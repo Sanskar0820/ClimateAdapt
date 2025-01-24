@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useAlert } from '../context/AlertContext'
+
 // import {currentWeatherData2} from "../assets/weatherapiData/tomorrowapi"
 // import {forecastData} from "../assets/weatherapiData/tomorrowapi"
 
@@ -30,7 +30,7 @@ const TomorrowApi = ({ panchyatSelectedItem }) => {
   const [hourlyForecast2, setHourlyForecast2] = useState(null)
   const [dailyForecast2, setDailyForecast2] = useState(null)
   const [currentWeatherData2, setCurrentWeatherData2] = useState(null)
-  const { setAlertMessage, setShowAlert } = useAlert();
+
 
   // const dailyForecast2=forecastData.timelines.daily
   // const hourlyForecast2=forecastData.timelines.hourly
@@ -47,8 +47,7 @@ const TomorrowApi = ({ panchyatSelectedItem }) => {
           setCurrentWeatherData2(response.data);
         }
       } catch (error) {
-        setAlertMessage("Error fetching weather data");
-        setShowAlert(true);
+        console.error(error);
       }
     }
   };

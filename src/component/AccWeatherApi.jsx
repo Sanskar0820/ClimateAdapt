@@ -24,7 +24,7 @@ import Calendar from "../../assets/weather-icons/calendar.png";
 import CloudCover from "../../assets/weather-icons/cloud-cover.png";
 
 import axios from 'axios';
-import { useAlert } from '../context/AlertContext';
+
 
 // Import weather icons
 const weatherIcons = {
@@ -53,7 +53,6 @@ const AccWeatherApi = ({ panchyatSelectedItem }) => {
   const [hourlyForecast1, setHourlyForecast1] = useState(null)
   const [dailyForecast1, setDailyForecast1] = useState(null)
   const [currentWeatherData1, setCurrentWeatherData1] = useState(null)
-  const { setAlertMessage, setShowAlert } = useAlert();
 
   // const currentWeatherData1 = currentWeather[0]
   // const dailyForecast1 = dailyForecast
@@ -70,8 +69,7 @@ const AccWeatherApi = ({ panchyatSelectedItem }) => {
           setCurrentWeatherData1(response.data[0]);
         }
       } catch (error) {
-        setAlertMessage("Error fetching weather data");
-        setShowAlert(true);
+        console.error(error);
       }
     }
   };
@@ -87,8 +85,7 @@ const AccWeatherApi = ({ panchyatSelectedItem }) => {
           setDailyForecast1(response.data);
         }
       } catch (error) {
-        setAlertMessage("Error fetching weather data");
-        setShowAlert(true);
+        console.error(error);
       }
     }
   };
@@ -104,8 +101,7 @@ const AccWeatherApi = ({ panchyatSelectedItem }) => {
           setHourlyForecast1(response.data);
         }
       } catch (error) {
-        setAlertMessage("Error fetching weather data");
-        setShowAlert(true);
+        console.error(error);
       }
     }
   };

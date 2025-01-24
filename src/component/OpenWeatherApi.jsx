@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useAlert } from '../context/AlertContext'
 // import { currentWeatherData } from "../assets/weatherapiData/openWeather"
 // import { forecastData } from "../assets/weatherapiData/openWeather"
 
