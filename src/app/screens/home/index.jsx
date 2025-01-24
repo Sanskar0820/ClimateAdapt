@@ -7,7 +7,7 @@ const HomeScreen = ({ isMenuOpen, toggleMenu }) => {
     <View style={styles.mainPageContainer}>
       <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
       <ImageBackground
-        source={require("../../../../assets/images/bakgroud.jpg")}
+        source={require("../../../../assets/images/background.jpg")}
         style={styles.backgroundImage}
       >
         <View style={styles.bannerContent}>

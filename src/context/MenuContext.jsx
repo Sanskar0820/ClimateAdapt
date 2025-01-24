@@ -6,7 +6,6 @@ export function MenuProvider({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    console.log('Toggle Menu Called', !isMenuOpen);
     setIsMenuOpen(!isMenuOpen);
   };
 

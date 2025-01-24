@@ -1,0 +1,1552 @@
+[
+  {
+    "ID": 1,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "ALAGIYANALLUR",
+    "LAT": 9.620749,
+    "LONG": 78.0118,
+    "AccuWAPI_LocationKey": 2812964
+  },
+  {
+    "ID": 2,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "VARALOTTI",
+    "LAT": 9.59411,
+    "LONG": 78.024085,
+    "AccuWAPI_LocationKey": 2813015
+  },
+  {
+    "ID": 3,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "VALUKKALOTTI",
+    "LAT": 9.572018,
+    "LONG": 78.026161,
+    "AccuWAPI_LocationKey": 2813088
+  },
+  {
+    "ID": 4,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "MANTHOPPU",
+    "LAT": 9.649391,
+    "LONG": 78.034142,
+    "AccuWAPI_LocationKey": 2812882
+  },
+  {
+    "ID": 5,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "PISINDI",
+    "LAT": 9.643603,
+    "LONG": 78.060038,
+    "AccuWAPI_LocationKey": 2812903
+  },
+  {
+    "ID": 6,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "PAMAPATTI",
+    "LAT": 9.657423,
+    "LONG": 78.063605,
+    "AccuWAPI_LocationKey": 2812879
+  },
+  {
+    "ID": 7,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "NANTHIKUNDU",
+    "LAT": 9.620686,
+    "LONG": 78.061741,
+    "AccuWAPI_LocationKey": 2812957
+  },
+  {
+    "ID": 8,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "VAKKANAKUNDU",
+    "LAT": 9.632753,
+    "LONG": 78.09621,
+    "AccuWAPI_LocationKey": 2812961
+  },
+  {
+    "ID": 9,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "JOKILPATTI",
+    "LAT": 9.586908,
+    "LONG": 78.15769,
+    "AccuWAPI_LocationKey": 2813068
+  },
+  {
+    "ID": 10,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "PANTHANENTHAL",
+    "LAT": 9.592004,
+    "LONG": 78.130828,
+    "AccuWAPI_LocationKey": 2813031
+  },
+  {
+    "ID": 11,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "P.PUTHUPATTI",
+    "LAT": 9.600592,
+    "LONG": 78.143894,
+    "AccuWAPI_LocationKey": 2813031
+  },
+  {
+    "ID": 12,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "KALKURICHI",
+    "LAT": 9.603048,
+    "LONG": 78.094879,
+    "AccuWAPI_LocationKey": 2812995
+  },
+  {
+    "ID": 13,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "THONUGAL",
+    "LAT": 9.611987,
+    "LONG": 78.033629,
+    "AccuWAPI_LocationKey": 2813015
+  },
+  {
+    "ID": 14,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "THOPPUR",
+    "LAT": 9.648822,
+    "LONG": 78.118627,
+    "AccuWAPI_LocationKey": 2812917
+  },
+  {
+    "ID": 15,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "SATHIRAPULIYANGULAM",
+    "LAT": 9.652141,
+    "LONG": 78.153794,
+    "AccuWAPI_LocationKey": 2812853
+  },
+  {
+    "ID": 16,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "PAPPANAM",
+    "LAT": 9.683849,
+    "LONG": 78.142216,
+    "AccuWAPI_LocationKey": 2812792
+  },
+  {
+    "ID": 17,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "T.VEPPANGULAM",
+    "LAT": 9.685544,
+    "LONG": 78.190884,
+    "AccuWAPI_LocationKey": 2812795
+  },
+  {
+    "ID": 18,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "THANDIYANENTHAL",
+    "LAT": 9.620423,
+    "LONG": 78.083551,
+    "AccuWAPI_LocationKey": 2812959
+  },
+  {
+    "ID": 19,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "ARASAKULAM",
+    "LAT": 9.736892,
+    "LONG": 78.118311,
+    "AccuWAPI_LocationKey": 2812691
+  },
+  {
+    "ID": 20,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "MANGULAM",
+    "LAT": 9.760167,
+    "LONG": 78.114927,
+    "AccuWAPI_LocationKey": 2812589
+  },
+  {
+    "ID": 21,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "S.KALLUPATTI",
+    "LAT": 9.697052,
+    "LONG": 78.092406,
+    "AccuWAPI_LocationKey": 2812738
+  },
+  {
+    "ID": 22,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "KAMBIKKUDI",
+    "LAT": 9.692922,
+    "LONG": 78.102343,
+    "AccuWAPI_LocationKey": 206626
+  },
+  {
+    "ID": 23,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "KILAVANERI",
+    "LAT": 9.623912,
+    "LONG": 78.14579,
+    "AccuWAPI_LocationKey": 2812984
+  },
+  {
+    "ID": 24,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "PANAIKURUPPI",
+    "LAT": 9.590937,
+    "LONG": 78.16812,
+    "AccuWAPI_LocationKey": 2813069
+  },
+  {
+    "ID": 25,
+    "STATE": "TAMIL NADU",
+    "DISTRICT": "VIRUDHUNAGAR",
+    "BLOCK": "KARIAPATTY",
+    "PANCHAYAT": "KURANDI",
+    "LAT": 9.75176,
+    "LONG": 78.126369,
+    "AccuWAPI_LocationKey": 2812617
+  },
+  {
+    "ID": 26,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "MANSURCHAK",
+    "PANCHAYAT": "GANPATOUL ",
+    "LAT": 25.625078,
+    "LONG": 85.926793,
+    "AccuWAPI_LocationKey": 3221190
+  },
+  {
+    "ID": 27,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "MANSURCHAK",
+    "PANCHAYAT": "GOVINDPUR-I ",
+    "LAT": 25.632196,
+    "LONG": 85.878823,
+    "AccuWAPI_LocationKey": 3221200
+  },
+  {
+    "ID": 28,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "MANSURCHAK",
+    "PANCHAYAT": "GOVINDPUR-II ",
+    "LAT": 25.631827,
+    "LONG": 85.881612,
+    "AccuWAPI_LocationKey": 3221200
+  },
+  {
+    "ID": 29,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "MANSURCHAK",
+    "PANCHAYAT": "MANSURCHAK ",
+    "LAT": 25.626239,
+    "LONG": 85.910295,
+    "AccuWAPI_LocationKey": 3350891
+  },
+  {
+    "ID": 30,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "MANSURCHAK",
+    "PANCHAYAT": "SAMASA-1 ",
+    "LAT": 25.624833,
+    "LONG": 85.932922,
+    "AccuWAPI_LocationKey": 3221190
+  },
+  {
+    "ID": 31,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "MANSURCHAK",
+    "PANCHAYAT": "SAMASA-II ",
+    "LAT": 25.620709,
+    "LONG": 85.934372,
+    "AccuWAPI_LocationKey": 3221190
+  },
+  {
+    "ID": 32,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "MANSURCHAK",
+    "PANCHAYAT": "SATHA ",
+    "LAT": 25.630837,
+    "LONG": 85.884324,
+    "AccuWAPI_LocationKey": 3221200
+  },
+  {
+    "ID": 33,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "ARWA ",
+    "LAT": 25.902035,
+    "LONG": 84.742586,
+    "AccuWAPI_LocationKey": 3216367
+  },
+  {
+    "ID": 34,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "BACHHAWARA ",
+    "LAT": 25.580888,
+    "LONG": 85.888889,
+    "AccuWAPI_LocationKey": 3350893
+  },
+  {
+    "ID": 35,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "BHIKHAMCHAK ",
+    "LAT": 25.609759,
+    "LONG": 85.906413,
+    "AccuWAPI_LocationKey": 3221723
+  },
+  {
+    "ID": 36,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "BISANPUR ",
+    "LAT": 25.405588,
+    "LONG": 86.151071,
+    "AccuWAPI_LocationKey": 3225443
+  },
+  {
+    "ID": 37,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "CHAMATHA-I ",
+    "LAT": 25.568684,
+    "LONG": 85.783765,
+    "AccuWAPI_LocationKey": 3222429
+  },
+  {
+    "ID": 38,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "CHAMATHA-II ",
+    "LAT": 25.569226,
+    "LONG": 85.784109,
+    "AccuWAPI_LocationKey": 3222429
+  },
+  {
+    "ID": 39,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "CHAMATHA-III ",
+    "LAT": 25.565964,
+    "LONG": 85.806545,
+    "AccuWAPI_LocationKey": 3222532
+  },
+  {
+    "ID": 40,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "CHIRANJIPUR ",
+    "LAT": 25.621696,
+    "LONG": 85.860136,
+    "AccuWAPI_LocationKey": 3221504
+  },
+  {
+    "ID": 41,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "DADPUR ",
+    "LAT": 24.826608,
+    "LONG": 86.35253,
+    "AccuWAPI_LocationKey": 3238853
+  },
+  {
+    "ID": 42,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "FATEHA ",
+    "LAT": 25.602788,
+    "LONG": 85.864997,
+    "AccuWAPI_LocationKey": 3221200
+  },
+  {
+    "ID": 43,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "GODHANA ",
+    "LAT": 25.538296,
+    "LONG": 85.911186,
+    "AccuWAPI_LocationKey": 3223169
+  },
+  {
+    "ID": 44,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "GOVINDPUR-III ",
+    "LAT": 25.16306,
+    "LONG": 85.422959,
+    "AccuWAPI_LocationKey": 3231113
+  },
+  {
+    "ID": 45,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "KAIDARABAD ",
+    "LAT": 25.574347,
+    "LONG": 85.944581,
+    "AccuWAPI_LocationKey": 3222591
+  },
+  {
+    "ID": 46,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "RANI-I ",
+    "LAT": 25.556599,
+    "LONG": 85.902734,
+    "AccuWAPI_LocationKey": 3350893
+  },
+  {
+    "ID": 47,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "RANI-II ",
+    "LAT": 25.548468,
+    "LONG": 85.903764,
+    "AccuWAPI_LocationKey": 3350893
+  },
+  {
+    "ID": 48,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "RANI-III ",
+    "LAT": 25.548623,
+    "LONG": 85.90638,
+    "AccuWAPI_LocationKey": 3350893
+  },
+  {
+    "ID": 49,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "RASID PUR ",
+    "LAT": 25.636769,
+    "LONG": 85.84966,
+    "AccuWAPI_LocationKey": 3221238
+  },
+  {
+    "ID": 50,
+    "STATE": "BIHAR",
+    "DISTRICT": "BEGUSARAI",
+    "BLOCK": "BACHHWARA",
+    "PANCHAYAT": "RUDOULI ",
+    "LAT": 25.597949,
+    "LONG": 85.941758,
+    "AccuWAPI_LocationKey": 3222076
+  },
+  {
+    "ID": 51,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "BAHORWA",
+    "LAT": 27.38865,
+    "LONG": 81.4176,
+    "AccuWAPI_LocationKey": 3107264
+  },
+  {
+    "ID": 52,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "SANGWAN",
+    "LAT": 27.377491,
+    "LONG": 81.444447,
+    "AccuWAPI_LocationKey": 3106839
+  },
+  {
+    "ID": 53,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "MAJHARA TAWKLI",
+    "LAT": 27.338566,
+    "LONG": 81.451746,
+    "AccuWAPI_LocationKey": 3143150
+  },
+  {
+    "ID": 54,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "BETAURA SARSATH",
+    "LAT": 27.37788,
+    "LONG": 81.415405,
+    "AccuWAPI_LocationKey": 3143155
+  },
+  {
+    "ID": 55,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "BHADWANI",
+    "LAT": 27.381942,
+    "LONG": 81.45168,
+    "AccuWAPI_LocationKey": 3107108
+  },
+  {
+    "ID": 56,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "SARAIALI",
+    "LAT": 27.33654,
+    "LONG": 81.495511,
+    "AccuWAPI_LocationKey": 3107379
+  },
+  {
+    "ID": 57,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "SIPAHIYAHULAS",
+    "LAT": 27.364538,
+    "LONG": 81.421036,
+    "AccuWAPI_LocationKey": 3143155
+  },
+  {
+    "ID": 58,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "ALIPUR DARAUNA",
+    "LAT": 27.381675,
+    "LONG": 81.515239,
+    "AccuWAPI_LocationKey": 3107306
+  },
+  {
+    "ID": 59,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "GHUREHARIPUR",
+    "LAT": 27.40015,
+    "LONG": 81.424281,
+    "AccuWAPI_LocationKey": 3107264
+  },
+  {
+    "ID": 60,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "BHAURI",
+    "LAT": 27.387859,
+    "LONG": 81.413713,
+    "AccuWAPI_LocationKey": 3143144
+  },
+  {
+    "ID": 61,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "DHAREHARA NAKDIL PUR ",
+    "LAT": 27.435648,
+    "LONG": 81.412643,
+    "AccuWAPI_LocationKey": 3107210
+  },
+  {
+    "ID": 62,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "BAUNDI",
+    "LAT": 27.461268,
+    "LONG": 81.411242,
+    "AccuWAPI_LocationKey": 894581
+  },
+  {
+    "ID": 63,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "FAKHARPUR",
+    "PANCHAYAT": "GOLAGANJ",
+    "LAT": 27.454458,
+    "LONG": 81.406586,
+    "AccuWAPI_LocationKey": 894581
+  },
+  {
+    "ID": 64,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "BAGHAIYA",
+    "LAT": 27.252705,
+    "LONG": 81.507312,
+    "AccuWAPI_LocationKey": 3107446
+  },
+  {
+    "ID": 65,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "CHULAMBHA",
+    "LAT": 27.287078,
+    "LONG": 81.515387,
+    "AccuWAPI_LocationKey": 3107413
+  },
+  {
+    "ID": 66,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "REWALI",
+    "LAT": 27.229895,
+    "LONG": 81.522375,
+    "AccuWAPI_LocationKey": 3107479
+  },
+  {
+    "ID": 67,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "MATERPUR",
+    "LAT": 27.210992,
+    "LONG": 81.509052,
+    "AccuWAPI_LocationKey": 3107494
+  },
+  {
+    "ID": 68,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "KANDAILA",
+    "LAT": 27.217972,
+    "LONG": 81.530492,
+    "AccuWAPI_LocationKey": 3107487
+  },
+  {
+    "ID": 69,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "GODAHIYA 2",
+    "LAT": 27.235247,
+    "LONG": 81.497395,
+    "AccuWAPI_LocationKey": 3143163
+  },
+  {
+    "ID": 70,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "GODAHIYA 3",
+    "LAT": 27.244783,
+    "LONG": 81.483523,
+    "AccuWAPI_LocationKey": 3143163
+  },
+  {
+    "ID": 71,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "GODAHIYA 4",
+    "LAT": 27.232077,
+    "LONG": 81.495895,
+    "AccuWAPI_LocationKey": 3107472
+  },
+  {
+    "ID": 72,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "KANDAULI",
+    "LAT": 27.313697,
+    "LONG": 81.483842,
+    "AccuWAPI_LocationKey": 3107407
+  },
+  {
+    "ID": 73,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "KOHALI",
+    "LAT": 27.307833,
+    "LONG": 81.5054387,
+    "AccuWAPI_LocationKey": 3107407
+  },
+  {
+    "ID": 74,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "BADRAULI",
+    "LAT": 27.3040254,
+    "LONG": 81.503925,
+    "AccuWAPI_LocationKey": 3107407
+  },
+  {
+    "ID": 75,
+    "STATE": "UTTAR PRADESH",
+    "DISTRICT": "BAHARAICH",
+    "BLOCK": "KAISARGANJ",
+    "PANCHAYAT": "VISAINDHA",
+    "LAT": 27.204533,
+    "LONG": 81.502796,
+    "AccuWAPI_LocationKey": 3107498
+  },
+  {
+    "ID": 76,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ANTA",
+    "PANCHAYAT": "BIJORA",
+    "LAT": 25.125521,
+    "LONG": 76.414954,
+    "AccuWAPI_LocationKey": 3074579
+  },
+  {
+    "ID": 77,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ANTA",
+    "PANCHAYAT": "JAI NAGAR",
+    "LAT": 25.12521,
+    "LONG": 76.62962,
+    "AccuWAPI_LocationKey": 3074675
+  },
+  {
+    "ID": 78,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ANTA",
+    "PANCHAYAT": "PALSAWA",
+    "LAT": 25.144305,
+    "LONG": 76.370996,
+    "AccuWAPI_LocationKey": 3074297
+  },
+  {
+    "ID": 79,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ANTA",
+    "PANCHAYAT": "SORKHAND KALAN",
+    "LAT": 25.167182,
+    "LONG": 76.408025,
+    "AccuWAPI_LocationKey": 3074074
+  },
+  {
+    "ID": 80,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ATRU",
+    "PANCHAYAT": "ANTANA",
+    "LAT": 24.836432,
+    "LONG": 76.609505,
+    "AccuWAPI_LocationKey": 3076972
+  },
+  {
+    "ID": 81,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ATRU",
+    "PANCHAYAT": "BARLAN",
+    "LAT": 24.816646,
+    "LONG": 76.669779,
+    "AccuWAPI_LocationKey": 195337
+  },
+  {
+    "ID": 82,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ATRU",
+    "PANCHAYAT": "DEELOD HATHI",
+    "LAT": 24.7689,
+    "LONG": 76.6355,
+    "AccuWAPI_LocationKey": 3077527
+  },
+  {
+    "ID": 83,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ATRU",
+    "PANCHAYAT": "KHARKHADA RAMLOTHAN",
+    "LAT": 24.74625,
+    "LONG": 76.68925,
+    "AccuWAPI_LocationKey": 3077831
+  },
+  {
+    "ID": 84,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ATRU",
+    "PANCHAYAT": "KUNDI",
+    "LAT": 24.7477313,
+    "LONG": 76.6585928,
+    "AccuWAPI_LocationKey": 3077753
+  },
+  {
+    "ID": 85,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ATRU",
+    "PANCHAYAT": "MOTHPUR",
+    "LAT": 24.7372154,
+    "LONG": 76.606604,
+    "AccuWAPI_LocationKey": 3077647
+  },
+  {
+    "ID": 86,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "ATRU",
+    "PANCHAYAT": "PATNA",
+    "LAT": 24.5807,
+    "LONG": 76.7769,
+    "AccuWAPI_LocationKey": 3079041
+  },
+  {
+    "ID": 87,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "BARAN",
+    "PANCHAYAT": "KOTRI SUNDA ",
+    "LAT": 25.2174,
+    "LONG": 76.6095,
+    "AccuWAPI_LocationKey": 3073805
+  },
+  {
+    "ID": 88,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "BARAN",
+    "PANCHAYAT": "TISAYA ",
+    "LAT": 25.23095,
+    "LONG": 76.59515,
+    "AccuWAPI_LocationKey": 3073569
+  },
+  {
+    "ID": 89,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHABRA",
+    "PANCHAYAT": "HANIHEDA ",
+    "LAT": 24.74625,
+    "LONG": 76.68925,
+    "AccuWAPI_LocationKey": 3077831
+  },
+  {
+    "ID": 90,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHABRA",
+    "PANCHAYAT": "KADAIYA HAT ",
+    "LAT": 24.5717,
+    "LONG": 77.0392,
+    "AccuWAPI_LocationKey": 3079098
+  },
+  {
+    "ID": 91,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHABRA",
+    "PANCHAYAT": "PHALIYA ",
+    "LAT": 24.5483,
+    "LONG": 77.0392,
+    "AccuWAPI_LocationKey": 3079291
+  },
+  {
+    "ID": 92,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHABRA",
+    "PANCHAYAT": "TELANI ",
+    "LAT": 24.4823,
+    "LONG": 77.0003,
+    "AccuWAPI_LocationKey": 3079778
+  },
+  {
+    "ID": 93,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHIPA BAROD",
+    "PANCHAYAT": "JHANJHANI",
+    "LAT": 24.6046,
+    "LONG": 76.64032,
+    "AccuWAPI_LocationKey": 3078895
+  },
+  {
+    "ID": 94,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHIPA BAROD",
+    "PANCHAYAT": "KACHNARIYA KALAN",
+    "LAT": 24.4965323,
+    "LONG": 76.7480705,
+    "AccuWAPI_LocationKey": 3079637
+  },
+  {
+    "ID": 95,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHIPA BAROD",
+    "PANCHAYAT": "KUNMA KHERI",
+    "LAT": 24.4706,
+    "LONG": 76.7192,
+    "AccuWAPI_LocationKey": 3079842
+  },
+  {
+    "ID": 96,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHIPA BAROD",
+    "PANCHAYAT": "MANPURA",
+    "LAT": 25.0279,
+    "LONG": 76.2885,
+    "AccuWAPI_LocationKey": 3075435
+  },
+  {
+    "ID": 97,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "CHHIPA BAROD",
+    "PANCHAYAT": "SEJANPUR",
+    "LAT": 25.2473726,
+    "LONG": 77.1528234,
+    "AccuWAPI_LocationKey": 3073598
+  },
+  {
+    "ID": 98,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "KISHANGANJ",
+    "PANCHAYAT": "GHATTI",
+    "LAT": 25.005823,
+    "LONG": 76.828337,
+    "AccuWAPI_LocationKey": 3075616
+  },
+  {
+    "ID": 99,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "KISHANGANJ",
+    "PANCHAYAT": "KHANDELA",
+    "LAT": 25.2333409,
+    "LONG": 76.849992,
+    "AccuWAPI_LocationKey": 3073751
+  },
+  {
+    "ID": 100,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "KISHANGANJ",
+    "PANCHAYAT": "KHANKHARA",
+    "LAT": 25.159633,
+    "LONG": 76.825281,
+    "AccuWAPI_LocationKey": 3074268
+  },
+  {
+    "ID": 101,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "KISHANGANJ",
+    "PANCHAYAT": "PARANIYA ",
+    "LAT": 25.000057,
+    "LONG": 76.783967,
+    "AccuWAPI_LocationKey": 3075654
+  },
+  {
+    "ID": 102,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "KISHANGANJ",
+    "PANCHAYAT": "RAMPURIYA TODIYA",
+    "LAT": 25.25168,
+    "LONG": 76.825502,
+    "AccuWAPI_LocationKey": 3073297
+  },
+  {
+    "ID": 103,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "MANGROL",
+    "PANCHAYAT": "BHATWARA",
+    "LAT": 25.36,
+    "LONG": 76.6196,
+    "AccuWAPI_LocationKey": 3139831
+  },
+  {
+    "ID": 104,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "MANGROL",
+    "PANCHAYAT": "BOHAT ",
+    "LAT": 25.235535,
+    "LONG": 76.488655,
+    "AccuWAPI_LocationKey": 3073660
+  },
+  {
+    "ID": 105,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "MANGROL",
+    "PANCHAYAT": "HINGONIYA",
+    "LAT": 24.33296,
+    "LONG": 75.83763,
+    "AccuWAPI_LocationKey": 3080774
+  },
+  {
+    "ID": 106,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "MANGROL",
+    "PANCHAYAT": "ISHARPURA ",
+    "LAT": 25.101145,
+    "LONG": 76.513161,
+    "AccuWAPI_LocationKey": 190347
+  },
+  {
+    "ID": 107,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "SHAHABAD",
+    "PANCHAYAT": "BAMAN GAWAN",
+    "LAT": 25.29377,
+    "LONG": 77.11272,
+    "AccuWAPI_LocationKey": 3073157
+  },
+  {
+    "ID": 108,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "SHAHABAD",
+    "PANCHAYAT": "BEEL KHERAMAL",
+    "LAT": 25.2919,
+    "LONG": 77.2403,
+    "AccuWAPI_LocationKey": 3073166
+  },
+  {
+    "ID": 109,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "SHAHABAD",
+    "PANCHAYAT": "BHOYAL",
+    "LAT": 25.2667572,
+    "LONG": 77.2577511,
+    "AccuWAPI_LocationKey": 3073346
+  },
+  {
+    "ID": 110,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "SHAHABAD",
+    "PANCHAYAT": "KASBA NONERA",
+    "LAT": 25.29377,
+    "LONG": 77.11272,
+    "AccuWAPI_LocationKey": 3073157
+  },
+  {
+    "ID": 111,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "SHAHABAD",
+    "PANCHAYAT": "MAJHARI",
+    "LAT": 25.101145,
+    "LONG": 76.513161,
+    "AccuWAPI_LocationKey": 190347
+  },
+  {
+    "ID": 112,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "SHAHABAD",
+    "PANCHAYAT": "SANDOKARA",
+    "LAT": 25.120363,
+    "LONG": 77.327817,
+    "AccuWAPI_LocationKey": 3074469
+  },
+  {
+    "ID": 113,
+    "STATE": "RAJASTHAN",
+    "DISTRICT": "BARAN",
+    "BLOCK": "SHAHABAD",
+    "PANCHAYAT": "SHUBH DHARA",
+    "LAT": 25.29377,
+    "LONG": 77.11272,
+    "AccuWAPI_LocationKey": 3073157
+  },
+  {
+    "ID": 114,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "TULJAPUR",
+    "PANCHAYAT": "PIMPALA KHU",
+    "LAT": 17.875707,
+    "LONG": 76.012438,
+    "AccuWAPI_LocationKey": 2781449
+  },
+  {
+    "ID": 115,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "TULJAPUR",
+    "PANCHAYAT": "PIMPALA BU",
+    "LAT": 17.854442,
+    "LONG": 76.006634,
+    "AccuWAPI_LocationKey": 2781609
+  },
+  {
+    "ID": 116,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "TULJAPUR",
+    "PANCHAYAT": "CHIVRI",
+    "LAT": 17.85631,
+    "LONG": 76.197387,
+    "AccuWAPI_LocationKey": 2781461
+  },
+  {
+    "ID": 117,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "TULJAPUR",
+    "PANCHAYAT": "CHINCHOLI",
+    "LAT": 17.907044,
+    "LONG": 76.133582,
+    "AccuWAPI_LocationKey": 2781339
+  },
+  {
+    "ID": 118,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "TULJAPUR",
+    "PANCHAYAT": "YEVATI",
+    "LAT": 17.857724,
+    "LONG": 76.156104,
+    "AccuWAPI_LocationKey": 2781580
+  },
+  {
+    "ID": 119,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "TULJAPUR",
+    "PANCHAYAT": "DINDEGAON",
+    "LAT": 17.836105,
+    "LONG": 76.120204,
+    "AccuWAPI_LocationKey": 2781581
+  },
+  {
+    "ID": 120,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OSMANABAD",
+    "PANCHAYAT": "DARFAL",
+    "LAT": 18.23636,
+    "LONG": 76.167239,
+    "AccuWAPI_LocationKey": 2779344
+  },
+  {
+    "ID": 121,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OSMANABAD",
+    "PANCHAYAT": "DAUTPUR",
+    "LAT": 18.248548,
+    "LONG": 76.195169,
+    "AccuWAPI_LocationKey": 2779344
+  },
+  {
+    "ID": 122,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OSMANABAD",
+    "PANCHAYAT": "ERLA",
+    "LAT": 18.261362,
+    "LONG": 76.184921,
+    "AccuWAPI_LocationKey": 2779213
+  },
+  {
+    "ID": 123,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OSMANABAD",
+    "PANCHAYAT": "UMREGAVHAN",
+    "LAT": 18.106703,
+    "LONG": 76.201939,
+    "AccuWAPI_LocationKey": 2780042
+  },
+  {
+    "ID": 124,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OSMANABAD",
+    "PANCHAYAT": "DHARUR",
+    "LAT": 18.066169,
+    "LONG": 76.131246,
+    "AccuWAPI_LocationKey": 2780395
+  },
+  {
+    "ID": 125,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "KALAMB",
+    "PANCHAYAT": "BHATSHIRAPURA",
+    "LAT": 18.522026,
+    "LONG": 76.073492,
+    "AccuWAPI_LocationKey": 2777615
+  },
+  {
+    "ID": 126,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "KALAMB",
+    "PANCHAYAT": "MANGRUL",
+    "LAT": 18.504433,
+    "LONG": 76.059814,
+    "AccuWAPI_LocationKey": 2777708
+  },
+  {
+    "ID": 127,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "KALAMB",
+    "PANCHAYAT": "BARAMACHIWADI",
+    "LAT": 18.430879,
+    "LONG": 75.994071,
+    "AccuWAPI_LocationKey": 2778213
+  },
+  {
+    "ID": 128,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "KALAMB",
+    "PANCHAYAT": "UMARA",
+    "LAT": 18.447794,
+    "LONG": 75.889104,
+    "AccuWAPI_LocationKey": 2778071
+  },
+  {
+    "ID": 129,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "KALAMB",
+    "PANCHAYAT": "DUDHALWADI",
+    "LAT": 18.403048,
+    "LONG": 75.850722,
+    "AccuWAPI_LocationKey": 2778360
+  },
+  {
+    "ID": 130,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "KALAMB",
+    "PANCHAYAT": "MASSA",
+    "LAT": 18.489148,
+    "LONG": 75.932616,
+    "AccuWAPI_LocationKey": 890443
+  },
+  {
+    "ID": 131,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "WASHI",
+    "PANCHAYAT": "IZORA",
+    "LAT": 18.594231,
+    "LONG": 75.706267,
+    "AccuWAPI_LocationKey": 2777186
+  },
+  {
+    "ID": 132,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "WASHI",
+    "PANCHAYAT": "PIMPALGAON (KAMLESHWARI)",
+    "LAT": 18.634127,
+    "LONG": 75.72361,
+    "AccuWAPI_LocationKey": 2776777
+  },
+  {
+    "ID": 133,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "WASHI",
+    "PANCHAYAT": "SARAMKONDI",
+    "LAT": 18.578241,
+    "LONG": 75.724162,
+    "AccuWAPI_LocationKey": 2777281
+  },
+  {
+    "ID": 134,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "WASHI",
+    "PANCHAYAT": "SHELGAON",
+    "LAT": 18.602754,
+    "LONG": 75.718039,
+    "AccuWAPI_LocationKey": 2777111
+  },
+  {
+    "ID": 135,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "WASHI",
+    "PANCHAYAT": "DAHIPHAL",
+    "LAT": 18.617329,
+    "LONG": 75.720944,
+    "AccuWAPI_LocationKey": 2776907
+  },
+  {
+    "ID": 136,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "LOHARA",
+    "PANCHAYAT": "KASTI BK ",
+    "LAT": 18.031632,
+    "LONG": 76.352297,
+    "AccuWAPI_LocationKey": 2780561
+  },
+  {
+    "ID": 137,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "LOHARA",
+    "PANCHAYAT": "PHANEPUR",
+    "LAT": 17.896434,
+    "LONG": 76.356917,
+    "AccuWAPI_LocationKey": 2781387
+  },
+  {
+    "ID": 138,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "LOHARA",
+    "PANCHAYAT": "WADGAON",
+    "LAT": 17.916445,
+    "LONG": 76.360153,
+    "AccuWAPI_LocationKey": 2781153
+  },
+  {
+    "ID": 139,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "LOHARA",
+    "PANCHAYAT": "WADGAONWADI",
+    "LAT": 17.935265,
+    "LONG": 76.346536,
+    "AccuWAPI_LocationKey": 2781153
+  },
+  {
+    "ID": 140,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "LOHARA",
+    "PANCHAYAT": "VILASPUR PANDHARI",
+    "LAT": 17.918772,
+    "LONG": 76.379057,
+    "AccuWAPI_LocationKey": 2781194
+  },
+  {
+    "ID": 141,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OMERGA",
+    "PANCHAYAT": "EKURGA",
+    "LAT": 17.902729,
+    "LONG": 76.580445,
+    "AccuWAPI_LocationKey": 2781354
+  },
+  {
+    "ID": 142,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OMERGA",
+    "PANCHAYAT": "EKUNDIWADI",
+    "LAT": 17.913665,
+    "LONG": 76.591952,
+    "AccuWAPI_LocationKey": 2781199
+  },
+  {
+    "ID": 143,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OMERGA",
+    "PANCHAYAT": "JAWALGA BET",
+    "LAT": 17.94418,
+    "LONG": 76.581063,
+    "AccuWAPI_LocationKey": 2780992
+  },
+  {
+    "ID": 144,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OMERGA",
+    "PANCHAYAT": "VHANTAL",
+    "LAT": 17.923856,
+    "LONG": 76.560379,
+    "AccuWAPI_LocationKey": 2781157
+  },
+  {
+    "ID": 145,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "OMERGA",
+    "PANCHAYAT": "KADDORA",
+    "LAT": 17.921341,
+    "LONG": 76.532304,
+    "AccuWAPI_LocationKey": 2781304
+  },
+  {
+    "ID": 146,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "BHOOM",
+    "PANCHAYAT": "DUDHODI",
+    "LAT": 18.582865,
+    "LONG": 75.534109,
+    "AccuWAPI_LocationKey": 2777237
+  },
+  {
+    "ID": 147,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "BHOOM",
+    "PANCHAYAT": "MANKESHWAR",
+    "LAT": 18.353774,
+    "LONG": 75.638794,
+    "AccuWAPI_LocationKey": 194782
+  },
+  {
+    "ID": 148,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "BHOOM",
+    "PANCHAYAT": "HADONGI",
+    "LAT": 18.466372,
+    "LONG": 75.710249,
+    "AccuWAPI_LocationKey": 2777902
+  },
+  {
+    "ID": 149,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "BHOOM",
+    "PANCHAYAT": "HIWARA",
+    "LAT": 18.463635,
+    "LONG": 75.736939,
+    "AccuWAPI_LocationKey": 2777973
+  },
+  {
+    "ID": 150,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "BHOOM",
+    "PANCHAYAT": "DINDORI",
+    "LAT": 18.449311,
+    "LONG": 75.749599,
+    "AccuWAPI_LocationKey": 2778051
+  },
+  {
+    "ID": 151,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "PARANDA",
+    "PANCHAYAT": "SIRSAO",
+    "LAT": 18.289976,
+    "LONG": 75.600554,
+    "AccuWAPI_LocationKey": 2778893
+  },
+  {
+    "ID": 152,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "PARANDA",
+    "PANCHAYAT": "LAKHI",
+    "LAT": 18.372106,
+    "LONG": 75.529188,
+    "AccuWAPI_LocationKey": 2778529
+  },
+  {
+    "ID": 153,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "PARANDA",
+    "PANCHAYAT": "ARANGAON",
+    "LAT": 18.354315,
+    "LONG": 75.536235,
+    "AccuWAPI_LocationKey": 2778608
+  },
+  {
+    "ID": 154,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "PARANDA",
+    "PANCHAYAT": "BHANDGAON",
+    "LAT": 18.325178,
+    "LONG": 75.634349,
+    "AccuWAPI_LocationKey": 2778817
+  },
+  {
+    "ID": 155,
+    "STATE": "MAHARASHTRA",
+    "DISTRICT": "USMANABAD",
+    "BLOCK": "PARANDA",
+    "PANCHAYAT": "KANDARI",
+    "LAT": 18.383106,
+    "LONG": 75.454034,
+    "AccuWAPI_LocationKey": 2778354
+  }
+ ]

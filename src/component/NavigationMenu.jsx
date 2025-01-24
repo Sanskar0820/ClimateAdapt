@@ -11,7 +11,6 @@ const NavigationMenu = () => {
   const slideAnim = React.useRef(new Animated.Value(-300)).current;
 
   useEffect(() => {
-    console.log('Navigation Menu Visibility Changed:', isMenuOpen);
     Animated.timing(slideAnim, {
       toValue: isMenuOpen ? 0 : -300,
       duration: 300,
@@ -25,13 +24,12 @@ const NavigationMenu = () => {
     { title: 'Drought', path: '/screens/drought', icon: 'water-outline' },
     { title: 'Hydrological', path: '/screens/hydrological', icon: 'analytics-outline' },
     { title: 'Meteorological', path: '/screens/meteorological', icon: 'cloudy-outline' },
-    { title: 'Time Series', path: '/screens/timeseries', icon: 'time-outline' },
+    { title: 'Weather', path: '/screens/weather', icon: 'thermometer-outline' },
     { title: 'Contact', path: '/screens/contact', icon: 'call-outline' },
     { title: 'Info', path: '/screens/info', icon: 'information-circle-outline' },
   ];
 
   const handleNavigation = (path) => {
-    console.log('Navigation Triggered:', path);
     setIsMenuOpen(false);
     router.push(path);
   };

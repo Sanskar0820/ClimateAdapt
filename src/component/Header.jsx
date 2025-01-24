@@ -8,7 +8,6 @@ const Header = () => {
   const { isMenuOpen, toggleMenu } = useMenu();
 
   const handleMenuPress = () => {
-    console.log('Menu Press', { isMenuOpen, hasToggle: !!toggleMenu });
     toggleMenu();
   };
 
