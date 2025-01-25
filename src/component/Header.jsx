@@ -20,9 +20,9 @@ const Header = () => {
         style={styles.menuButton}
       >
         {isMenuOpen ? (
-          <Entypo name="cross" size={24} color="black" />
+          <Entypo name="cross" size={30} color="black" />
         ) : (
-          <Ionicons name="reorder-three" size={26} color="black" />
+          <Ionicons name="reorder-three" size={36} color="black" />
         )}
       </TouchableOpacity>
     </View>
@@ -33,7 +33,7 @@ export default Header
 
 const styles = StyleSheet.create({
     container:{
-        height: 55,
+        height: "8%",
         width: "100%",
         flexDirection: "row",
         justifyContent: "space-around",

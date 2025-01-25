@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Image } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Animated, Image, Linking } from 'react-native'
 import React, { useEffect } from 'react'
 import { useRouter, usePathname } from 'expo-router'
 import { useMenu } from '../context/MenuContext'
@@ -20,18 +20,43 @@ const NavigationMenu = () => {
 
   const menuItems = [
     { title: 'Home', path: '/', icon: 'home-outline' },
-    { title: 'Dashboard', path: '/screens/dashboard', icon: 'grid-outline' },
-    { title: 'Drought', path: '/screens/drought', icon: 'water-outline' },
-    { title: 'Hydrological', path: '/screens/hydrological', icon: 'analytics-outline' },
-    { title: 'Meteorological', path: '/screens/meteorological', icon: 'cloudy-outline' },
-    { title: 'Weather', path: '/screens/weather', icon: 'thermometer-outline' },
-    { title: 'Contact', path: '/screens/contact', icon: 'call-outline' },
+    { title: 'Meteorological Condition', path: '/screens/meteorological', icon: 'cloudy-outline' },
+    { title: 'Hydrological Condition', path: '/screens/hydrological', icon: 'analytics-outline' },
+    { title: 'Drought Condition', path: '/screens/drought', icon: 'water-outline' },
+    { title: 'Weather Condition', path: '/screens/weather', icon: 'thermometer-outline' },
+    { title: 'Map', path: '/screens/dashboard', icon: 'map-outline' },
+    { 
+      title: 'Vegetation Condition', 
+      url: 'https://akankshayadaw.users.earthengine.app/view/test', 
+      icon: 'leaf-outline', 
+      isExternal: true 
+    },
+    { 
+      title: 'Land Use', 
+      url: 'https://akankshayadaw.users.earthengine.app/view/lulc', 
+      icon: 'layers-outline', 
+      isExternal: true 
+    },
     { title: 'Info', path: '/screens/info', icon: 'information-circle-outline' },
+    { title: 'Contact Us', path: '/screens/contact', icon: 'call-outline' },
   ];
 
   const handleNavigation = (path) => {
     setIsMenuOpen(false);
     router.push(path);
+  };
+
+  const handleExternalLink = async (url) => {
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        console.warn(`Cannot open URL: ${url}`);
+      }
+    } catch (error) {
+      console.error(`Error opening URL: ${error}`);
+    }
   };
 
   if (!isMenuOpen) return null;
@@ -61,22 +86,30 @@ const NavigationMenu = () => {
               key={index}
               style={[
                 styles.menuItem,
-                currentPath === item.path && styles.activeMenuItem
+                !item.isExternal && currentPath === item.path && styles.activeMenuItem
               ]}
-              onPress={() => handleNavigation(item.path)}
+              onPress={() => item.isExternal ? handleExternalLink(item.url) : handleNavigation(item.path)}
             >
               <Ionicons 
                 name={item.icon} 
                 size={24} 
-                color={currentPath === item.path ? '#003580' : '#666'} 
+                color={!item.isExternal && currentPath === item.path ? '#003580' : '#666'} 
                 style={styles.menuIcon}
               />
               <Text style={[
                 styles.menuText,
-                currentPath === item.path && styles.activeMenuText
+                !item.isExternal && currentPath === item.path && styles.activeMenuText
               ]}>
                 {item.title}
               </Text>
+              {item.isExternal && (
+                <Ionicons 
+                  name="open-outline" 
+                  size={16} 
+                  color="#666" 
+                  style={styles.externalIcon}
+                />
+              )}
             </TouchableOpacity>
           ))}
         </View>
@@ -130,6 +163,7 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#eee',
     marginVertical: 10,
+    marginHorizontal: 20,
   },
   overlay: {
     position: 'absolute',
@@ -176,5 +210,9 @@ const styles = StyleSheet.create({
   footerText: {
     color: '#666',
     fontSize: 12,
+  },
+  externalIcon: {
+    marginLeft: 'auto',
+    marginRight: 10,
   },
 }) 

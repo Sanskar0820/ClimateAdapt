@@ -10,6 +10,7 @@ import TimeseriesScreen from "./screens/timeseries";
 import MeteorologicalScreen from "./screens/meteorological";
 import InfoScreen from "./screens/info";
 import Header from "../component/Header";
+import WeatherScreen from "./screens/weather";
 
 const AppRouter = () => {
   const pathname = usePathname();
@@ -18,20 +19,20 @@ const AppRouter = () => {
     switch (pathname) {
       case '/':
         return <HomeScreen />;
+      case '/screens/meteorological':
+        return <MeteorologicalScreen title="Meteorological Condition" />;
+      case '/screens/hydrological':
+        return <HydrologicalScreen title="Hydrological Condition" />;
+      case '/screens/drought':
+        return <DroughtScreen title="Drought Condition" />;
+      case '/screens/weather':
+        return <WeatherScreen title="Weather Condition" />;
       case '/screens/dashboard':
         return <DashboardScreen />;
-      case '/screens/drought':
-        return <DroughtScreen />;
-      case '/screens/hydrological':
-        return <HydrologicalScreen />;
-      case '/screens/contact':
-        return <ContactScreen />;
-      case '/screens/timeseries':
-        return <TimeseriesScreen />;
-      case '/screens/meteorological':
-        return <MeteorologicalScreen />;
       case '/screens/info':
         return <InfoScreen />;
+      case '/screens/contact':
+        return <ContactScreen />;
       default:
         return <HomeScreen />;
     }
