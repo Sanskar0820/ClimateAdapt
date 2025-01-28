@@ -1,18 +1,17 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import MapView, { PROVIDER_GOOGLE, Polygon, Marker } from 'react-native-maps';
+import React, { useState, useRef, forwardRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import MapView, { PROVIDER_GOOGLE, Polygon } from 'react-native-maps';
 import { Ionicons } from '@expo/vector-icons';
-import { mapStyles, initialRegion, mapCenter, setInitialMapZoom } from '../helpers/mapFunction';
+import { mapStyles, initialRegion, mapCenter } from '../helpers/mapFunction';
 import SearchBar from './SearchBar';
 
-const BaseMap = ({ 
+const BaseMap = forwardRef(({ 
   children, 
   onRegionChange,
   selectedDistrict,
   selectedTehsil,
   tehsilBoundaries
-}) => {
-  const mapRef = useRef(null);
+}, ref) => {
   const [mapType, setMapType] = useState('standard');
   const [currentPosition, setCurrentPosition] = useState(null);
 
@@ -21,26 +20,33 @@ const BaseMap = ({
   };
 
   const handleZoomToCenter = () => {
-    mapRef.current?.animateToRegion({
-      ...mapCenter,
-      latitudeDelta: 20,
-      longitudeDelta: 20,
-    }, 1000);
+    if (ref.current) {
+      ref.current.animateToRegion(
+        {
+          ...mapCenter,
+          latitudeDelta: 20,
+          longitudeDelta: 20,
+        },
+        1000
+      );
+    }
   };
 
   const toggleMapType = () => {
-    setMapType(prev => prev === 'standard' ? 'hybrid' : 'standard');
+    setMapType((prev) => (prev === 'standard' ? 'hybrid' : 'standard'));
   };
 
   const handleLocationSelect = (region) => {
-    mapRef.current?.animateToRegion(region, 1000);
+    if (ref.current) {
+      ref.current.animateToRegion(region, 1000);
+    }
   };
 
   const renderTehsilBoundaries = () => {
-    if (!tehsilBoundaries) return null;
+    if (!tehsilBoundaries?.features) return null;
 
     return tehsilBoundaries.features.map((feature, index) => {
-      const coordinates = feature.geometry.coordinates[0].map(coord => ({
+      const coordinates = feature.geometry.coordinates[0].map((coord) => ({
         latitude: coord[1],
         longitude: coord[0],
       }));
@@ -61,7 +67,7 @@ const BaseMap = ({
     <View style={styles.container}>
       <SearchBar onLocationSelect={handleLocationSelect} />
       <MapView
-        ref={mapRef}
+        ref={ref}
         provider={PROVIDER_GOOGLE}
         style={styles.map}
         initialRegion={initialRegion}
@@ -76,17 +82,11 @@ const BaseMap = ({
       </MapView>
 
       <View style={styles.controls}>
-        <TouchableOpacity 
-          style={styles.controlButton} 
-          onPress={handleZoomToCenter}
-        >
+        <TouchableOpacity style={styles.controlButton} onPress={handleZoomToCenter}>
           <Ionicons name="home" size={24} color="#003580" />
         </TouchableOpacity>
 
-        <TouchableOpacity 
-          style={styles.controlButton} 
-          onPress={toggleMapType}
-        >
+        <TouchableOpacity style={styles.controlButton} onPress={toggleMapType}>
           <Ionicons name="layers" size={24} color="#003580" />
         </TouchableOpacity>
       </View>
@@ -111,7 +111,7 @@ const BaseMap = ({
       )}
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -124,98 +124,47 @@ const styles = StyleSheet.create({
   map: {
     width: '100%',
     height: '100%',
-    borderRadius: 15,
   },
   controls: {
     position: 'absolute',
-    top: 20,
-    right: 20,
-    backgroundColor: 'transparent',
-    zIndex: 1,
-    gap: 10,
+    top: 10,
+    right: 10,
+    zIndex: 10,
   },
   controlButton: {
-    backgroundColor: 'white',
-    padding: 12,
-    borderRadius: 12,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 48,
-    height: 48,
-    transform: [{ scale: 1 }], // For press animation
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    padding: 10,
+    borderRadius: 50,
+    marginBottom: 10,
   },
   infoCard: {
     position: 'absolute',
-    bottom: 20,
-    left: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    padding: 15,
-    borderRadius: 12,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    minWidth: 150,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    bottom: 10,
+    left: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 10,
+    borderRadius: 5,
   },
   infoText: {
-    fontSize: 14,
-    color: '#333',
-    fontWeight: '500',
-    lineHeight: 20,
+    color: '#fff',
   },
   locationCard: {
     position: 'absolute',
-    top: 20,
-    left: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    padding: 15,
-    borderRadius: 12,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    minWidth: 200,
-    borderWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
+    bottom: 60,
+    left: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 10,
+    borderRadius: 5,
   },
   locationTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
-    color: '#003580',
-    marginBottom: 8,
+    color: '#fff',
   },
   locationText: {
-    fontSize: 14,
-    color: '#333',
-    fontWeight: '500',
-    lineHeight: 20,
-  },
-  // Add press animation styles
-  '@media (hover: hover)': {
-    controlButton: {
-      ':hover': {
-        transform: [{ scale: 1.05 }],
-      },
-    },
-  },
-  // Add responsive styles
-  '@media (max-width: 768px)': {
-    locationCard: {
-      minWidth: 150,
-    },
-    infoCard: {
-      minWidth: 120,
-    },
+    fontSize: 12,
+    color: '#fff',
   },
 });
 
-export default BaseMap; 
+export default BaseMap;

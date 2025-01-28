@@ -104,8 +104,8 @@ const DashboardScreen = () => {
     setSelectedMapData(null);
 
     let filteredDistrictFeatures = indiaTehsilsFiltered.features.filter(
-      (feature) => feature.properties.DISTRICT === value && 
-                  feature.properties.STATE === items[0].STATE
+      (feature) => feature.properties.DISTRICT === value &&
+        feature.properties.STATE === items[0].STATE
     );
 
     setFilteredIndiaDistrict({
@@ -156,7 +156,7 @@ const DashboardScreen = () => {
       const variable = selectedMapData.variables.find(v => v.value === value);
       if (variable) {
         console.log('Selected Variable:', variable); // Debug log
-        
+
         // Check if we have data for this variable
         const tehsilData = selectedMapData.Data?.find(
           item => item.ID === tehsilSelectedItem?.ID
@@ -202,10 +202,10 @@ const DashboardScreen = () => {
           >
             <Picker.Item label="Select Parameter" value="" />
             {selectedMapData.variables.map((variable, index) => (
-              <Picker.Item 
-                key={index} 
-                label={`${variable.name} (${variable.unit})`} 
-                value={variable.value} 
+              <Picker.Item
+                key={index}
+                label={`${variable.name} (${variable.unit})`}
+                value={variable.value}
               />
             ))}
           </Picker>
@@ -215,8 +215,8 @@ const DashboardScreen = () => {
   };
 
   const DistrictStyle = (feature) => {
-    if (feature.properties.TEHSIL === selectedTehsil && 
-        feature.properties.DISTRICT === selectedDistrict) {
+    if (feature.properties.TEHSIL === selectedTehsil &&
+      feature.properties.DISTRICT === selectedDistrict) {
       return {
         fillColor: "rgba(255, 255, 0, 0.7)",
         weight: 2,
@@ -303,20 +303,48 @@ const DashboardScreen = () => {
               />
             ) : (
               // Render India state boundaries
-              indiaStates.features.map((feature, index) => {
-                const coordinates = feature.geometry.coordinates[0].map(coord => ({
-                  latitude: coord[1],
-                  longitude: coord[0],
-                }));
-                return (
-                  <Polygon
-                    key={index}
-                    coordinates={coordinates}
-                    strokeColor="black"
-                    strokeWidth={2}
-                    fillColor="transparent"
-                  />
-                );
+              // Render India state boundaries
+              indiaStates.features.map((feature, featureIndex) => {
+                // Check if the geometry is of type MultiPolygon
+                if (feature.geometry.type === "MultiPolygon") {
+                  return feature.geometry.coordinates.map((polygon, polygonIndex) => {
+                    // Flatten the coordinates array and map to { latitude, longitude }
+                    const coordinates = polygon[0].map(coord => ({
+                      latitude: coord[1],
+                      longitude: coord[0],
+                    }));
+
+                    return (
+                      <Polygon
+                        key={`${featureIndex}-${polygonIndex}`}
+                        coordinates={coordinates}
+                        strokeColor="black"
+                        strokeWidth={2}
+                        fillColor="transparent"
+                      />
+                    );
+                  });
+                }
+
+                // If the geometry is a Polygon (not MultiPolygon), handle it directly
+                if (feature.geometry.type === "Polygon") {
+                  const coordinates = feature.geometry.coordinates[0].map(coord => ({
+                    latitude: coord[1],
+                    longitude: coord[0],
+                  }));
+
+                  return (
+                    <Polygon
+                      key={featureIndex}
+                      coordinates={coordinates}
+                      strokeColor="black"
+                      strokeWidth={2}
+                      fillColor="transparent"
+                    />
+                  );
+                }
+
+                return null; // Return null for unsupported geometry types
               })
             )}
           </BaseMap>
