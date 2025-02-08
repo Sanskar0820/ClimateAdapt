@@ -6,11 +6,11 @@ import DashboardScreen from "./screens/dashboard";
 import DroughtScreen from "./screens/drought";
 import HydrologicalScreen from "./screens/hydrological";
 import ContactScreen from "./screens/contact";
-import TimeseriesScreen from "./screens/timeseries";
 import MeteorologicalScreen from "./screens/meteorological";
 import InfoScreen from "./screens/info";
 import Header from "../component/Header";
 import WeatherScreen from "./screens/weather";
+import 'react-native-polyfill-globals/auto';
 
 const AppRouter = () => {
   const pathname = usePathname();

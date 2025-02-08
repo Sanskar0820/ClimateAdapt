@@ -1,22 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { VictoryChart, VictoryBar, VictoryLine, VictoryAxis, VictoryLegend } from 'victory-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { CartesianChart, Line, Area } from 'victory-native';
 import { daysInYear } from '../helpers/functions';
 
-const ClimatologyTimeSeriesChart = ({ 
-  selectedDistrict, 
-  selectedTehsil, 
-  selectedMapData, 
-  selectedTehsilID, 
-  selectedVariable 
+const ClimatologyTimeSeriesChart = ({
+  selectedDistrict,
+  selectedTehsil,
+  selectedMapData,
+  selectedTehsilID,
+  selectedVariable,
 }) => {
-  const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
+  console.log('Rendering ClimatologyTimeSeriesChart');
+  console.log('Props:', {
+    selectedDistrict,
+    selectedTehsil,
+    selectedMapData,
+    selectedTehsilID,
+    selectedVariable,
+  });
+
+  if (!selectedMapData || !selectedMapData.Data) {
+    return <Text>No data available.</Text>;
+  }
+
+  const filteredData = selectedMapData.Data.find(
+    (item) => item.ID === selectedTehsilID
+  );
+
+  if (!filteredData || !filteredData[selectedVariable.value]) {
+    return <Text>No valid data for the selected variable.</Text>;
+  }
 
   const chartData = daysInYear.map((day, index) => ({
     day,
-    value: filteredData[selectedVariable.value][index],
-    sd: filteredData[`${selectedVariable.value}_SD`][index],
-    current: filteredData[`daily_${selectedVariable.value}_2024`][index]
+    value: filteredData[selectedVariable.value][index] || 0,
+    sd: filteredData[`${selectedVariable.value}_SD`]?.[index] || 0,
+    current: filteredData[`daily_${selectedVariable.value}_2024`]?.[index] || 0,
   }));
 
   return (
@@ -28,61 +47,44 @@ const ClimatologyTimeSeriesChart = ({
         {`${selectedVariable.name} (${selectedVariable.unit})`}
       </Text>
 
-      <VictoryChart
-        width={Dimensions.get('window').width - 40}
-        height={300}
-        padding={{ top: 20, bottom: 50, left: 60, right: 20 }}
+      <CartesianChart
+        data={chartData}
+        xKey="day"
+        domainPadding={{ left: 20, right: 20 }}
+        padding={{ left: 60, bottom: 50, top: 20, right: 20 }}
+        xAxis={{
+          label: 'Days',
+          labelOffset: 30,
+        }}
       >
-        <VictoryAxis
-          tickFormat={(t) => t}
-          label="Days"
-          style={{
-            axisLabel: { padding: 30 }
-          }}
-        />
-        <VictoryAxis
-          dependentAxis
-          label={`${selectedVariable.name} (${selectedVariable.unit})`}
-          style={{
-            axisLabel: { padding: 40 }
-          }}
-        />
-        <VictoryLine
-          data={chartData}
-          x="day"
-          y="value"
-          style={{
-            data: { stroke: "#4299E1" }
-          }}
-        />
-        <VictoryBar
-          data={chartData}
-          x="day"
-          y="sd"
-          style={{
-            data: { fill: "purple", opacity: 0.3 }
-          }}
-        />
-        <VictoryLine
-          data={chartData}
-          x="day"
-          y="current"
-          style={{
-            data: { stroke: "red" }
-          }}
-        />
-      </VictoryChart>
+        {({ points, chartBounds }) => (
+          <>
+            {/* Main Climatology Line */}
+            <Line
+              points={points.value}
+              chartBounds={chartBounds}
+              color="blue"
+              strokeWidth={2}
+            />
 
-      <View style={styles.legend}>
-        <VictoryLegend
-          orientation="horizontal"
-          data={[
-            { name: "Climatology", symbol: { fill: "#4299E1" } },
-            { name: "SD", symbol: { fill: "purple", opacity: 0.3 } },
-            { name: "2024", symbol: { fill: "red" } }
-          ]}
-        />
-      </View>
+            {/* Standard Deviation Area */}
+            <Area
+              points={points.sd}
+              chartBounds={chartBounds}
+              color="green"
+              opacity={0.3}
+            />
+
+            {/* Current Year Data */}
+            <Line
+              points={points.current}
+              chartBounds={chartBounds}
+              color="red"
+              strokeWidth={2}
+            />
+          </>
+        )}
+      </CartesianChart>
     </View>
   );
 };
@@ -110,10 +112,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  legend: {
-    alignItems: 'center',
-    marginTop: 10,
-  }
 });
 
-export default ClimatologyTimeSeriesChart; 
+export default ClimatologyTimeSeriesChart;

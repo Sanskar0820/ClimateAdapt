@@ -1,29 +1,39 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { VictoryChart, VictoryBar, VictoryAxis, VictoryLegend } from 'victory-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { CartesianChart, Bars } from 'victory-native';
 import { yearsArray } from '../helpers/functions';
 
-const ExtremesConditionsCharts = ({ 
-  selectedDistrict, 
-  selectedTehsil, 
-  selectedMapData, 
-  selectedTehsilID, 
-  selectedVariable 
+const ExtremesConditionsCharts = ({
+  selectedDistrict,
+  selectedTehsil,
+  selectedMapData,
+  selectedTehsilID,
+  selectedVariable,
 }) => {
-  const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
+  if (!selectedMapData || !selectedMapData.Data) {
+    return <Text>No data available.</Text>;
+  }
+
+  const filteredData = selectedMapData.Data.find(
+    (item) => item.ID === selectedTehsilID
+  );
+
+  if (!filteredData || !filteredData[selectedVariable.value]) {
+    return <Text>No valid data for the selected variable.</Text>;
+  }
 
   const chartData = yearsArray.map((year, index) => ({
     year,
-    frequency: filteredData[selectedVariable.value][index]
+    frequency: filteredData[selectedVariable.value]?.[index] || 0, // Ensure no undefined values
   }));
 
   const getTitle = () => {
-    if (selectedVariable.value === "pcp") {
-      return "Frequency of extreme precipitation (exceeding 95th percentile rainy days threshold)";
-    } else if (selectedVariable.value === "temp") {
-      return "Frequency of extreme temperature (exceeding 95th percentile threshold of temperature for March-May)";
+    if (selectedVariable.value === 'pcp') {
+      return 'Frequency of extreme precipitation (exceeding 95th percentile rainy days threshold)';
+    } else if (selectedVariable.value === 'temp') {
+      return 'Frequency of extreme temperature (exceeding 95th percentile threshold of temperature for March-May)';
     }
-    return "";
+    return 'Extreme Conditions Frequency';
   };
 
   return (
@@ -33,43 +43,31 @@ const ExtremesConditionsCharts = ({
       </Text>
       <Text style={styles.subtitle}>{getTitle()}</Text>
 
-      <VictoryChart
-        width={Dimensions.get('window').width - 40}
-        height={300}
-        padding={{ top: 20, bottom: 50, left: 60, right: 20 }}
+      <CartesianChart
+        data={chartData}
+        xKey="year"
+        domainPadding={{ left: 20, right: 20 }}
+        padding={{ left: 60, bottom: 50, top: 20, right: 20 }}
+        xAxis={{
+          label: 'Years',
+          labelOffset: 30,
+        }}
       >
-        <VictoryAxis
-          tickFormat={(t) => t}
-          label="Years"
-          style={{
-            axisLabel: { padding: 30 }
-          }}
-        />
-        <VictoryAxis
-          dependentAxis
-          label="Frequency"
-          style={{
-            axisLabel: { padding: 40 }
-          }}
-        />
-        <VictoryBar
-          data={chartData}
-          x="year"
-          y="frequency"
-          style={{
-            data: { fill: "#4299E1" }
-          }}
-        />
-      </VictoryChart>
+        {({ points, chartBounds }) => {
+          if (!points || !points.frequency) {
+            return <Text>No chart data available.</Text>; // Prevent undefined errors
+          }
 
-      <View style={styles.legend}>
-        <VictoryLegend
-          orientation="horizontal"
-          data={[
-            { name: "Frequency", symbol: { fill: "#4299E1" } }
-          ]}
-        />
-      </View>
+          return (
+            <Bars
+              points={points.frequency} // Corrected points reference
+              chartBounds={chartBounds}
+              color="#4299E1"
+              barWidth={8}
+            />
+          );
+        }}
+      </CartesianChart>
     </View>
   );
 };
@@ -97,10 +95,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  legend: {
-    alignItems: 'center',
-    marginTop: 10,
-  }
 });
 
-export default ExtremesConditionsCharts; 
+export default ExtremesConditionsCharts;

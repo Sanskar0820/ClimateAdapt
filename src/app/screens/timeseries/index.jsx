@@ -1,20 +1,15 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import Header from '../../../component/Header'
-import { Picker } from '@react-native-picker/picker'
-import { LineChart } from 'react-native-chart-kit'
-import { useLoader } from '../../../context/LoaderContext'
-import PlaceAttributes from '../../../../assets/PlaceAttributes.json'
-import { Dimensions } from 'react-native'
-// import { Button } from '@rneui/themed'
+import React, { useEffect, useRef, useState } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Picker, Dimensions } from 'react-native';
+import Plotly from 'react-native-plotly';
+import PlaceAttributes from '../../../../assets/PlaceAttributes.json';
+import Header from '../../../component/Header';
+import { useLoader } from '../../../context/LoaderContext';
 
 const TimeseriesScreen = () => {
   const [startYear, setStartYear] = useState(null);
   const [endYear, setEndYear] = useState(null);
   const [selectedSession, setSelectedSession] = useState(null);
   const [tehsilList, setTehsilList] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedTehsil, setSelectedTehsil] = useState('');
   const [tehsilSelectedItem, setTehsilSelectedItem] = useState([]);
   const [selectedData, setSelectedData] = useState(null);
   const [droughtArea, setDroughtArea] = useState(null);
@@ -65,7 +60,6 @@ const TimeseriesScreen = () => {
   }, [selectedSession, startYear, endYear, tehsilSelectedItem]);
 
   const handleDistrictSelect = (value) => {
-    setSelectedDistrict(value);
     let items = PlaceAttributes.filter((item) => item.DISTRICT === value);
     items = [...new Set(items.map((item) => item))];
     items.sort();
@@ -73,7 +67,6 @@ const TimeseriesScreen = () => {
   };
 
   const handleTehsilSelect = (value) => {
-    setSelectedTehsil(value);
     let item = tehsilList.filter((item) => item.TEHSIL === value);
     setTehsilSelectedItem(item);
   };
@@ -89,29 +82,24 @@ const TimeseriesScreen = () => {
       }));
 
     return (
-      <LineChart
-        data={{
-          labels: plotData.map(d => d.year.toString()),
-          datasets: [{
-            data: plotData.map(d => d.value)
-          }]
+      <Plotly
+        data={[
+          {
+            x: plotData.map(entry => entry.year),
+            y: plotData.map(entry => entry.value),
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: 'red' },
+          },
+        ]}
+        layout={{
+          width: screenWidth - 40,
+          height: 220,
+          title: 'Drought Time Series',
+          xaxis: { title: 'Year' },
+          yaxis: { title: 'Drought Value' },
         }}
-        width={screenWidth - 40}
-        height={220}
-        chartConfig={{
-          backgroundColor: '#fff',
-          backgroundGradientFrom: '#fff',
-          backgroundGradientTo: '#fff',
-          decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(255, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16
-          }
-        }}
-        style={{
-          marginVertical: 8,
-          borderRadius: 16
-        }}
+        style={{ marginVertical: 8, borderRadius: 16 }}
       />
     );
   };
@@ -127,7 +115,7 @@ const TimeseriesScreen = () => {
             style={styles.picker}
             onValueChange={handleDistrictSelect}
           >
-            <Picker.Item label="Select" value="" />
+            <Picker.Item label="Select District" value="" />
             {[...new Set(PlaceAttributes.map((item) => item.DISTRICT))].map((item, index) => (
               <Picker.Item key={index} label={item} value={item} />
             ))}
@@ -140,13 +128,47 @@ const TimeseriesScreen = () => {
             enabled={tehsilList.length > 0}
             onValueChange={handleTehsilSelect}
           >
-            <Picker.Item label="Select" value="" />
+            <Picker.Item label="Select Tehsil" value="" />
             {tehsilList.map((item, index) => (
               <Picker.Item key={index} label={item.TEHSIL} value={item.TEHSIL} />
             ))}
           </Picker>
 
-          {/* Add more selection components */}
+          <Text style={styles.label}>Select Start Year</Text>
+          <Picker
+            selectedValue={startYear}
+            style={styles.picker}
+            onValueChange={(value) => setStartYear(value)}
+          >
+            <Picker.Item label="Select Start Year" value="" />
+            {Array.from({ length: 2020 - 1900 }, (_, index) => `${1901 + index}`).map((year, index) => (
+              <Picker.Item key={index} label={year} value={year} />
+            ))}
+          </Picker>
+
+          <Text style={styles.label}>Select End Year</Text>
+          <Picker
+            selectedValue={endYear}
+            style={styles.picker}
+            onValueChange={(value) => setEndYear(value)}
+          >
+            <Picker.Item label="Select End Year" value="" />
+            {Array.from({ length: 2020 - 1900 }, (_, index) => `${1901 + index}`).map((year, index) => (
+              <Picker.Item key={index} label={year} value={year} />
+            ))}
+          </Picker>
+
+          <Text style={styles.label}>Select Session</Text>
+          <Picker
+            selectedValue={selectedSession}
+            style={styles.picker}
+            onValueChange={(value) => setSelectedSession(value)}
+          >
+            <Picker.Item label="Select Session" value="" />
+            {["Summer Monsoon", "Winter Monsoon", "Calendar Year", "Water Year"].map((session, index) => (
+              <Picker.Item key={index} label={session} value={session} />
+            ))}
+          </Picker>
         </View>
 
         <View style={styles.chartContainer}>
@@ -156,8 +178,6 @@ const TimeseriesScreen = () => {
     </SafeAreaView>
   );
 };
-
-export default TimeseriesScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -186,5 +206,7 @@ const styles = StyleSheet.create({
   chartContainer: {
     padding: 20,
     alignItems: 'center',
-  }
-}); 
+  },
+});
+
+export default TimeseriesScreen; 

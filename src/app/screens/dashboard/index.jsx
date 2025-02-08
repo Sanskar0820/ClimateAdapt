@@ -1,9 +1,9 @@
 import 'react-native-get-random-values';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Dimensions, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
 import Header from '../../../component/Header'
 import { Picker } from '@react-native-picker/picker'
-import MapView, { PROVIDER_GOOGLE, Polygon } from 'react-native-maps'
+import MapView, { Polygon } from 'react-native-maps'
 import PlaceAttributes from '../../../../assets/PlaceAttributes.json'
 import { useLoader } from '../../../context/LoaderContext'
 import AnnualTimeSeriesChart from '../../../component/AnnualTimeSeriesChart'
@@ -16,6 +16,8 @@ import { ExtremesConditionsData } from '../../../../assets/data/ExtremesConditio
 import FilteredJsonData from '../../../component/FilteredJsonData';
 import indiaTehsilsFiltered from '../../../../assets/data/indiaTehsilsFiltered.json';
 import indiaStates from '../../../../assets/data/indiaStates.json';
+
+console.log('Components and data imported successfully');
 
 const MapDatasetOptions = [
   {
@@ -82,6 +84,7 @@ const MapDatasetOptions = [
 ];
 
 const DashboardScreen = () => {
+  console.log('Rendering DashboardScreen');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedTehsil, setSelectedTehsil] = useState('');
   const [tehsilList, setTehsilList] = useState([]);
@@ -233,153 +236,168 @@ const DashboardScreen = () => {
     }
   };
 
+  const toggleShowTimeseries = () => {
+    setShowTimeseries(!showTimeseries);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <View style={styles.content}>
-        <ScrollView style={styles.selectionContainer}>
-          <Text style={styles.label}>Select District</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={selectedDistrict}
-              style={styles.picker}
-              onValueChange={handleDistrictSelect}
+      <ScrollView style={styles.mainScrollView}>
+        <View style={styles.content}>
+          <View style={styles.selectionContainer}>
+            <Text style={styles.label}>Select District</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={selectedDistrict}
+                style={styles.picker}
+                onValueChange={handleDistrictSelect}
+              >
+                <Picker.Item label="Select District" value="" />
+                {[...new Set(PlaceAttributes.map((item) => item.DISTRICT))].map((item, index) => (
+                  <Picker.Item key={index} label={item} value={item} />
+                ))}
+              </Picker>
+            </View>
+
+            <Text style={styles.label}>Select Tehsil</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={selectedTehsil}
+                style={styles.picker}
+                enabled={tehsilList.length > 0}
+                onValueChange={handleTehsilSelect}
+              >
+                <Picker.Item label="Select Tehsil" value="" />
+                {tehsilList.map((item, index) => (
+                  <Picker.Item key={index} label={item.TEHSIL} value={item.TEHSIL} />
+                ))}
+              </Picker>
+            </View>
+
+            {tehsilSelectedItem && (
+              <>
+                <Text style={styles.label}>Select Data Type</Text>
+                <View style={styles.pickerContainer}>
+                  <Picker
+                    selectedValue={selectedMapData?.DataValue || ''}
+                    style={styles.picker}
+                    onValueChange={handleSelectMapData}
+                  >
+                    <Picker.Item label="Select Data Type" value="" />
+                    {MapDatasetOptions.map((item, index) => (
+                      <Picker.Item key={index} label={item.DataName} value={item.DataValue} />
+                    ))}
+                  </Picker>
+                </View>
+              </>
+            )}
+
+            {selectedMapData && renderParameterPicker()}
+
+            <TouchableOpacity 
+              style={styles.toggleButton}
+              onPress={toggleShowTimeseries}
+              disabled={!selectedVariable}
             >
-              <Picker.Item label="Select District" value="" />
-              {[...new Set(PlaceAttributes.map((item) => item.DISTRICT))].map((item, index) => (
-                <Picker.Item key={index} label={item} value={item} />
-              ))}
-            </Picker>
+              <Text style={styles.toggleButtonText}>
+                {showTimeseries ? "Hide Timeseries" : "Show Timeseries"}
+              </Text>
+            </TouchableOpacity>
           </View>
 
-          <Text style={styles.label}>Select Tehsil</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={selectedTehsil}
-              style={styles.picker}
-              enabled={tehsilList.length > 0}
-              onValueChange={handleTehsilSelect}
+          <View style={styles.mapContainer}>
+            <BaseMap
+              ref={mapRef}
+              selectedDistrict={selectedDistrict}
+              selectedTehsil={selectedTehsil}
             >
-              <Picker.Item label="Select Tehsil" value="" />
-              {tehsilList.map((item, index) => (
-                <Picker.Item key={index} label={item.TEHSIL} value={item.TEHSIL} />
-              ))}
-            </Picker>
-          </View>
+              {filteredIndiaDistrict ? (
+                <FilteredJsonData
+                  mapRef={mapRef}
+                  filteredIndiaDistrict={filteredIndiaDistrict}
+                  selectedTehsilID={tehsilSelectedItem?.ID}
+                  DistrictStyle={DistrictStyle}
+                />
+              ) : (
+                // Render India state boundaries
+                indiaStates.features.map((feature, featureIndex) => {
+                  // Check if the geometry is of type MultiPolygon
+                  if (feature.geometry.type === "MultiPolygon") {
+                    return feature.geometry.coordinates.map((polygon, polygonIndex) => {
+                      // Flatten the coordinates array and map to { latitude, longitude }
+                      const coordinates = polygon[0].map(coord => ({
+                        latitude: coord[1],
+                        longitude: coord[0],
+                      }));
 
-          {tehsilSelectedItem && (
-            <>
-              <Text style={styles.label}>Select Data Type</Text>
-              <View style={styles.pickerContainer}>
-                <Picker
-                  selectedValue={selectedMapData?.DataValue || ''}
-                  style={styles.picker}
-                  onValueChange={handleSelectMapData}
-                >
-                  <Picker.Item label="Select Data Type" value="" />
-                  {MapDatasetOptions.map((item, index) => (
-                    <Picker.Item key={index} label={item.DataName} value={item.DataValue} />
-                  ))}
-                </Picker>
-              </View>
-            </>
-          )}
+                      return (
+                        <Polygon
+                          key={`${featureIndex}-${polygonIndex}`}
+                          coordinates={coordinates}
+                          strokeColor="black"
+                          strokeWidth={2}
+                          fillColor="transparent"
+                        />
+                      );
+                    });
+                  }
 
-          {selectedMapData && renderParameterPicker()}
-        </ScrollView>
-
-        <View style={styles.mapContainer}>
-          <BaseMap
-            ref={mapRef}
-            selectedDistrict={selectedDistrict}
-            selectedTehsil={selectedTehsil}
-          >
-            {filteredIndiaDistrict ? (
-              <FilteredJsonData
-                mapRef={mapRef}
-                filteredIndiaDistrict={filteredIndiaDistrict}
-                selectedTehsilID={tehsilSelectedItem?.ID}
-                DistrictStyle={DistrictStyle}
-              />
-            ) : (
-              // Render India state boundaries
-              // Render India state boundaries
-              indiaStates.features.map((feature, featureIndex) => {
-                // Check if the geometry is of type MultiPolygon
-                if (feature.geometry.type === "MultiPolygon") {
-                  return feature.geometry.coordinates.map((polygon, polygonIndex) => {
-                    // Flatten the coordinates array and map to { latitude, longitude }
-                    const coordinates = polygon[0].map(coord => ({
+                  // If the geometry is a Polygon (not MultiPolygon), handle it directly
+                  if (feature.geometry.type === "Polygon") {
+                    const coordinates = feature.geometry.coordinates[0].map(coord => ({
                       latitude: coord[1],
                       longitude: coord[0],
                     }));
 
                     return (
                       <Polygon
-                        key={`${featureIndex}-${polygonIndex}`}
+                        key={featureIndex}
                         coordinates={coordinates}
                         strokeColor="black"
                         strokeWidth={2}
                         fillColor="transparent"
                       />
                     );
-                  });
-                }
+                  }
 
-                // If the geometry is a Polygon (not MultiPolygon), handle it directly
-                if (feature.geometry.type === "Polygon") {
-                  const coordinates = feature.geometry.coordinates[0].map(coord => ({
-                    latitude: coord[1],
-                    longitude: coord[0],
-                  }));
-
-                  return (
-                    <Polygon
-                      key={featureIndex}
-                      coordinates={coordinates}
-                      strokeColor="black"
-                      strokeWidth={2}
-                      fillColor="transparent"
-                    />
-                  );
-                }
-
-                return null; // Return null for unsupported geometry types
-              })
-            )}
-          </BaseMap>
-        </View>
-
-        {showTimeseries && tehsilSelectedItem && selectedVariable && selectedMapData && (
-          <View style={styles.timeseriesContainer}>
-            {selectedMapData.DataValue === "annual_data" ? (
-              <AnnualTimeSeriesChart
-                selectedMapData={selectedMapData}
-                selectedVariable={selectedVariable}
-                selectedTehsilID={tehsilSelectedItem.ID}
-                selectedDistrict={selectedDistrict}
-                selectedTehsil={selectedTehsil}
-              />
-            ) : selectedMapData.DataValue === "climatology_data" ? (
-              <ClimatologyTimeSeriesChart
-                selectedMapData={selectedMapData}
-                selectedVariable={selectedVariable}
-                selectedTehsilID={tehsilSelectedItem.ID}
-                selectedDistrict={selectedDistrict}
-                selectedTehsil={selectedTehsil}
-              />
-            ) : (
-              <ExtremesConditionsCharts
-                selectedMapData={selectedMapData}
-                selectedVariable={selectedVariable}
-                selectedTehsilID={tehsilSelectedItem.ID}
-                selectedDistrict={selectedDistrict}
-                selectedTehsil={selectedTehsil}
-              />
-            )}
+                  return null; // Return null for unsupported geometry types
+                })
+              )}
+            </BaseMap>
           </View>
-        )}
-      </View>
+
+          {showTimeseries && tehsilSelectedItem && selectedVariable && selectedMapData && (
+            <View style={styles.timeseriesContainer}>
+              {selectedMapData.DataValue === "annual_data" ? (
+                <AnnualTimeSeriesChart
+                  selectedMapData={selectedMapData}
+                  selectedVariable={selectedVariable}
+                  selectedTehsilID={tehsilSelectedItem.ID}
+                  selectedDistrict={selectedDistrict}
+                  selectedTehsil={selectedTehsil}
+                />
+              ) : selectedMapData.DataValue === "climatology_data" ? (
+                <ClimatologyTimeSeriesChart
+                  selectedDistrict={selectedDistrict}
+                  selectedTehsil={selectedTehsil}
+                  selectedMapData={selectedMapData}
+                  selectedTehsilID={tehsilSelectedItem.ID}
+                  selectedVariable={selectedVariable}
+                />
+              ) : (
+                <ExtremesConditionsCharts
+                  selectedMapData={selectedMapData}
+                  selectedVariable={selectedVariable}
+                  selectedTehsilID={tehsilSelectedItem.ID}
+                  selectedDistrict={selectedDistrict}
+                  selectedTehsil={selectedTehsil}
+                />
+              )}
+            </View>
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -389,8 +407,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  content: {
+  mainScrollView: {
     flex: 1,
+  },
+  content: {
+    flexGrow: 1,
   },
   selectionContainer: {
     padding: 20,
@@ -416,8 +437,21 @@ const styles = StyleSheet.create({
     height: 50,
   },
   mapContainer: {
-    flex: 1,
+    height: 400, // Increased height to match BaseMap
     overflow: 'hidden',
+  },
+  toggleButton: {
+    backgroundColor: '#007AFF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  toggleButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
   },
   timeseriesContainer: {
     padding: 20,

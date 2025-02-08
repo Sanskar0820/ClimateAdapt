@@ -1,21 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { VictoryChart, VictoryBar, VictoryLine, VictoryAxis, VictoryLegend } from 'victory-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { CartesianChart, Bar, Line } from 'victory-native';
 import { yearsArray } from '../helpers/functions';
+import { Skia } from "@shopify/react-native-skia";
 
-const AnnualTimeSeriesChart = ({ 
-  selectedDistrict, 
-  selectedTehsil, 
-  selectedMapData, 
-  selectedTehsilID, 
-  selectedVariable 
+console.log("SKIA IS ---> ",Skia); // Check if Skia is defined
+
+
+const AnnualTimeSeriesChart = ({
+  selectedDistrict,
+  selectedTehsil,
+  selectedMapData,
+  selectedTehsilID,
+  selectedVariable,
 }) => {
-  const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
+  if (!selectedMapData || !selectedMapData.Data) {
+    return <Text>No data available.</Text>;
+  }
+
+  const filteredData = selectedMapData.Data.find(
+    (item) => item.ID === selectedTehsilID
+  );
+
+  if (!filteredData || !filteredData[selectedVariable.value]) {
+    return <Text>No valid data available for the selected variable.</Text>;
+  }
 
   const chartData = yearsArray.map((year, index) => ({
     year,
-    value: filteredData[selectedVariable.value][index],
-    trendline: filteredData[`${selectedVariable.value}_trendline`][index]
+    value: filteredData[selectedVariable.value][index] || 0,
+    trendline: filteredData[`${selectedVariable.value}_trendline`]?.[index] || 0,
   }));
 
   return (
@@ -25,55 +39,45 @@ const AnnualTimeSeriesChart = ({
       </Text>
       <Text style={styles.subtitle}>
         {`${selectedVariable.name} (${selectedVariable.unit})`}
-        {`\nChange: ${filteredData[`${selectedVariable.value}_change`]}%, h: ${filteredData[`${selectedVariable.value}_h`]}`}
+        {`\nChange: ${filteredData[`${selectedVariable.value}_change`] || 0}%, h: ${
+          filteredData[`${selectedVariable.value}_h`] || 0
+        }`}
       </Text>
 
-      <VictoryChart
-        width={Dimensions.get('window').width - 40}
-        height={300}
-        padding={{ top: 20, bottom: 50, left: 60, right: 20 }}
+      <CartesianChart
+        data={chartData}
+        xKey="year"
+        yKeys={['value', 'trendline']}
+        domainPadding={{ left: 20, right: 20 }}
+        padding={{ left: 60, bottom: 50, top: 20, right: 20 }}
+        xAxis={[
+          {
+            label: 'Years',
+            labelOffset: 30,
+          },
+        ]}
+        yAxis={[
+          {
+            label: `${selectedVariable.name} (${selectedVariable.unit})`,
+            labelOffset: 40,
+          },
+        ]}
       >
-        <VictoryAxis
-          tickFormat={(t) => t}
-          label="Years"
-          style={{
-            axisLabel: { padding: 30 }
-          }}
-        />
-        <VictoryAxis
-          dependentAxis
-          label={`${selectedVariable.name} (${selectedVariable.unit})`}
-          style={{
-            axisLabel: { padding: 40 }
-          }}
-        />
-        <VictoryBar
-          data={chartData}
-          x="year"
-          y="value"
-          style={{
-            data: { fill: "#4299E1" }
-          }}
-        />
-        <VictoryLine
-          data={chartData}
-          x="year"
-          y="trendline"
-          style={{
-            data: { stroke: "red" }
-          }}
-        />
-      </VictoryChart>
-
-      <View style={styles.legend}>
-        <VictoryLegend
-          orientation="horizontal"
-          data={[
-            { name: selectedVariable.name, symbol: { fill: "#4299E1" } },
-            { name: "Trendline", symbol: { fill: "red" } }
-          ]}
-        />
-      </View>
+        {({ points, chartBounds }) => (
+          <>
+            <Bar
+              points={points.value}
+              chartBounds={chartBounds}
+              color="#4299E1"
+            />
+            <Line
+              points={points.trendline}
+              chartBounds={chartBounds}
+              color="red"
+            />
+          </>
+        )}
+      </CartesianChart>
     </View>
   );
 };
@@ -101,10 +105,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
-  legend: {
-    alignItems: 'center',
-    marginTop: 10,
-  }
 });
 
-export default AnnualTimeSeriesChart; 
+export default AnnualTimeSeriesChart;
