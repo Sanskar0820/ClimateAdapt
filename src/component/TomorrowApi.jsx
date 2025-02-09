@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import axios from 'axios'
 
 // import {currentWeatherData2} from "../assets/weatherapiData/tomorrowapi"
@@ -63,10 +63,10 @@ const TomorrowApi = ({ panchyatSelectedItem }) => {
         if (response.data) {
           setDailyForecast2(response.data.timelines.daily);
           setHourlyForecast2(response.data.timelines.hourly);
+          // console.log(response.data)
         }
       } catch (error) {
-        setAlertMessage("Error fetching weather data");
-        setShowAlert(true);
+        console.error("Error fetching weather data", error);
       }
     }
   };
@@ -103,378 +103,376 @@ const TomorrowApi = ({ panchyatSelectedItem }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <div>
-        <div className='card_heading'>
-          <h2>Current Weather</h2>
-        </div>
+      <View style={styles.cardHeading}>
+        <Text style={styles.headingText}>Current Weather</Text>
+      </View>
 
-        {currentWeatherData2 && currentWeatherData2.data ? (
-          <>
-            <div className='row'>
-              <div className='col-md-6 col-sm-12 col-lg-6'>
-                <div className='weather_main_card'>
-                  <div className='weather_card'>
-                    <img src={Calendar} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">
-                        {/* {currentWeatherData2.weather[0].main},{" "} */}
-                        {/* {currentWeatherData2.data.description} */}
-                      </p>
-                      <p className='weather_card_value'>{formatForecastDateTime(currentWeatherData2.data.time)}</p>
-                    </div>
-                  </div>
+      <View style={styles.mainContainer}>
+        {/* Current Weather Card */}
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={Calendar} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>
+              {/* {currentWeatherData2.weather[0].main},{" "} */}
+              {/* {currentWeatherData2.data.description} */}
+            </Text>
+            <Text style={styles.weatherValue}>
+              {formatForecastDateTime(currentWeatherData2.data.time)}
+            </Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={TempIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Temperature</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.temperature} °C</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={TempIcon} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Temperature</Text>
+            <Text style={styles.weatherValue}>
+              {currentWeatherData2.data.values.temperature} °C
+            </Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={FeelsLikeIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Feels Like</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.temperatureApparent} °C</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={FeelsLikeIcon} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Feels Like</Text>
+            <Text style={styles.weatherValue}>
+              {currentWeatherData2.data.values.temperatureApparent} °C
+            </Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={HumidityIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Humidity</p>
-                      <p className='weather_card_value'> {currentWeatherData2.data.values.humidity} %</p>
-                    </div>
-                  </div>
-                  <div className='weather_card'>
-                    <img src={LocationIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Location</p>
-                      <p className='weather_card_value'>{panchyatSelectedItem.PANCHAYAT}, {panchyatSelectedItem.DISTRICT}</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={HumidityIcon} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Humidity</Text>
+            <Text style={styles.weatherValue}>
+              {currentWeatherData2.data.values.humidity} %
+            </Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={DewPoint} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Dew Point</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.dewPoint} °C</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={LocationIcon} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Location</Text>
+            <Text style={styles.weatherValue}>{panchyatSelectedItem.PANCHAYAT}, {panchyatSelectedItem.DISTRICT}</Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={Rainfall} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Precipitation Probability</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.precipitationProbability} %</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className='col-md-6 col-sm-12 col-lg-6'>
-                <div className='weather_main_card'>
-                  <div className='weather_card'>
-                    <img src={WindPressureIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Pressure Surface Level</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.pressureSurfaceLevel} hPa</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={DewPoint} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Dew Point</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData2.data.values.dewPoint} °C</Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={WindIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Wind Speed</p>
-                      <p className='weather_card_value'>  {(currentWeatherData2.data.values.windSpeed * 3.6).toFixed(2)} km/h</p>
-                    </div>
-                  </div>
-                  <div className='weather_card'>
-                    <img src={WindDirection} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Wind Direction</p>
-                      <p className='weather_card_value'>  {(currentWeatherData2.data.values.windDirection)}°  </p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={Rainfall} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Precipitation Probability</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData2.data.values.precipitationProbability} %</Text>
+          </View>
+        </View>
+      </View>
 
-                  <div className='weather_card'>
-                    <img src={CloudCover} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Cloud Cover</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.cloudCover} % </p>
-                    </div>
-                  </div>
+      <View style={styles.mainContainer}>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={WindPressureIcon} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Pressure Surface Level</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData2.data.values.pressureSurfaceLevel} hPa</Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={UVIndex} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">UV Index</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.uvIndex}</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={WindIcon} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Wind Speed</Text>
+            <Text style={styles.weatherValue}>
+              {(currentWeatherData2.data.values.windSpeed * 3.6).toFixed(2)} km/h
+            </Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={VisibilityIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Visibility</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.visibility} km</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={WindDirection} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Wind Direction</Text>
+            <Text style={styles.weatherValue}>
+              {currentWeatherData2.data.values.windDirection}°
+            </Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={CloudCeiling} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Cloud Ceiling</p>
-                      <p className='weather_card_value'>{currentWeatherData2.data.values.cloudCeiling} km</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className='right_panel_container my-4'>
-            Please select a location.
-          </div>
-        )}
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={CloudCover} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Cloud Cover</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData2.data.values.cloudCover} %</Text>
+          </View>
+        </View>
 
-        <div className='card_heading'>
-          <h2>Hourly Forecast (120 Hours)</h2>
-        </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={UVIndex} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>UV Index</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData2.data.values.uvIndex}</Text>
+          </View>
+        </View>
 
-        {hourlyForecast2 && hourlyForecast2.length > 0 ? (
-          <div className='forecast_container'>
-            {hourlyForecast2.map((item, index) => (
-              <div className='col-md-6 col-sm-12 col-lg-6' key={index}>
-                <div className='forecast_cards_details column_3'>
-                  <div className='weather_card'>
-                    <img src={Calendar} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">
-                        {/* {item.IconPhrase} */}
-                      </p>
-                      <p className='weather_card_value'>
-                        {formatForecastDateTime(item.time)}
-                      </p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={VisibilityIcon} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Visibility</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData2.data.values.visibility} km</Text>
+          </View>
+        </View>
 
-                  <div className='weather_card'>
-                    <img src={TempIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Temperature</p>
-                      <p className='weather_card_value'>{item.values.temperature} °C</p>
-                    </div>
-                  </div>
-                  <div className='weather_card'>
-                    <img src={FeelsLikeIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Feels Like</p>
-                      <p className='weather_card_value'>{item.values.temperatureApparent} °C</p>
-                    </div>
-                  </div>
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={CloudCeiling} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Cloud Ceiling</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData2.data.values.cloudCeiling} km</Text>
+          </View>
+        </View>
+      </View>
 
-                  <div className='weather_card'>
-                    <img src={DewPoint} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">DewPoint</p>
-                      <p className='weather_card_value'> {item.values.dewPoint}  °C</p>
-                    </div>
-                  </div>
+      <View style={styles.cardHeading}>
+        <Text style={styles.headingText}>Hourly Forecast (120 Hours)</Text>
+      </View>
 
-                  <div className='weather_card'>
-                    <img src={HumidityIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Relative Humidity</p>
-                      <p className='weather_card_value'> {item.values.humidity} %</p>
-                    </div>
-                  </div>
+      {hourlyForecast2 && hourlyForecast2.length > 0 ? (
+        <ScrollView horizontal style={styles.forecastContainer}>
+          {hourlyForecast2.map((item, index) => (
+            <View key={index} style={styles.forecastCard}>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={Calendar} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>
+                    {/* {item.IconPhrase} */}
+                  </Text>
+                  <Text style={styles.weatherValue}>
+                    {formatForecastDateTime(item.time)}
+                  </Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={WindIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Wind Speed</p>
-                      <p className='weather_card_value'>  {(item.values.windSpeed)} km/h</p>
-                    </div>
-                  </div>
-                  <div className='weather_card'>
-                    <img src={WindDirection} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Wind Direction</p>
-                      <p className='weather_card_value'>  {(item.values.windDirection)}° </p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={TempIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Temperature</Text>
+                  <Text style={styles.weatherValue}>{item.values.temperature} °C</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={UVIndex} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">UV Index</p>
-                      <p className='weather_card_value'>  {(item.values.uvIndex)} </p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={FeelsLikeIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Feels Like</Text>
+                  <Text style={styles.weatherValue}>{item.values.temperatureApparent} °C</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={VisibilityIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Visibility</p>
-                      <p className='weather_card_value'>{item.values.visibility}{" "}km</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={DewPoint} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>DewPoint</Text>
+                  <Text style={styles.weatherValue}>{item.values.dewPoint} °C</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={CloudCeiling} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Ceiling (cloud)</p>
-                      <p className='weather_card_value'>{item.values.cloudCeiling}{" "}km</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={HumidityIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Relative Humidity</Text>
+                  <Text style={styles.weatherValue}>{item.values.humidity} %</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={Rainfall} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Rain Probability</p>
-                      <p className='weather_card_value'>{item.values.precipitationProbability} %</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={WindIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Wind Speed</Text>
+                  <Text style={styles.weatherValue}>{item.values.windSpeed} km/h</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={WindPressureIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Pressure Surface Level</p>
-                      <p className='weather_card_value'>{item.values.pressureSurfaceLevel} hPa</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className='right_panel_container my-4'>
-            Please select a location.
-          </div>
-        )}
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={WindDirection} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Wind Direction</Text>
+                  <Text style={styles.weatherValue}>{item.values.windDirection}°</Text>
+                </View>
+              </View>
 
-        <div className='card_heading'>
-          <h2>Daily Forecast (5 Days)</h2>
-        </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={UVIndex} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>UV Index</Text>
+                  <Text style={styles.weatherValue}>{item.values.uvIndex}</Text>
+                </View>
+              </View>
 
-        {dailyForecast2 && dailyForecast2.length > 0 ? (
-          <div className='forecast_container'>
-            {dailyForecast2.map((item, index) => (
-              <div className='col-md-6 col-sm-12 col-lg-6' key={index}>
-                <div className='forecast_cards_details column_3'>
-                  <div className='weather_card'>
-                    <img src={Calendar} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">
-                        {/* {item.IconPhrase} */}
-                      </p>
-                      <p className='weather_card_value'>
-                        {formatForecastDateTime(item.time)}
-                      </p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={VisibilityIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Visibility</Text>
+                  <Text style={styles.weatherValue}>{item.values.visibility} km</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={TempIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Temperature</p>
-                      <p className='weather_card_value'>{item.values.temperatureAvg} °C</p>
-                    </div>
-                  </div>
-                  <div className='weather_card'>
-                    <img src={FeelsLikeIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Feels Like</p>
-                      <p className='weather_card_value'>{item.values.temperatureApparentAvg} °C</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={CloudCeiling} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Ceiling (cloud)</Text>
+                  <Text style={styles.weatherValue}>{item.values.cloudCeiling} km</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={DewPoint} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">DewPoint</p>
-                      <p className='weather_card_value'> {item.values.dewPointAvg}  °C</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={Rainfall} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Rain Probability</Text>
+                  <Text style={styles.weatherValue}>{item.values.precipitationProbability} %</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={HumidityIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Relative Humidity</p>
-                      <p className='weather_card_value'> {item.values.humidityAvg} %</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={WindPressureIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Pressure Surface Level</Text>
+                  <Text style={styles.weatherValue}>{item.values.pressureSurfaceLevel} hPa</Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      ) : (
+        <View style={styles.rightPanelContainer}>
+          <Text>Please select a location.</Text>
+        </View>
+      )}
 
-                  <div className='weather_card'>
-                    <img src={WindIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Wind Speed</p>
-                      <p className='weather_card_value'>  {(item.values.windSpeedAvg)} km/h</p>
-                    </div>
-                  </div>
-                  <div className='weather_card'>
-                    <img src={WindDirection} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Wind Direction</p>
-                      <p className='weather_card_value'>  {(item.values.windDirectionAvg)}° </p>
-                    </div>
-                  </div>
+      <View style={styles.cardHeading}>
+        <Text style={styles.headingText}>Daily Forecast (5 Days)</Text>
+      </View>
 
-                  <div className='weather_card'>
-                    <img src={UVIndex} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">UV Index</p>
-                      <p className='weather_card_value'>  {(item.values.uvIndexAvg)} </p>
-                    </div>
-                  </div>
+      {dailyForecast2 && dailyForecast2.length > 0 ? (
+        <ScrollView horizontal style={styles.forecastContainer}>
+          {dailyForecast2.map((item, index) => (
+            <View style={styles.forecastCard} key={index}>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={Calendar} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>
+                    {/* {item.IconPhrase} */}
+                  </Text>
+                  <Text style={styles.weatherValue}>
+                    {formatForecastDateTime(item.time)}
+                  </Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={VisibilityIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Visibility</p>
-                      <p className='weather_card_value'>{item.values.visibilityAvg}{" "}km</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={TempIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Temperature</Text>
+                  <Text style={styles.weatherValue}>{item.values.temperatureAvg} °C</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={CloudCeiling} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Ceiling (cloud)</p>
-                      <p className='weather_card_value'>{item.values.cloudCeilingAvg}{" "}km</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={FeelsLikeIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Feels Like</Text>
+                  <Text style={styles.weatherValue}>{item.values.temperatureApparentAvg} °C</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={Rainfall} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Rain Probability</p>
-                      <p className='weather_card_value'>{item.values.precipitationProbabilityAvg} %</p>
-                    </div>
-                  </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={DewPoint} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>DewPoint</Text>
+                  <Text style={styles.weatherValue}>{item.values.dewPointAvg} °C</Text>
+                </View>
+              </View>
 
-                  <div className='weather_card'>
-                    <img src={WindPressureIcon} alt='weather_icon' />
-                    <div className='weather_content'>
-                      <p className="weather_card_text">Pressure Surface Level</p>
-                      <p className='weather_card_value'>{item.values.pressureSurfaceLevelAvg} hPa</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className='right_panel_container my-4'>
-            Please select a location.
-          </div>
-        )}
-      </div>
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={HumidityIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Relative Humidity</Text>
+                  <Text style={styles.weatherValue}>{item.values.humidityAvg} %</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={WindIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Wind Speed</Text>
+                  <Text style={styles.weatherValue}>{item.values.windSpeedAvg} km/h</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={WindDirection} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Wind Direction</Text>
+                  <Text style={styles.weatherValue}>{item.values.windDirectionAvg}°</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={UVIndex} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>UV Index</Text>
+                  <Text style={styles.weatherValue}>{item.values.uvIndexAvg}</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={VisibilityIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Visibility</Text>
+                  <Text style={styles.weatherValue}>{item.values.visibilityAvg} km</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={CloudCeiling} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Ceiling (cloud)</Text>
+                  <Text style={styles.weatherValue}>{item.values.cloudCeilingAvg} km</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={Rainfall} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Rain Probability</Text>
+                  <Text style={styles.weatherValue}>{item.values.precipitationProbabilityAvg} %</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={WindPressureIcon} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Pressure Surface Level</Text>
+                  <Text style={styles.weatherValue}>{item.values.pressureSurfaceLevelAvg} hPa</Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      ) : (
+        <View style={styles.rightPanelContainer}>
+          <Text>Please select a location.</Text>
+        </View>
+      )}
     </ScrollView>
   );
 };
-
-export default TomorrowApi;
 
 const styles = StyleSheet.create({
   container: {
@@ -484,5 +482,62 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
   },
-  // Add more styles as needed
+  cardHeading: {
+    padding: 15,
+    backgroundColor: '#f5f5f5',
+  },
+  headingText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  mainContainer: {
+    padding: 10,
+  },
+  weatherCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 15,
+    marginBottom: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  icon: {
+    width: 30,
+    height: 30,
+    marginRight: 15,
+  },
+  weatherContent: {
+    flex: 1,
+  },
+  weatherText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  weatherValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  forecastContainer: {
+    padding: 10,
+    flexDirection: 'row',
+  },
+  forecastCard: {
+    width: 300, // Set a fixed width for each forecast card
+    marginRight: 10,
+  },
+  rightPanelContainer: {
+    padding: 20,
+    alignItems: 'center',
+  },
 });
+
+export default TomorrowApi;

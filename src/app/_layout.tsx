@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { MenuProvider } from '../context/MenuContext';
 import { SelectedFeatureProvider } from '../context/SelectedFeatureContext';
 import { LoaderProvider } from '../context/LoaderContext';
+import { AlertProvider } from '../context/AlertContext'
 import NavigationMenu from '../component/NavigationMenu';
 
 SplashScreen.preventAutoHideAsync();
@@ -17,6 +18,7 @@ export default function RootLayout() {
 
   return (
     <MenuProvider>
+      <AlertProvider>
         <LoaderProvider>
           <SelectedFeatureProvider>
             <View style={{ flex: 1 }}>
@@ -28,6 +30,7 @@ export default function RootLayout() {
             </View>
           </SelectedFeatureProvider>
         </LoaderProvider>
+      </AlertProvider>
     </MenuProvider>
   );
 }
