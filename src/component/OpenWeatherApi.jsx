@@ -1,22 +1,22 @@
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import axios from 'axios'
 // import { currentWeatherData } from "../assets/weatherapiData/openWeather"
 // import { forecastData } from "../assets/weatherapiData/openWeather"
 
 // Import weather icons
 const weatherIcons = {
-  humidity: require('../../assets/weather-icons/humidity.svg'),
-  temp: require('../../assets/weather-icons/thermometer-1-2.svg'),
-  minTemp: require('../../assets/weather-icons/thermometer-0.svg'),
-  maxTemp: require('../../assets/weather-icons/thermometer-full.svg'),
+  humidity: require('../../assets/weather-icons/humidity.png'),
+  temp: require('../../assets/weather-icons/thermometer-1-2.png'),
+  minTemp: require('../../assets/weather-icons/thermometer-0.png'),
+  maxTemp: require('../../assets/weather-icons/thermometer-full.png'),
   windPressure: require('../../assets/weather-icons/wind-pressure.png'),
   visibility: require('../../assets/weather-icons/visibility.png'),
   feelsLike: require('../../assets/weather-icons/feels-like.png'),
   location: require('../../assets/weather-icons/location.png'),
-  wind: require('../../assets/weather-icons/wind.svg'),
-  sunrise: require('../../assets/weather-icons/sunrise.svg'),
-  sunset: require('../../assets/weather-icons/sunset.svg'),
+  wind: require('../../assets/weather-icons/wind.png'),
+  sunrise: require('../../assets/weather-icons/sunrise.png'),
+  sunset: require('../../assets/weather-icons/sunset.png'),
 };
 
 const OpenWeatherApi = ({ panchyatSelectedItem }) => {
@@ -83,148 +83,163 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.sectionTitle}>Current Weather</Text>
-      
-      <View style={styles.weatherCard}>
-        <Image 
-          source={{ uri: `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}.png` }}
-          style={styles.weatherIcon}
-        />
-        <View style={styles.weatherInfo}>
-          <Text style={styles.weatherText}>
-            {currentWeatherData.weather[0].main}, {currentWeatherData.weather[0].description}
-          </Text>
-          <Text style={styles.timeText}>
-            {formatForecastDateTime(currentWeatherData.dt, currentWeatherData.timezone)}
-          </Text>
+      <View style={styles.cardHeading}>
+        <Text style={styles.headingText}>Current Weather</Text>
+      </View>
+
+      <View style={styles.mainContainer}>
+        <View style={styles.weatherCard}>
+          <Image 
+            source={{ uri: `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}.png` }}
+            style={styles.weatherIcon}
+          />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>
+              {currentWeatherData.weather[0].main}, {currentWeatherData.weather[0].description}
+            </Text>
+            <Text style={styles.weatherValue}>
+              {formatForecastDateTime(currentWeatherData.dt, currentWeatherData.timezone)}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={weatherIcons.location} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Location</Text>
+            <Text style={styles.weatherValue}>
+              {panchyatSelectedItem.PANCHAYAT}, {panchyatSelectedItem.DISTRICT}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={weatherIcons.temp} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Temperature</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData.main.temp} °C</Text>
+          </View>
+        </View>
+
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={weatherIcons.feelsLike} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Feels Like</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData.main.feels_like} °C</Text>
+          </View>
+        </View>
+
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={weatherIcons.minTemp} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Min Temp</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData.main.temp_min} °C</Text>
+          </View>
+        </View>
+
+        <View style={styles.weatherCard}>
+          <Image style={styles.icon} source={weatherIcons.maxTemp} />
+          <View style={styles.weatherContent}>
+            <Text style={styles.weatherText}>Max Temp</Text>
+            <Text style={styles.weatherValue}>{currentWeatherData.main.temp_max} °C</Text>
+          </View>
         </View>
       </View>
 
-      <View style={styles.weatherCard}>
-        <Image source={weatherIcons.location} style={styles.icon} />
-        <View style={styles.weatherInfo}>
-          <Text style={styles.label}>Location</Text>
-          <Text style={styles.value}>
-            {panchyatSelectedItem.PANCHAYAT}, {panchyatSelectedItem.DISTRICT}
-          </Text>
-        </View>
+      <View style={styles.cardHeading}>
+        <Text style={styles.headingText}>3 Hour Forecast (5 days)</Text>
       </View>
 
-      <View style={styles.weatherCard}>
-        <Image source={weatherIcons.temp} style={styles.icon} />
-        <View style={styles.weatherInfo}>
-          <Text style={styles.label}>Temperature</Text>
-          <Text style={styles.value}>{currentWeatherData.main.temp} °C</Text>
+      {forecastData && forecastData.list.length > 0 ? (
+        <ScrollView horizontal style={styles.forecastContainer}>
+          {forecastData.list.map((item, index) => (
+            <View key={index} style={styles.forecastCard}>
+              <View style={styles.weatherCard}>
+                <Image 
+                  source={{ uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}.png` }}
+                  style={styles.weatherIcon}
+                />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>
+                    {item.weather[0].main}, {item.weather[0].description}
+                  </Text>
+                  <Text style={styles.weatherValue}>
+                    {formatForecastDateTime(item.dt, forecastData.city.timezone)}
+                  </Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.temp} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Temperature</Text>
+                  <Text style={styles.weatherValue}>{item.main.temp} °C</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.windPressure} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Pressure</Text>
+                  <Text style={styles.weatherValue}>{item.main.pressure} hPa</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.humidity} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Humidity</Text>
+                  <Text style={styles.weatherValue}>{item.main.humidity} %</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.minTemp} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Min Temp</Text>
+                  <Text style={styles.weatherValue}>{item.main.temp_min} °C</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.feelsLike} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Feels Like</Text>
+                  <Text style={styles.weatherValue}>{item.main.feels_like} °C</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.visibility} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Visibility</Text>
+                  <Text style={styles.weatherValue}>{(item.visibility / 1000).toFixed(2)} km</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.maxTemp} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Max Temp</Text>
+                  <Text style={styles.weatherValue}>{item.main.temp_max} °C</Text>
+                </View>
+              </View>
+
+              <View style={styles.weatherCard}>
+                <Image style={styles.icon} source={weatherIcons.wind} />
+                <View style={styles.weatherContent}>
+                  <Text style={styles.weatherText}>Wind Speed</Text>
+                  <Text style={styles.weatherValue}>{(item.wind.speed * 3.6).toFixed(2)} km/h</Text>
+                </View>
+              </View>
+            </View>
+          ))}
+        </ScrollView>
+      ) : (
+        <View style={styles.rightPanelContainer}>
+          <Text>Please select a location.</Text>
         </View>
-      </View>
-
-      <View style={styles.weatherCard}>
-        <Image source={weatherIcons.feelsLike} style={styles.icon} />
-        <View style={styles.weatherInfo}>
-          <Text style={styles.label}>Feels Like</Text>
-          <Text style={styles.value}>{currentWeatherData.main.feels_like} °C</Text>
-        </View>
-      </View>
-
-      <View style={styles.weatherCard}>
-        <Image source={weatherIcons.minTemp} style={styles.icon} />
-        <View style={styles.weatherInfo}>
-          <Text style={styles.label}>Min Temp</Text>
-          <Text style={styles.value}>{currentWeatherData.main.temp_min} °C</Text>
-        </View>
-      </View>
-
-      <View style={styles.weatherCard}>
-        <Image source={weatherIcons.maxTemp} style={styles.icon} />
-        <View style={styles.weatherInfo}>
-          <Text style={styles.label}>Max Temp</Text>
-          <Text style={styles.value}>{currentWeatherData.main.temp_max} °C</Text>
-        </View>
-      </View>
-
-      <Text style={styles.sectionTitle}>3 Hour Forecast (5 days)</Text>
-      {forecastData && forecastData.list.map((item, index) => (
-        <View key={index} style={styles.forecastCard}>
-          <View style={styles.weatherCard}>
-            <Image 
-              source={{ uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}.png` }}
-              style={styles.weatherIcon}
-            />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.weatherText}>
-                {item.weather[0].main}, {item.weather[0].description}
-              </Text>
-              <Text style={styles.timeText}>
-                {formatForecastDateTime(item.dt, forecastData.city.timezone)}
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.temp} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Temperature</Text>
-              <Text style={styles.value}>{item.main.temp} °C</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.windPressure} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Pressure</Text>
-              <Text style={styles.value}>{item.main.pressure} hPa</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.humidity} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Humidity</Text>
-              <Text style={styles.value}>{item.main.humidity} %</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.minTemp} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Min Temp</Text>
-              <Text style={styles.value}>{item.main.temp_min} °C</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.feelsLike} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Feels Like</Text>
-              <Text style={styles.value}>{item.main.feels_like} °C</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.visibility} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Visibility</Text>
-              <Text style={styles.value}>{(item.visibility / 1000).toFixed(2)} km</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.maxTemp} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Max Temp</Text>
-              <Text style={styles.value}>{item.main.temp_max} °C</Text>
-            </View>
-          </View>
-
-          <View style={styles.weatherCard}>
-            <Image source={weatherIcons.wind} style={styles.icon} />
-            <View style={styles.weatherInfo}>
-              <Text style={styles.label}>Wind Speed</Text>
-              <Text style={styles.value}>{(item.wind.speed * 3.6).toFixed(2)} km/h</Text>
-            </View>
-          </View>
-        </View>
-      ))}
+      )}
     </ScrollView>
   );
 };
@@ -235,63 +250,68 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  sectionTitle: {
+  placeholder: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  cardHeading: {
+    padding: 15,
+    backgroundColor: '#f5f5f5',
+  },
+  headingText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 15,
-    color: '#003580',
+  },
+  mainContainer: {
+    padding: 10,
   },
   weatherCard: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
     padding: 15,
-    borderRadius: 8,
     marginBottom: 10,
-    elevation: 2,
+    borderRadius: 8,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   weatherIcon: {
-    width: 50,
-    height: 50,
-  },
-  icon: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     marginRight: 10,
   },
-  weatherInfo: {
+  icon: {
+    width: 25,
+    height: 25,
+    marginRight: 10,
+  },
+  weatherContent: {
     flex: 1,
-    marginLeft: 10,
   },
   weatherText: {
     fontSize: 16,
-    color: '#333',
-  },
-  timeText: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 4,
-  },
-  label: {
-    fontSize: 14,
     color: '#666',
   },
-  value: {
-    fontSize: 16,
+  weatherValue: {
+    fontSize: 18,
+    fontWeight: 'bold',
     color: '#333',
-    marginTop: 2,
+  },
+  forecastContainer: {
+    padding: 10,
+    flexDirection: 'row',
   },
   forecastCard: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
+    width: 300,
+    marginRight: 10,
   },
-  placeholder: {
+  rightPanelContainer: {
     padding: 20,
     alignItems: 'center',
   },

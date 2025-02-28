@@ -5,17 +5,17 @@ import { useAlertContext } from '../context/AlertContext';
 
 // Import weather icons
 const weatherIcons = {
-  humidity: require('../../assets/weather-icons/humidity.svg'),
-  temp: require('../../assets/weather-icons/thermometer-1-2.svg'),
-  minTemp: require('../../assets/weather-icons/thermometer-0.svg'),
-  maxTemp: require('../../assets/weather-icons/thermometer-full.svg'),
+  humidity: require('../../assets/weather-icons/humidity.png'),
+  temp: require('../../assets/weather-icons/thermometer-1-2.png'),
+  minTemp: require('../../assets/weather-icons/thermometer-0.png'),
+  maxTemp: require('../../assets/weather-icons/thermometer-full.png'),
   windPressure: require('../../assets/weather-icons/wind-pressure.png'),
   visibility: require('../../assets/weather-icons/visibility.png'),
   feelsLike: require('../../assets/weather-icons/feels-like.png'),
   location: require('../../assets/weather-icons/location.png'),
-  wind: require('../../assets/weather-icons/wind.svg'),
-  sunrise: require('../../assets/weather-icons/sunrise.svg'),
-  sunset: require('../../assets/weather-icons/sunset.svg'),
+  wind: require('../../assets/weather-icons/wind.png'),
+  sunrise: require('../../assets/weather-icons/sunrise.png'),
+  sunset: require('../../assets/weather-icons/sunset.png'),
   dewPoint: require('../../assets/weather-icons/dew-point.png'),
   uvIndex: require('../../assets/weather-icons/uv-index.png'),
   windDirection: require('../../assets/weather-icons/wind-direction.png'),
@@ -120,31 +120,31 @@ const AccWeatherApi = ({ panchyatSelectedItem }) => {
         <Text style={styles.headingText}>Current Weather</Text>
       </View>
 
-      <View style={styles.mainContainer}>
-        {/* Current Weather Card */}
-        <View style={styles.weatherCard}>
-          <Image
-            style={styles.weatherIcon}
-            source={{
-              uri: `https://developer.accuweather.com/sites/default/files/${currentWeatherData1.WeatherIcon.toString().padStart(2, '0')}-s.png`
-            }}
-          />
-          <View style={styles.weatherContent}>
-            <Text style={styles.weatherText}>{currentWeatherData1.WeatherText}</Text>
-            <Text style={styles.weatherValue}>
-              {formatForecastDateTime(currentWeatherData1.LocalObservationDateTime)}
-            </Text>
+        <View style={styles.mainContainer}>
+          {/* Current Weather Card */}
+          <View style={styles.weatherCard}>
+            <Image
+              style={styles.weatherIcon}
+              source={{
+                uri: `https://developer.accuweather.com/sites/default/files/${currentWeatherData1.WeatherIcon.toString().padStart(2, '0')}-s.png`
+              }}
+            />
+            <View style={styles.weatherContent}>
+              <Text style={styles.weatherText}>{currentWeatherData1.WeatherText}</Text>
+              <Text style={styles.weatherValue}>
+                {formatForecastDateTime(currentWeatherData1.LocalObservationDateTime)}
+              </Text>
+            </View>
           </View>
-        </View>
 
-        {/* Temperature Card */}
-        <View style={styles.weatherCard}>
+          {/* Temperature Card */}
+          <View style={styles.weatherCard}>
           <Image style={styles.icon} source={weatherIcons.temp} />
-          <View style={styles.weatherContent}>
-            <Text style={styles.weatherText}>Temperature</Text>
-            <Text style={styles.weatherValue}>{currentWeatherData1.Temperature.Metric.Value} °C</Text>
+            <View style={styles.weatherContent}>
+              <Text style={styles.weatherText}>Temperature</Text>
+              <Text style={styles.weatherValue}>{currentWeatherData1.Temperature.Metric.Value} °C</Text>
+            </View>
           </View>
-        </View>
 
         {/* Feels Like Card */}
         <View style={styles.weatherCard}>

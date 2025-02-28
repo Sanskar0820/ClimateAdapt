@@ -6,15 +6,15 @@ import axios from 'axios'
 // import {forecastData} from "../assets/weatherapiData/tomorrowapi"
 
 
-import HumidityIcon from "../../assets/weather-icons/humidity.svg";
-import TempIcon from "../../assets/weather-icons/thermometer-1-2.svg";
+import HumidityIcon from "../../assets/weather-icons/humidity.png";
+import TempIcon from "../../assets/weather-icons/thermometer-1-2.png";
 import MinTempIcon from "../../assets/weather-icons/thermometer-0.svg";
 import MaxTempIcon from "../../assets/weather-icons/thermometer-full.svg";
 import WindPressureIcon from "../../assets/weather-icons/wind-pressure.png";
 import VisibilityIcon from "../../assets/weather-icons/visibility.png";
 import FeelsLikeIcon from "../../assets/weather-icons/feels-like.png";
 import LocationIcon from "../../assets/weather-icons/location.png";
-import WindIcon from "../../assets/weather-icons/wind.svg";
+import WindIcon from "../../assets/weather-icons/wind.png";
 import SunriseIcon from "../../assets/weather-icons/sunrise.svg";
 import SunsetIcon from "../../assets/weather-icons/sunset.svg";
 import DewPoint from "../../assets/weather-icons/dew-point.png";
@@ -113,8 +113,8 @@ const TomorrowApi = ({ panchyatSelectedItem }) => {
           <Image style={styles.icon} source={Calendar} />
           <View style={styles.weatherContent}>
             <Text style={styles.weatherText}>
-              {/* {currentWeatherData2.weather[0].main},{" "} */}
-              {/* {currentWeatherData2.data.description} */}
+                        {/* {currentWeatherData2.weather[0].main},{" "} */}
+                        {/* {currentWeatherData2.data.description} */}
             </Text>
             <Text style={styles.weatherValue}>
               {formatForecastDateTime(currentWeatherData2.data.time)}
@@ -243,18 +243,18 @@ const TomorrowApi = ({ panchyatSelectedItem }) => {
         <Text style={styles.headingText}>Hourly Forecast (120 Hours)</Text>
       </View>
 
-      {hourlyForecast2 && hourlyForecast2.length > 0 ? (
+        {hourlyForecast2 && hourlyForecast2.length > 0 ? (
         <ScrollView horizontal style={styles.forecastContainer}>
-          {hourlyForecast2.map((item, index) => (
+            {hourlyForecast2.map((item, index) => (
             <View key={index} style={styles.forecastCard}>
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={Calendar} />
                 <View style={styles.weatherContent}>
                   <Text style={styles.weatherText}>
-                    {/* {item.IconPhrase} */}
+                        {/* {item.IconPhrase} */}
                   </Text>
                   <Text style={styles.weatherValue}>
-                    {formatForecastDateTime(item.time)}
+                        {formatForecastDateTime(item.time)}
                   </Text>
                 </View>
               </View>
@@ -359,18 +359,18 @@ const TomorrowApi = ({ panchyatSelectedItem }) => {
         <Text style={styles.headingText}>Daily Forecast (5 Days)</Text>
       </View>
 
-      {dailyForecast2 && dailyForecast2.length > 0 ? (
+        {dailyForecast2 && dailyForecast2.length > 0 ? (
         <ScrollView horizontal style={styles.forecastContainer}>
-          {dailyForecast2.map((item, index) => (
+            {dailyForecast2.map((item, index) => (
             <View style={styles.forecastCard} key={index}>
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={Calendar} />
                 <View style={styles.weatherContent}>
                   <Text style={styles.weatherText}>
-                    {/* {item.IconPhrase} */}
+                        {/* {item.IconPhrase} */}
                   </Text>
                   <Text style={styles.weatherValue}>
-                    {formatForecastDateTime(item.time)}
+                        {formatForecastDateTime(item.time)}
                   </Text>
                 </View>
               </View>
