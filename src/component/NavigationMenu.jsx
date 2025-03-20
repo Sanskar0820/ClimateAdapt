@@ -39,6 +39,7 @@ const NavigationMenu = () => {
     },
     { title: 'Info', path: '/screens/info', icon: 'information-circle-outline' },
     { title: 'Contact Us', path: '/screens/contact', icon: 'call-outline' },
+    { title: 'Feedback', path: '/screens/feedback', icon: 'call-outline' },
   ];
 
   const handleNavigation = (path) => {

@@ -10,6 +10,7 @@ import MeteorologicalScreen from "./screens/meteorological";
 import InfoScreen from "./screens/info";
 import Header from "../component/Header";
 import WeatherScreen from "./screens/weather";
+import FeedbackScreen from "./screens/feedback";
 import 'react-native-polyfill-globals/auto';
 
 const AppRouter = () => {
@@ -33,6 +34,8 @@ const AppRouter = () => {
         return <InfoScreen />;
       case '/screens/contact':
         return <ContactScreen />;
+      case '/screens/feedback':
+        return <FeedbackScreen />;
       default:
         return <HomeScreen />;
     }
