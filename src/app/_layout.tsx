@@ -8,6 +8,7 @@ import { SelectedFeatureProvider } from '../context/SelectedFeatureContext';
 import { LoaderProvider } from '../context/LoaderContext';
 import { AlertProvider } from '../context/AlertContext'
 import NavigationMenu from '../component/NavigationMenu';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -20,6 +21,7 @@ export default function RootLayout() {
     <MenuProvider>
       <AlertProvider>
         <LoaderProvider>
+          <GestureHandlerRootView>
           <SelectedFeatureProvider>
             <View style={{ flex: 1 }}>
               <Stack screenOptions={{ headerShown: false }}>
@@ -29,6 +31,7 @@ export default function RootLayout() {
               <NavigationMenu />
             </View>
           </SelectedFeatureProvider>
+        </GestureHandlerRootView>
         </LoaderProvider>
       </AlertProvider>
     </MenuProvider>

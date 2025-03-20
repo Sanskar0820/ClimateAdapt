@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import Header from '../../../component/Header'
-import { useSelectedFeature } from '../../../context/SelectedFeatureContext'
-import PlaceAttributes from '../../../../assets/PlaceAttributes.json'
-import Hydrological_Images from '../../../../assets/Hydrological_Images.json'
-import { Picker } from '@react-native-picker/picker'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, Animated, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import Header from '../../../component/Header';
+import { useSelectedFeature } from '../../../context/SelectedFeatureContext';
+import PlaceAttributes from '../../../../assets/PlaceAttributes.json';
+import Hydrological_Images from '../../../../assets/Hydrological_Images.json';
+import { Picker } from '@react-native-picker/picker';
+import { PanGestureHandler, State } from 'react-native-gesture-handler';
 
 const HydrologicalScreen = () => {
   const { 
@@ -17,12 +18,46 @@ const HydrologicalScreen = () => {
 
   const [selectedImage, setSelectedImage] = useState(null);
 
+  const scale = useRef(new Animated.Value(1)).current;
+  const translateX = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(0)).current;
+  const lastScale = useRef(1);
+  const lastOffset = useRef({ x: 0, y: 0 });
+
   useEffect(() => {
     if (selectedTehsil && selectedTehsil !== '') {
       let item = Hydrological_Images.find((item) => item.TEHSIL === selectedTehsil);
       setSelectedImage(item);
     }
   }, [selectedTehsil]);
+
+  const onZoomIn = () => {
+    const newScale = Math.min(lastScale.current * 1.2, 3); // Max zoom limit
+    lastScale.current = newScale;
+    Animated.timing(scale, { toValue: newScale, duration: 200, useNativeDriver: true }).start();
+  };
+
+  const onZoomOut = () => {
+    const newScale = Math.max(lastScale.current * 0.8, 1); // Min zoom limit
+    lastScale.current = newScale;
+    Animated.timing(scale, { toValue: newScale, duration: 200, useNativeDriver: true }).start();
+  };
+
+  const onPanEvent = Animated.event(
+    [
+      { nativeEvent: { translationX: translateX, translationY: translateY } },
+    ],
+    { useNativeDriver: true }
+  );
+
+  const onPanStateChange = (event) => {
+    if (event.nativeEvent.state === State.END) {
+      lastOffset.current.x += event.nativeEvent.translationX;
+      lastOffset.current.y += event.nativeEvent.translationY;
+      translateX.setValue(lastOffset.current.x);
+      translateY.setValue(lastOffset.current.y);
+    }
+  };
 
   const renderLegendText = (text) => {
     return text.replace(/</g, '‹').replace(/>/g, '›');
@@ -61,11 +96,31 @@ const HydrologicalScreen = () => {
 
         {selectedImage ? (
           <View style={styles.imageContainer}>
-            <Image 
-              source={{ uri: selectedImage.url }}
-              style={styles.hydrologicalImage}
-              resizeMode="contain"
-            />
+            <PanGestureHandler onGestureEvent={onPanEvent} onHandlerStateChange={onPanStateChange}>
+              <Animated.View style={styles.imageBoundary}>
+                <Animated.Image
+                  source={{ uri: selectedImage.url }}
+                  style={[
+                    styles.hydrologicalImage,
+                    {
+                      transform: [{ scale }, { translateX }, { translateY }],
+                    },
+                  ]}
+                  resizeMode="contain"
+                />
+              </Animated.View>
+            </PanGestureHandler>
+
+            {/* Zoom Controls */}
+            <View style={styles.zoomControls}>
+              <TouchableOpacity style={styles.zoomButton} onPress={onZoomIn}>
+                <Text style={styles.zoomText}>+</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.zoomButton} onPress={onZoomOut}>
+                <Text style={styles.zoomText}>-</Text>
+              </TouchableOpacity>
+            </View>
+
             <View style={styles.legendContainer}>
               <Text style={styles.legendTitle}>Soil-Moisture Percentile:</Text>
               <Text style={styles.legendText}>
@@ -103,10 +158,10 @@ const HydrologicalScreen = () => {
         )}
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default HydrologicalScreen
+export default HydrologicalScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -134,11 +189,31 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     padding: 20,
+    alignItems: 'center',
+  },
+  imageBoundary: {
+    width: 300,
+    height: 300,
+    overflow: 'hidden',
   },
   hydrologicalImage: {
     width: '100%',
-    height: 300,
-    marginBottom: 20,
+    height: '100%',
+  },
+  zoomControls: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  zoomButton: {
+    backgroundColor: '#007AFF',
+    padding: 10,
+    borderRadius: 8,
+    marginHorizontal: 5,
+  },
+  zoomText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   legendContainer: {
     padding: 15,
@@ -192,4 +267,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#666',
   }
-}) 
+});

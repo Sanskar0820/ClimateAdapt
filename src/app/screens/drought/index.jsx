@@ -1,18 +1,21 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import Header from '../../../component/Header'
-import { useSelectedFeature } from '../../../context/SelectedFeatureContext'
-import PlaceAttributes from '../../../../assets/PlaceAttributes.json'
-import Drought_Images from '../../../../assets/Drought_Images.json'
-import { Picker } from '@react-native-picker/picker'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Animated, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import Header from '../../../component/Header';
+import { useSelectedFeature } from '../../../context/SelectedFeatureContext';
+import PlaceAttributes from '../../../../assets/PlaceAttributes.json';
+import Drought_Images from '../../../../assets/Drought_Images.json';
+import { Picker } from '@react-native-picker/picker';
+import { PinchGestureHandler, PanGestureHandler, State } from 'react-native-gesture-handler';
 
 const DroughtScreen = () => {
-  const { 
-    handleDistrictSelect,
-    selectedDistrict,
-  } = useSelectedFeature();
-
+  const { handleDistrictSelect, selectedDistrict } = useSelectedFeature();
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const scale = useRef(new Animated.Value(1)).current;
+  const translateX = useRef(new Animated.Value(0)).current;
+  const translateY = useRef(new Animated.Value(0)).current;
+  const lastScale = useRef(1);
+  const lastOffset = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     if (selectedDistrict && selectedDistrict !== '') {
@@ -20,6 +23,34 @@ const DroughtScreen = () => {
       setSelectedImage(item);
     }
   }, [selectedDistrict]);
+
+  const onZoomIn = () => {
+    const newScale = Math.min(lastScale.current * 1.2, 3); // Max zoom limit
+    lastScale.current = newScale;
+    Animated.timing(scale, { toValue: newScale, duration: 200, useNativeDriver: true }).start();
+  };
+
+  const onZoomOut = () => {
+    const newScale = Math.max(lastScale.current * 0.8, 1); // Min zoom limit
+    lastScale.current = newScale;
+    Animated.timing(scale, { toValue: newScale, duration: 200, useNativeDriver: true }).start();
+  };
+
+  const onPanEvent = Animated.event(
+    [
+      { nativeEvent: { translationX: translateX, translationY: translateY } },
+    ],
+    { useNativeDriver: true }
+  );
+
+  const onPanStateChange = (event) => {
+    if (event.nativeEvent.state === State.END) {
+      lastOffset.current.x += event.nativeEvent.translationX;
+      lastOffset.current.y += event.nativeEvent.translationY;
+      translateX.setValue(lastOffset.current.x);
+      translateY.setValue(lastOffset.current.y);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -41,23 +72,42 @@ const DroughtScreen = () => {
 
         {selectedImage ? (
           <View style={styles.imageContainer}>
-            <Image 
-              source={{ uri: selectedImage.url }}
-              style={styles.droughtImage}
-              resizeMode="contain"
-            />
+            <PanGestureHandler onGestureEvent={onPanEvent} onHandlerStateChange={onPanStateChange}>
+              <Animated.View style={styles.imageBoundary}>
+                <Animated.Image
+                  source={{ uri: selectedImage.url }}
+                  style={[
+                    styles.droughtImage,
+                    {
+                      transform: [{ scale }, { translateX }, { translateY }],
+                    },
+                  ]}
+                  resizeMode="contain"
+                />
+              </Animated.View>
+            </PanGestureHandler>
+
+            {/* Zoom Controls */}
+            <View style={styles.zoomControls}>
+              <TouchableOpacity style={styles.zoomButton} onPress={onZoomIn}>
+                <Text style={styles.zoomText}>+</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.zoomButton} onPress={onZoomOut}>
+                <Text style={styles.zoomText}>-</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         ) : (
           <View style={styles.placeholderContainer}>
-            <Text style={styles.placeholder}>Please select location.</Text>
+            <Text style={styles.placeholder}>Please select a location.</Text>
           </View>
         )}
       </ScrollView>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default DroughtScreen
+export default DroughtScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -89,10 +139,29 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
   },
+  imageBoundary: {
+    width: 300,
+    height: 400,
+    overflow: 'hidden',
+  },
   droughtImage: {
     width: '100%',
-    height: 400,
-    marginBottom: 20,
+    height: '100%',
+  },
+  zoomControls: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  zoomButton: {
+    backgroundColor: '#007AFF',
+    padding: 10,
+    borderRadius: 8,
+    marginHorizontal: 5,
+  },
+  zoomText: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
   },
   placeholderContainer: {
     flex: 1,
@@ -105,5 +174,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
     textAlign: 'center',
-  }
-}) 
+  },
+});
