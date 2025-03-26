@@ -8,6 +8,7 @@ import HydrologicalScreen from "./screens/hydrological";
 import ContactScreen from "./screens/contact";
 import MeteorologicalScreen from "./screens/meteorological";
 import InfoScreen from "./screens/info";
+import AdvisoryScreen from "./screens/advisory";
 import Header from "../component/Header";
 import WeatherScreen from "./screens/weather";
 import FeedbackScreen from "./screens/feedback";
@@ -36,6 +37,8 @@ const AppRouter = () => {
         return <ContactScreen />;
       case '/screens/feedback':
         return <FeedbackScreen />;
+        case '/screens/advisory':
+          return <AdvisoryScreen />;
       default:
         return <HomeScreen />;
     }

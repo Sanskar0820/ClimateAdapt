@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Linking } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Animated, Linking, ScrollView } from 'react-native';
 import React, { useEffect } from 'react';
 import { useRouter, usePathname } from 'expo-router';
 import { useMenu } from '../context/MenuContext';
@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 const NavigationMenu = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
-  const { t } = useTranslation(); // ✅ Import translation function
+  const { t } = useTranslation();
   const router = useRouter();
   const currentPath = usePathname();
   const slideAnim = React.useRef(new Animated.Value(-300)).current;
@@ -22,6 +22,7 @@ const NavigationMenu = () => {
 
   const menuItems = [
     { title: t('menu.home'), path: '/', icon: 'home-outline' },
+    { title: t('menu.advisory'), path: '/screens/advisory', icon: 'book-outline' },
     { title: t('menu.meteorological'), path: '/screens/meteorological', icon: 'cloudy-outline' },
     { title: t('menu.hydrological'), path: '/screens/hydrological', icon: 'analytics-outline' },
     { title: t('menu.drought'), path: '/screens/drought', icon: 'water-outline' },
@@ -41,7 +42,7 @@ const NavigationMenu = () => {
     },
     { title: t('menu.info'), path: '/screens/info', icon: 'information-circle-outline' },
     { title: t('menu.contact'), path: '/screens/contact', icon: 'call-outline' },
-    { title: t('menu.feedback'), path: '/screens/feedback', icon: 'call-outline' },
+    { title: t('menu.feedback'), path: '/screens/feedback', icon: 'chatbox-ellipses-outline' },
   ];
 
   const handleNavigation = (path) => {
@@ -78,7 +79,9 @@ const NavigationMenu = () => {
           <Text style={styles.headerText}>ClimateAdapt</Text>
         </View>
         <View style={styles.divider} />
-        <View style={styles.menuContent}>
+        
+        {/* ✅ Scrollable Menu */}
+        <ScrollView contentContainerStyle={styles.menuScroll}>
           {menuItems.map((item, index) => (
             <TouchableOpacity 
               key={index}
@@ -110,7 +113,8 @@ const NavigationMenu = () => {
               )}
             </TouchableOpacity>
           ))}
-        </View>
+        </ScrollView>
+
         <View style={styles.footer}>
           <Text style={styles.footerText}>{t('menu.version')}</Text>
         </View>
@@ -163,9 +167,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
     zIndex: 99,
   },
-  menuContent: {
-    flex: 1,
+  menuScroll: {
     paddingTop: 10,
+    paddingBottom: 20, // Ensures bottom items aren't too close
   },
   menuItem: {
     flexDirection: 'row',

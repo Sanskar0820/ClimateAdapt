@@ -1,6 +1,7 @@
 {
     "menu": {
         "home": "Home",
+        "advisory": "Advisory",
         "meteorological": "Meteorological Condition",
         "hydrological": "Hydrological Condition",
         "drought": "Drought Condition",

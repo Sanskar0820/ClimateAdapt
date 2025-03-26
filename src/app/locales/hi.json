@@ -1,6 +1,7 @@
 {
     "menu": {
         "home": "होम",
+        "advisory": "सलाहकार",
         "meteorological": "मौसम संबंधी स्थिति",
         "hydrological": "जल संबंधी स्थिति",
         "drought": "सूखा स्थिति",

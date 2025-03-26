@@ -1,6 +1,7 @@
 {
     "menu": {
         "home": "முகப்பு",
+        "advisory": "ஆலோசனை",
         "meteorological": "வானிலை நிலை",
         "hydrological": "நீரியல் நிலை",
         "drought": "வறட்சி நிலை",

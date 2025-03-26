@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
     fontWeight: "bold"
   },
   langButton: {

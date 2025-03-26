@@ -27,10 +27,12 @@
     "expo-blur": "~14.0.2",
     "expo-constants": "~17.0.4",
     "expo-dev-client": "^5.0.11",
+    "expo-file-system": "~18.0.11",
     "expo-font": "~13.0.3",
     "expo-haptics": "~14.0.1",
     "expo-image": "~2.0.4",
     "expo-linking": "~7.0.4",
+    "expo-localization": "~16.0.1",
     "expo-router": "~4.0.17",
     "expo-splash-screen": "~0.29.21",
     "expo-status-bar": "~2.0.1",
@@ -42,6 +44,7 @@
     "react-dom": "18.3.1",
     "react-i18next": "^15.4.1",
     "react-native": "^0.76.6",
+    "react-native-blob-util": "^0.21.2",
     "react-native-chart-kit": "^6.12.0",
     "react-native-fetch-api": "^3.0.0",
     "react-native-gesture-handler": "~2.20.2",
@@ -49,6 +52,7 @@
     "react-native-google-places-autocomplete": "^2.5.7",
     "react-native-localize": "^3.4.1",
     "react-native-maps": "^1.20.1",
+    "react-native-pdf": "^6.7.7",
     "react-native-pinchable": "^0.2.1",
     "react-native-plotly": "^6.0.0",
     "react-native-polyfill-globals": "^3.1.0",
@@ -60,7 +64,7 @@
     "react-native-webview": "^13.12.5",
     "text-encoding": "^0.7.0",
     "victory-native": "^41.16.1",
-    "expo-localization": "~16.0.1"
+    "expo-document-picker": "~13.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
