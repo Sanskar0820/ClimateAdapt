@@ -6,11 +6,12 @@ import PlaceAttributes from '../../../../assets/PlaceAttributes.json';
 import Drought_Images from '../../../../assets/Drought_Images.json';
 import { Picker } from '@react-native-picker/picker';
 import { PinchGestureHandler, PanGestureHandler, State } from 'react-native-gesture-handler';
+import { useTranslation } from 'react-i18next';
 
 const DroughtScreen = () => {
   const { handleDistrictSelect, selectedDistrict } = useSelectedFeature();
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const { t } = useTranslation();
   const scale = useRef(new Animated.Value(1)).current;
   const translateX = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;
@@ -57,15 +58,17 @@ const DroughtScreen = () => {
       <Header />
       <ScrollView style={styles.content}>
         <View style={styles.selectionContainer}>
-          <Text style={styles.label}>Select district</Text>
+          <Text style={styles.label}>{t('data.select_district')}</Text>
           <Picker
             selectedValue={selectedDistrict}
             style={styles.picker}
             onValueChange={(itemValue) => handleDistrictSelect(itemValue)}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(PlaceAttributes.map((item) => item.DISTRICT))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[
+              ...new Set(PlaceAttributes.map((item) => item.DISTRICT)) // Store only district names in Set
+            ].map((district, index) => (
+              <Picker.Item key={index} label={t(`location.${district}`)} value={district} />
             ))}
           </Picker>
         </View>
@@ -99,7 +102,7 @@ const DroughtScreen = () => {
           </View>
         ) : (
           <View style={styles.placeholderContainer}>
-            <Text style={styles.placeholder}>Please select a location.</Text>
+            <Text style={styles.placeholder}>{t('data.select_location_placeholder')}</Text>
           </View>
         )}
       </ScrollView>

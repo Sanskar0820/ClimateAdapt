@@ -1,8 +1,10 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Linking, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Header from '../../../component/Header'
+import { useTranslation } from 'react-i18next';
 
 const ContactScreen = () => {
+  const { t } = useTranslation();
   const contacts = [
     {
       name: 'Dr. Vimal Mishra',

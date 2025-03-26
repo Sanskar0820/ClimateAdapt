@@ -6,18 +6,19 @@ import PlaceAttributes from '../../../../assets/PlaceAttributes.json';
 import Meteorological_Images from '../../../../assets/Meteorologgical_Images.json';
 import { Picker } from '@react-native-picker/picker';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import { useTranslation } from 'react-i18next';
 
 const MeteorologicalScreen = () => {
-  const { 
-    handleDistrictSelect, 
-    handleTehsilSelect, 
-    selectedDistrict, 
-    selectedTehsil, 
-    tehsilList 
+  const {
+    handleDistrictSelect,
+    handleTehsilSelect,
+    selectedDistrict,
+    selectedTehsil,
+    tehsilList
   } = useSelectedFeature();
 
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const { t } = useTranslation();
   const scale = useRef(new Animated.Value(1)).current;
   const translateX = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;
@@ -68,28 +69,34 @@ const MeteorologicalScreen = () => {
       <Header />
       <ScrollView style={styles.content}>
         <View style={styles.selectionContainer}>
-          <Text style={styles.label}>Select district</Text>
+          <Text style={styles.label}>{t('data.select_district')}</Text>
           <Picker
             selectedValue={selectedDistrict}
             style={styles.picker}
             onValueChange={(itemValue) => handleDistrictSelect(itemValue)}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(PlaceAttributes.map((item) => item.DISTRICT))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[
+              ...new Set(PlaceAttributes.map((item) => item.DISTRICT)) // Store only district names in Set
+            ].map((district, index) => (
+              <Picker.Item key={index} label={t(`location.${district}`)} value={district} />
             ))}
           </Picker>
 
-          <Text style={styles.label}>Select taluka</Text>
+
+          <Text style={styles.label}>{t('data.select_block')}</Text>
           <Picker
             selectedValue={selectedTehsil}
             style={styles.picker}
             enabled={tehsilList && tehsilList.length > 0}
             onValueChange={(itemValue) => handleTehsilSelect(itemValue)}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(tehsilList && tehsilList.map((item) => item.TEHSIL))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[...new Set(tehsilList && tehsilList.map((item) => ({
+              key: item.TEHSIL,
+              label: t(`location.${item.TEHSIL}`) // Fetching translations
+            })))].map((item, index) => (
+              <Picker.Item key={index} label={item.label} value={item.key} />
             ))}
           </Picker>
         </View>
@@ -122,16 +129,14 @@ const MeteorologicalScreen = () => {
             </View>
 
             <View style={styles.legendContainer}>
-              <Text style={styles.legendTitle}>Departure/Anomaly:</Text>
-              <Text style={styles.legendText}>
-                Difference between the current rainfall/temperature and the average (or normal) rainfall/temperature for a specific period and location. This metric is used to assess whether a region is experiencing above-average or below-average rainfall/temperature.
-              </Text>
+              <Text style={styles.legendTitle}>{t('meteorological.Departure')}</Text>
+              <Text style={styles.legendText}>{t('meteorological.Departure_text')}</Text>
 
-              <Text style={styles.legendTitle}>Legend</Text>
+              <Text style={styles.legendTitle}>{t('meteorological.Legend')}</Text>
               <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
-                  <Text style={styles.tableHeader}>Temperature Condition</Text>
-                  <Text style={styles.tableHeader}>Rainfall Remark</Text>
+                  <Text style={styles.tableHeader}>{t('meteorological.Temperature Condition')}</Text>
+                  <Text style={styles.tableHeader}>{t('meteorological.Rainfall Remark')}</Text>
                 </View>
                 <View style={styles.tableRow}>
                   <Text style={[styles.tableCell, { color: 'red' }]}>
@@ -154,18 +159,18 @@ const MeteorologicalScreen = () => {
                     {renderLegendText('-2 <= Temperature Anomaly <= 2 (Normal temperature)')}
                   </Text>
                   <Text style={styles.tableCell}>
-                    Very Light to Light Rainfall (0.1 - 15.5 mm){'\n'}
-                    Moderate Rainfall (15.6 - 64.4 mm){'\n'}
-                    Heavy Rainfall (64.5 - 115.5 mm){'\n'}
-                    Very Heavy Rainfall (115.6 - 204.4 mm){'\n'}
-                    Extremely Heavy Rainfall (≥ 204.5 mm)
+                    {t('meteorological.table1')}{'\n'}
+                    {t('meteorological.table2')}{'\n'}
+                    {t('meteorological.table3')}{'\n'}
+                    {t('meteorological.table4')}{'\n'}
+                    {t('meteorological.table5')}
                   </Text>
                 </View>
               </View>
             </View>
           </View>
         ) : (
-          <Text style={styles.placeholder}>Please select location.</Text>
+          <Text style={styles.placeholder}>{t('data.select_location_placeholder')}</Text>
         )}
       </ScrollView>
     </SafeAreaView>

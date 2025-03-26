@@ -1,13 +1,15 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native'
-import React, { useState } from 'react'
-import Header from '../../../component/Header'
-import { Picker } from '@react-native-picker/picker'
-import weatherPlaces from '../../../../assets/weatherPlaces.json'
-import OpenWeatherApi from '../../../component/OpenWeatherApi'
-import TomorrowApi from '../../../component/TomorrowApi'
-import AccuWeatherApi from '../../../component/AccWeatherApi'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import Header from '../../../component/Header';
+import { Picker } from '@react-native-picker/picker';
+import weatherPlaces from '../../../../assets/weatherPlaces.json';
+import OpenWeatherApi from '../../../component/OpenWeatherApi';
+import TomorrowApi from '../../../component/TomorrowApi';
+import AccuWeatherApi from '../../../component/AccWeatherApi';
+import { useTranslation } from 'react-i18next';
 
 const WeatherScreen = () => {
+  const { t } = useTranslation();
   const [selectedApi, setSelectedApi] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState(null);
   const [selectedTehsil, setSelectedTehsil] = useState(null);
@@ -49,51 +51,54 @@ const WeatherScreen = () => {
       <Header />
       <ScrollView style={styles.content}>
         <View style={styles.selectionContainer}>
-          <Text style={styles.label}>Select district</Text>
+          <Text style={styles.label}>{t('data.select_district')}</Text>
           <Picker
             selectedValue={selectedDistrict}
             style={styles.picker}
             onValueChange={handleDistrictSelect}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(weatherPlaces.map((item) => item.DISTRICT))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[...new Set(weatherPlaces.map((item) => item.DISTRICT))].map((district, index) => (
+              <Picker.Item key={index} label={t(`location.${district}`)} value={district} />
             ))}
           </Picker>
 
-          <Text style={styles.label}>Select block</Text>
+          <Text style={styles.label}>{t('data.select_block')}</Text>
           <Picker
             selectedValue={selectedTehsil}
             style={styles.picker}
             enabled={tehsilList.length > 0}
             onValueChange={handleTehsilSelect}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(tehsilList.map((item) => item.BLOCK))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[...new Set(tehsilList.map((item) => item.BLOCK))].map((block, index) => (
+              <Picker.Item key={index} label={t(`location.${block}`)} value={block} />
             ))}
           </Picker>
 
-          <Text style={styles.label}>Select panchyat</Text>
+          <Text style={styles.label}>{t('data.select_panchayat')}</Text>
           <Picker
             selectedValue={selectedPanchyat}
             style={styles.picker}
             enabled={panchyatList.length > 0}
             onValueChange={handlePanchyatSelect}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(panchyatList.map((item) => item.PANCHAYAT))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[...new Set(panchyatList.map((item) => ({
+              key: item.PANCHAYAT,
+              label: t(`location.${item.PANCHAYAT}`) // Fetching translations
+            })))].map((item, index) => (
+              <Picker.Item key={index} label={item.label} value={item.key} />
             ))}
           </Picker>
 
-          <Text style={styles.label}>Select weather API</Text>
+          <Text style={styles.label}>{t('data.select_api')}</Text>
           <Picker
             selectedValue={selectedApi}
             style={styles.picker}
             onValueChange={(value) => setSelectedApi(value)}
           >
-            <Picker.Item label="Select" value="" />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
             <Picker.Item label="Tomorrow.io API" value="tomorrow" />
             <Picker.Item label="Accuweather API" value="accuweather" />
             <Picker.Item label="Open Weather API" value="open_weather" />
@@ -110,11 +115,11 @@ const WeatherScreen = () => {
               ) : selectedApi === "tomorrow" ? (
                 <TomorrowApi panchyatSelectedItem={panchyatSelectedItem} />
               ) : (
-                <Text style={styles.placeholder}>Please select an API.</Text>
+                <Text style={styles.placeholder}>{t('data.select_api_placeholder')}</Text>
               )}
             </>
           ) : (
-            <Text style={styles.placeholder}>Please select a location.</Text>
+            <Text style={styles.placeholder}>{t('data.select_location_placeholder')}</Text>
           )}
         </View>
       </ScrollView>
@@ -157,4 +162,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
   }
-}); 
+});

@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import PlaceAttributes from '../../assets/PlaceAttributes.json';
+import { useTranslation } from 'react-i18next';
+
 
 const SelectedFeatureContext = createContext();
 
@@ -7,6 +9,8 @@ export function SelectedFeatureProvider({ children }) {
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedTehsil, setSelectedTehsil] = useState('');
   const [tehsilList, setTehsilList] = useState([]);
+  const { t } = useTranslation();
+  
 
   const handleDistrictSelect = (district) => {
     setSelectedDistrict(district);

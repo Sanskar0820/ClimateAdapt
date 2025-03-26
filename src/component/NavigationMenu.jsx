@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View, TouchableOpacity, Animated, Image, Linking } from 'react-native'
-import React, { useEffect } from 'react'
-import { useRouter, usePathname } from 'expo-router'
-import { useMenu } from '../context/MenuContext'
+import { StyleSheet, Text, View, TouchableOpacity, Animated, Linking } from 'react-native';
+import React, { useEffect } from 'react';
+import { useRouter, usePathname } from 'expo-router';
+import { useMenu } from '../context/MenuContext';
 import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from 'react-i18next';
 
 const NavigationMenu = () => {
   const { isMenuOpen, setIsMenuOpen } = useMenu();
+  const { t } = useTranslation(); // ✅ Import translation function
   const router = useRouter();
   const currentPath = usePathname();
   const slideAnim = React.useRef(new Animated.Value(-300)).current;
@@ -19,27 +21,27 @@ const NavigationMenu = () => {
   }, [isMenuOpen]);
 
   const menuItems = [
-    { title: 'Home', path: '/', icon: 'home-outline' },
-    { title: 'Meteorological Condition', path: '/screens/meteorological', icon: 'cloudy-outline' },
-    { title: 'Hydrological Condition', path: '/screens/hydrological', icon: 'analytics-outline' },
-    { title: 'Drought Condition', path: '/screens/drought', icon: 'water-outline' },
-    { title: 'Weather Condition', path: '/screens/weather', icon: 'thermometer-outline' },
-    { title: 'Map', path: '/screens/dashboard', icon: 'map-outline' },
+    { title: t('menu.home'), path: '/', icon: 'home-outline' },
+    { title: t('menu.meteorological'), path: '/screens/meteorological', icon: 'cloudy-outline' },
+    { title: t('menu.hydrological'), path: '/screens/hydrological', icon: 'analytics-outline' },
+    { title: t('menu.drought'), path: '/screens/drought', icon: 'water-outline' },
+    { title: t('menu.weather'), path: '/screens/weather', icon: 'thermometer-outline' },
+    { title: t('menu.map'), path: '/screens/dashboard', icon: 'map-outline' },
     { 
-      title: 'Vegetation Condition', 
+      title: t('menu.vegetation'), 
       url: 'https://akankshayadaw.users.earthengine.app/view/test', 
       icon: 'leaf-outline', 
       isExternal: true 
     },
     { 
-      title: 'Land Use', 
+      title: t('menu.landUse'), 
       url: 'https://akankshayadaw.users.earthengine.app/view/lulc', 
       icon: 'layers-outline', 
       isExternal: true 
     },
-    { title: 'Info', path: '/screens/info', icon: 'information-circle-outline' },
-    { title: 'Contact Us', path: '/screens/contact', icon: 'call-outline' },
-    { title: 'Feedback', path: '/screens/feedback', icon: 'call-outline' },
+    { title: t('menu.info'), path: '/screens/info', icon: 'information-circle-outline' },
+    { title: t('menu.contact'), path: '/screens/contact', icon: 'call-outline' },
+    { title: t('menu.feedback'), path: '/screens/feedback', icon: 'call-outline' },
   ];
 
   const handleNavigation = (path) => {
@@ -70,12 +72,7 @@ const NavigationMenu = () => {
         onPress={() => setIsMenuOpen(false)}
       />
       <Animated.View 
-        style={[
-          styles.container,
-          {
-            transform: [{ translateX: slideAnim }],
-          },
-        ]}
+        style={[styles.container, { transform: [{ translateX: slideAnim }] }]}
       >
         <View style={styles.header}>
           <Text style={styles.headerText}>ClimateAdapt</Text>
@@ -115,14 +112,14 @@ const NavigationMenu = () => {
           ))}
         </View>
         <View style={styles.footer}>
-          <Text style={styles.footerText}>Version 1.0.0</Text>
+          <Text style={styles.footerText}>{t('menu.version')}</Text>
         </View>
       </Animated.View>
     </>
   )
 }
 
-export default NavigationMenu
+export default NavigationMenu;
 
 const styles = StyleSheet.create({
   container: {
@@ -135,10 +132,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     elevation: 5,
     shadowColor: '#000',
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
+    shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
@@ -148,12 +142,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#003580',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  logo: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    marginRight: 10,
   },
   headerText: {
     color: 'white',
@@ -216,4 +204,4 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 10,
   },
-}) 
+});

@@ -2,9 +2,11 @@ import React, { useRef } from 'react';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Header from '../../../component/Header';
+import { useTranslation } from 'react-i18next';
 
 const FeedbackScreen = () => {
   const webViewRef = useRef(null);
+  const { t } = useTranslation();
 
   // More specific CSS targeting
   const injectedJavaScript = `

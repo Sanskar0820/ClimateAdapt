@@ -6,18 +6,19 @@ import PlaceAttributes from '../../../../assets/PlaceAttributes.json';
 import Hydrological_Images from '../../../../assets/Hydrological_Images.json';
 import { Picker } from '@react-native-picker/picker';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import { useTranslation } from 'react-i18next';
 
 const HydrologicalScreen = () => {
-  const { 
-    handleDistrictSelect, 
-    handleTehsilSelect, 
-    selectedDistrict, 
-    selectedTehsil, 
-    tehsilList 
+  const {
+    handleDistrictSelect,
+    handleTehsilSelect,
+    selectedDistrict,
+    selectedTehsil,
+    tehsilList
   } = useSelectedFeature();
 
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const { t } = useTranslation();
   const scale = useRef(new Animated.Value(1)).current;
   const translateX = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;
@@ -68,28 +69,33 @@ const HydrologicalScreen = () => {
       <Header />
       <ScrollView style={styles.content}>
         <View style={styles.selectionContainer}>
-          <Text style={styles.label}>Select district</Text>
+          <Text style={styles.label}>{t('data.select_district')}</Text>
           <Picker
             selectedValue={selectedDistrict}
             style={styles.picker}
             onValueChange={(itemValue) => handleDistrictSelect(itemValue)}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(PlaceAttributes.map((item) => item.DISTRICT))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[
+              ...new Set(PlaceAttributes.map((item) => item.DISTRICT)) // Store only district names in Set
+            ].map((district, index) => (
+              <Picker.Item key={index} label={t(`location.${district}`)} value={district} />
             ))}
           </Picker>
 
-          <Text style={styles.label}>Select taluka</Text>
+          <Text style={styles.label}>{t('data.select_block')}</Text>
           <Picker
             selectedValue={selectedTehsil}
             style={styles.picker}
             enabled={tehsilList && tehsilList.length > 0}
             onValueChange={(itemValue) => handleTehsilSelect(itemValue)}
           >
-            <Picker.Item label="Select" value="" />
-            {[...new Set(tehsilList && tehsilList.map((item) => item.TEHSIL))].map((item, index) => (
-              <Picker.Item key={index} label={item} value={item} />
+            <Picker.Item label={t('data.select_placeholder')} value="" />
+            {[...new Set(tehsilList && tehsilList.map((item) => ({
+              key: item.TEHSIL,
+              label: t(`location.${item.TEHSIL}`) // Fetching translations
+            })))].map((item, index) => (
+              <Picker.Item key={index} label={item.label} value={item.key} />
             ))}
           </Picker>
         </View>
@@ -122,9 +128,9 @@ const HydrologicalScreen = () => {
             </View>
 
             <View style={styles.legendContainer}>
-              <Text style={styles.legendTitle}>Soil-Moisture Percentile:</Text>
+              <Text style={styles.legendTitle}>{t('hydrological.Soil')}</Text>
               <Text style={styles.legendText}>
-                Soil-moisture percentile shows the current soil moisture conditions (dry/wet) compared to all past measurements. For examples, If current soil-moisture is 90th percentile, that means it is wetter than 90% of all past measurements. If it is 10th percentile, the soil is drier than 90% of all past measurements.
+                {t('hydrological.Soil_text')}
               </Text>
 
               <Text style={styles.legendTitle}>Legend</Text>
@@ -154,7 +160,7 @@ const HydrologicalScreen = () => {
             </View>
           </View>
         ) : (
-          <Text style={styles.placeholder}>Please select location.</Text>
+          <Text style={styles.placeholder}>{t('data.select_location_placeholder')}</Text>
         )}
       </ScrollView>
     </SafeAreaView>

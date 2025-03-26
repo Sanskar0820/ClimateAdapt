@@ -4,6 +4,7 @@ import Plotly from 'react-native-plotly';
 import PlaceAttributes from '../../../../assets/PlaceAttributes.json';
 import Header from '../../../component/Header';
 import { useLoader } from '../../../context/LoaderContext';
+import { useTranslation } from 'react-i18next';
 
 const TimeseriesScreen = () => {
   const [startYear, setStartYear] = useState(null);
@@ -15,6 +16,7 @@ const TimeseriesScreen = () => {
   const [droughtArea, setDroughtArea] = useState(null);
   const [droughtIntensity, setDroughtIntensity] = useState(null);
   const { setIsLoading } = useLoader();
+  const { t } = useTranslation();
 
   const screenWidth = Dimensions.get('window').width;
 
