@@ -20,7 +20,7 @@ import SunsetIcon from "../../assets/weather-icons/sunset.svg";
 import DewPoint from "../../assets/weather-icons/dew-point.png";
 import UVIndex from "../../assets/weather-icons/uv-index.png";
 import WindDirection from "../../assets/weather-icons/wind-direction.png";
-import CloudCeiling from "../../assets/weather-icons/ceiling_cloud.png";
+import CloudCeiling from "../../assets/weather-icons/cloud-cover.png";
 import Rainfall from "../../assets/weather-icons/raining.png";
 import Evapotranspiration from "../../assets/weather-icons/Evapotranspiration.png";
 import Calendar from "../../assets/weather-icons/calendar.png";

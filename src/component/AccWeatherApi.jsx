@@ -19,7 +19,7 @@ const weatherIcons = {
   dewPoint: require('../../assets/weather-icons/dew-point.png'),
   uvIndex: require('../../assets/weather-icons/uv-index.png'),
   windDirection: require('../../assets/weather-icons/wind-direction.png'),
-  cloudCeiling: require('../../assets/weather-icons/ceiling_cloud.png'),
+  cloudCeiling: require('../../assets/weather-icons/cloud-cover.png'),
   rainfall: require('../../assets/weather-icons/raining.png'),
   evapotranspiration: require('../../assets/weather-icons/Evapotranspiration.png'),
   calendar: require('../../assets/weather-icons/calendar.png'),
