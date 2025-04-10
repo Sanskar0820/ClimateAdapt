@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import axios from 'axios'
+import { useTranslation } from 'react-i18next';
+import AccWeatherApi from './AccWeatherApi';
 // import { currentWeatherData } from "../assets/weatherapiData/openWeather"
 // import { forecastData } from "../assets/weatherapiData/openWeather"
 
@@ -22,6 +24,7 @@ const weatherIcons = {
 const OpenWeatherApi = ({ panchyatSelectedItem }) => {
   const [forecastData, setForecastData] = useState(null)
   const [currentWeatherData, setCurrentWeatherData] = useState(null)
+  const { t } = useTranslation();
 
   const fetchCurrentWeatherData = async (selectedItem) => {
     if (selectedItem && selectedItem.LAT) {
@@ -84,12 +87,12 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.cardHeading}>
-        <Text style={styles.headingText}>Current Weather</Text>
+        <Text style={styles.headingText}>{t('AccWeather.currentWeather')}</Text>
       </View>
 
       <View style={styles.mainContainer}>
         <View style={styles.weatherCard}>
-          <Image 
+          <Image
             source={{ uri: `https://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}.png` }}
             style={styles.weatherIcon}
           />
@@ -106,7 +109,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
         <View style={styles.weatherCard}>
           <Image style={styles.icon} source={weatherIcons.location} />
           <View style={styles.weatherContent}>
-            <Text style={styles.weatherText}>Location</Text>
+            <Text style={styles.weatherText}>{t('AccWeather.location')}</Text>
             <Text style={styles.weatherValue}>
               {panchyatSelectedItem.PANCHAYAT}, {panchyatSelectedItem.DISTRICT}
             </Text>
@@ -116,7 +119,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
         <View style={styles.weatherCard}>
           <Image style={styles.icon} source={weatherIcons.temp} />
           <View style={styles.weatherContent}>
-            <Text style={styles.weatherText}>Temperature</Text>
+            <Text style={styles.weatherText}>{t('AccWeather.temperature')}</Text>
             <Text style={styles.weatherValue}>{currentWeatherData.main.temp} °C</Text>
           </View>
         </View>
@@ -124,7 +127,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
         <View style={styles.weatherCard}>
           <Image style={styles.icon} source={weatherIcons.feelsLike} />
           <View style={styles.weatherContent}>
-            <Text style={styles.weatherText}>Feels Like</Text>
+            <Text style={styles.weatherText}>{t('AccWeather.feelsLike')}</Text>
             <Text style={styles.weatherValue}>{currentWeatherData.main.feels_like} °C</Text>
           </View>
         </View>
@@ -132,7 +135,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
         <View style={styles.weatherCard}>
           <Image style={styles.icon} source={weatherIcons.minTemp} />
           <View style={styles.weatherContent}>
-            <Text style={styles.weatherText}>Min Temp</Text>
+            <Text style={styles.weatherText}>{t('AccWeather.minTemp')}</Text>
             <Text style={styles.weatherValue}>{currentWeatherData.main.temp_min} °C</Text>
           </View>
         </View>
@@ -140,14 +143,14 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
         <View style={styles.weatherCard}>
           <Image style={styles.icon} source={weatherIcons.maxTemp} />
           <View style={styles.weatherContent}>
-            <Text style={styles.weatherText}>Max Temp</Text>
+            <Text style={styles.weatherText}>{t('AccWeather.maxTemp')}</Text>
             <Text style={styles.weatherValue}>{currentWeatherData.main.temp_max} °C</Text>
           </View>
         </View>
       </View>
 
       <View style={styles.cardHeading}>
-        <Text style={styles.headingText}>3 Hour Forecast (5 days)</Text>
+        <Text style={styles.headingText}>{t('AccWeather.3hourForecast')}</Text>
       </View>
 
       {forecastData && forecastData.list.length > 0 ? (
@@ -155,7 +158,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
           {forecastData.list.map((item, index) => (
             <View key={index} style={styles.forecastCard}>
               <View style={styles.weatherCard}>
-                <Image 
+                <Image
                   source={{ uri: `https://openweathermap.org/img/wn/${item.weather[0].icon}.png` }}
                   style={styles.weatherIcon}
                 />
@@ -172,7 +175,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.temp} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Temperature</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.temperature')}</Text>
                   <Text style={styles.weatherValue}>{item.main.temp} °C</Text>
                 </View>
               </View>
@@ -180,7 +183,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.windPressure} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Pressure</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.pressure')}</Text>
                   <Text style={styles.weatherValue}>{item.main.pressure} hPa</Text>
                 </View>
               </View>
@@ -188,7 +191,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.humidity} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Humidity</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.humidity')}</Text>
                   <Text style={styles.weatherValue}>{item.main.humidity} %</Text>
                 </View>
               </View>
@@ -196,7 +199,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.minTemp} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Min Temp</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.minTemp')}</Text>
                   <Text style={styles.weatherValue}>{item.main.temp_min} °C</Text>
                 </View>
               </View>
@@ -204,7 +207,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.feelsLike} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Feels Like</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.feelsLike')}</Text>
                   <Text style={styles.weatherValue}>{item.main.feels_like} °C</Text>
                 </View>
               </View>
@@ -212,7 +215,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.visibility} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Visibility</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.visibility')}</Text>
                   <Text style={styles.weatherValue}>{(item.visibility / 1000).toFixed(2)} km</Text>
                 </View>
               </View>
@@ -220,7 +223,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.maxTemp} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Max Temp</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.maxTemp')}</Text>
                   <Text style={styles.weatherValue}>{item.main.temp_max} °C</Text>
                 </View>
               </View>
@@ -228,7 +231,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
               <View style={styles.weatherCard}>
                 <Image style={styles.icon} source={weatherIcons.wind} />
                 <View style={styles.weatherContent}>
-                  <Text style={styles.weatherText}>Wind Speed</Text>
+                  <Text style={styles.weatherText}>{t('AccWeather.windSpeed')}</Text>
                   <Text style={styles.weatherValue}>{(item.wind.speed * 3.6).toFixed(2)} km/h</Text>
                 </View>
               </View>
@@ -237,7 +240,7 @@ const OpenWeatherApi = ({ panchyatSelectedItem }) => {
         </ScrollView>
       ) : (
         <View style={styles.rightPanelContainer}>
-          <Text>Please select a location.</Text>
+          <Text>{t('data.select_location_placeholder')}</Text>
         </View>
       )}
     </ScrollView>

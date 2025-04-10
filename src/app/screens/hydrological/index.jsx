@@ -133,27 +133,34 @@ const HydrologicalScreen = () => {
                 {t('hydrological.Soil_text')}
               </Text>
 
-              <Text style={styles.legendTitle}>Legend</Text>
+              <Text style={styles.legendTitle}>{t('hydrological.legend')}</Text>
               <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
-                  <Text style={styles.tableHeader}>Dry Condition:</Text>
-                  <Text style={styles.tableHeader}>Wet Condition:</Text>
+                  <Text style={styles.tableHeader}>{t('hydrological.dry_condition')}</Text>
+                  <Text style={styles.tableHeader}>{t('hydrological.wet_condition')}</Text>
                 </View>
                 <View style={styles.tableRow}>
                   <View style={styles.tableCell}>
-                    <Text>{renderLegendText('30th﹤Percentile ≤ 70th')} (Normal Conditions)</Text>
-                    <Text>{renderLegendText('20th﹤Percentile ≤ 30th')} <Text style={styles.redText}>(Abnormally Dry)</Text></Text>
-                    <Text>{renderLegendText('10th﹤Percentile ≤ 20th')} <Text style={styles.redText}>(Moderate Dry)</Text></Text>
-                    <Text>{renderLegendText('5th﹤Percentile ≤ 10th')} <Text style={styles.redText}>(Severe Dry)</Text></Text>
-                    <Text>{renderLegendText('2nd﹤Percentile ≤ 5th')} <Text style={styles.redText}>(Extreme Dry)</Text></Text>
-                    <Text>{renderLegendText('0th﹤Percentile ≤ 2nd')} <Text style={styles.redText}>(Exceptional Dry)</Text></Text>
+                    {t('hydrological.dry_levels', { returnObjects: true }).map((item, index) => {
+                      const [range, label] = item.split('(');
+                      return (
+                        <Text key={index}>
+                          {renderLegendText(range.trim())}{' '}
+                          <Text style={styles.redText}>({label.replace(')', '').trim()})</Text>
+                        </Text>
+                      );
+                    })}
                   </View>
                   <View style={styles.tableCell}>
-                    <Text>{renderLegendText('70th﹤Percentile ≤ 80th')} <Text style={styles.blueText}>(Abnormally Wet)</Text></Text>
-                    <Text>{renderLegendText('80th﹤Percentile ≤ 90th')} <Text style={styles.blueText}>(Moderate Wet)</Text></Text>
-                    <Text>{renderLegendText('90th﹤Percentile ≤ 95th')} <Text style={styles.blueText}>(Severe Wet)</Text></Text>
-                    <Text>{renderLegendText('95nd﹤Percentile ≤ 98th')} <Text style={styles.blueText}>(Extreme Wet)</Text></Text>
-                    <Text>{renderLegendText('98th﹤Percentile ≤ 100th')} <Text style={styles.blueText}>(Exceptional Wet)</Text></Text>
+                    {t('hydrological.wet_levels', { returnObjects: true }).map((item, index) => {
+                      const [range, label] = item.split('(');
+                      return (
+                        <Text key={index}>
+                          {renderLegendText(range.trim())}{' '}
+                          <Text style={styles.blueText}>({label.replace(')', '').trim()})</Text>
+                        </Text>
+                      );
+                    })}
                   </View>
                 </View>
               </View>

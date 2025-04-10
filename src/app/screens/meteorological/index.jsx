@@ -129,10 +129,10 @@ const MeteorologicalScreen = () => {
             </View>
 
             <View style={styles.legendContainer}>
-              <Text style={styles.legendTitle}>{t('meteorological.Departure')}</Text>
-              <Text style={styles.legendText}>{t('meteorological.Departure_text')}</Text>
+              <Text style={styles.legendTitle}>{t('meteorological.departure_heading')}</Text>
+              <Text style={styles.legendText}>{t('meteorological.departure_text')}</Text>
 
-              <Text style={styles.legendTitle}>{t('meteorological.Legend')}</Text>
+              <Text style={styles.legendTitle}>{t('meteorological.legend')}</Text>
               <View style={styles.tableContainer}>
                 <View style={styles.tableRow}>
                   <Text style={styles.tableHeader}>{t('meteorological.Temperature Condition')}</Text>
@@ -140,23 +140,23 @@ const MeteorologicalScreen = () => {
                 </View>
                 <View style={styles.tableRow}>
                   <Text style={[styles.tableCell, { color: 'red' }]}>
-                    {renderLegendText('Temperature Anomaly > 2 (High temperature)')}
+                    {renderLegendText(t('meteorological.temperature_conditions.high'))}
                   </Text>
                   <Text style={[styles.tableCell, { color: 'blue' }]}>
-                    {renderLegendText('Departure > 0 (Surplus)')}
+                    {renderLegendText(t('meteorological.rainfall_remark.surplus'))}
                   </Text>
                 </View>
                 <View style={styles.tableRow}>
                   <Text style={[styles.tableCell, { color: 'blue' }]}>
-                    {renderLegendText('Temperature Anomaly < -2 (Low temperature)')}
+                    {renderLegendText(t('meteorological.temperature_conditions.low'))}
                   </Text>
                   <Text style={[styles.tableCell, { color: 'red' }]}>
-                    {renderLegendText('Departure < 0 (Deficit)')}
+                    {renderLegendText(t('meteorological.rainfall_remark.surplus'))}
                   </Text>
                 </View>
                 <View style={styles.tableRow}>
                   <Text style={[styles.tableCell, { color: 'green' }]}>
-                    {renderLegendText('-2 <= Temperature Anomaly <= 2 (Normal temperature)')}
+                    {renderLegendText(t('meteorological.temperature_conditions.normal'))}
                   </Text>
                   <Text style={styles.tableCell}>
                     {t('meteorological.table1')}{'\n'}

@@ -252,24 +252,90 @@
         "ARANGAON": "Arangaon",
         "BHANDGAON": "Bhandgaon",
         "KANDARI": "Kandari",
-        "OSMANABAD":"Osmanabad"
+        "OSMANABAD": "Osmanabad"
     },
-    "meteorological":{
-        "Departure":"Departure/Anomaly:",
-        "Departure_text":"Difference between the current rainfall/temperature and the average (or normal) rainfall/temperature for a specific period and location. This metric is used to assess whether a region is experiencing above-average or below-average rainfall/temperature.",
-        "Legend":"Legend",
-        "Temperature Condition":"Temperature Condition",
-        "Rainfall Remark":"Rainfall Remark",
-        "table1":"Very Light to Light Rainfall (0.1 - 15.5 mm)",
-        "table2":"Moderate Rainfall (15.6 - 64.4 mm)",
-        "table3":"Heavy Rainfall (64.5 - 115.5 mm)",
-        "table4":"Very Heavy Rainfall (115.6 - 204.4 mm)",
-        "table5":"Extremely Heavy Rainfall (≥ 204.5 mm)",
-        "temp1":"Temperature Anomaly > 2 (High temperature)"
-
+    "meteorological": {
+        "departure_heading": "Departure/Anomaly:",
+        "departure_text": "Difference between the current rainfall/temperature and the average (or normal) rainfall/temperature for a specific period and location. This metric is used to assess whether a region is experiencing above-average or below-average rainfall/temperature.",
+        "legend": "Legend",
+        "Temperature Condition": "Temperature Condition",
+        "Rainfall Remark": "Rainfall Remark",
+        "temperature_conditions": {
+            "high": "Temperature Anomaly > 2 (High temperature)",
+            "low": "Temperature Anomaly < -2 (Low temperature)",
+            "normal": "-2 <= Temperature Anomaly <= 2 (Normal temperature)"
+        },
+        "rainfall_remark": {
+            "surplus": "Departure > 0 (Surplus)",
+            "deficit": "Departure < 0 (Deficit)",
+            "levels": "Very Light to Light Rainfall (0.1 - 15.5 mm)\nModerate Rainfall (15.6 - 64.4 mm)\nHeavy Rainfall (64.5 - 115.5 mm)\nVery Heavy Rainfall (115.6 - 204.4 mm)\nExtremely Heavy Rainfall (≥ 204.5 mm)"
+        },
+        "table1": "Very Light to Light Rainfall (0.1 - 15.5 mm)",
+        "table2": "Moderate Rainfall (15.6 - 64.4 mm)",
+        "table3": "Heavy Rainfall (64.5 - 115.5 mm)",
+        "table4": "Very Heavy Rainfall (115.6 - 204.4 mm)",
+        "table5": "Extremely Heavy Rainfall (≥ 204.5 mm)"
     },
-    "hydrological":{
-        "Soil":"Soil-Moisture Percentile:",
-        "Soil_text":"Soil-moisture percentile shows the current soil moisture conditions (dry/wet) compared to all past measurements. For examples, If current soil-moisture is 90th percentile, that means it is wetter than 90% of all past measurements. If it is 10th percentile, the soil is drier than 90% of all past measurements."
+    "hydrological": {
+        "Soil": "Soil-Moisture Percentile:",
+        "Soil_text": "Soil-moisture percentile shows the current soil moisture conditions (dry/wet) compared to all past measurements. For examples, If current soil-moisture is 90th percentile, that means it is wetter than 90% of all past measurements. If it is 10th percentile, the soil is drier than 90% of all past measurements.",
+        "legend": "Legend",
+        "dry_condition": "Dry Condition:",
+        "wet_condition": "Wet Condition:",
+        "dry_levels": [
+            "30th < Percentile ≤ 70th (Normal Conditions)",
+            "20th < Percentile ≤ 30th (Abnormally Dry)",
+            "10th < Percentile ≤ 20th (Moderate Dry)",
+            "5th < Percentile ≤ 10th (Severe Dry)",
+            "2nd < Percentile ≤ 5th (Extreme Dry)",
+            "0th < Percentile ≤ 2nd (Exceptional Dry)"
+        ],
+        "wet_levels": [
+            "70th < Percentile ≤ 80th (Abnormally Wet)",
+            "80th < Percentile ≤ 90th (Moderate Wet)",
+            "90th < Percentile ≤ 95th (Severe Wet)",
+            "95th < Percentile ≤ 98th (Extreme Wet)",
+            "98th < Percentile ≤ 100th (Exceptional Wet)"
+        ]
+    },
+    "AccWeather": {
+        "currentWeather": "Current Weather",
+        "hourlyForecast": "Hourly Forecast (12 Hours)",
+        "hourlyForecast1": "Hourly Forecast (120 Hours)",
+        "dailyForecast": "Daily Forecast (5 days)",
+        "3hourForecast": "3 Hour Forecast (5 days)",
+        "temperature": "Temperature",
+        "feelsLike": "Feels Like",
+        "location": "Location",
+        "dewPoint": "Dew Point",
+        "pressure": "Pressure",
+        "humidity": "Humidity",
+        "relativeHumidity": "Relative Humidity",
+        "windSpeed": "Wind Speed",
+        "windDirection": "Wind Direction",
+        "uvIndex": "UV Index",
+        "visibility": "Visibility",
+        "cloudCeiling": "Ceiling (cloud)",
+        "precipitationSummary": "Precipitation Probability",
+        "precipitation": "Precipitation",
+        "pastHour": "Past Hour",
+        "past6Hours": "Past 6 Hours",
+        "past12Hours": "Past 12 Hours",
+        "past24Hours": "Past 24 Hours",
+        "temperatureSummary": "Temperature Summary",
+        "minTemp": "Min Temp",
+        "maxTemp": "Max Temp",
+        "past6HourRange": "Past 6 Hour Range",
+        "past12HourRange": "Past 12 Hour Range",
+        "past24HourRange": "Past 24 Hour Range",
+        "rainProbability": "Rain Probability",
+        "evapotranspiration": "Evapotranspiration",
+        "knowMore": "Know More",
+        "selectLocation": "Please select a location",
+        "day": "Day",
+        "night": "Night",
+        "sunrise": "Sunrise",
+        "sunset": "Sunset",
+        "cloudCover":"Cloud Cover"
     }
 }
