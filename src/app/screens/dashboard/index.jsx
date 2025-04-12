@@ -1,28 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { StyleSheet, SafeAreaView, View } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Header from '../../../component/Header';
+import { useTranslation } from 'react-i18next';
 
 const DashboardScreen = () => {
+  const { i18n } = useTranslation();
+  const selectedLanguage = i18n.language;
   const webViewRef = useRef(null);
 
-  // More specific CSS targeting
   const injectedJavaScript = `
     (function() {
       const style = document.createElement('style');
       style.textContent = \`
-        /* Target common navigation elements */
-        nav,
-        header,
-        .MuiAppBar-root,
-        .MuiToolbar-root,
-        #navbar,
-        .navbar,
-        .nav-wrapper,
-        .site-header,
-        .top-bar,
-        .header-container,
-        [role="navigation"],
+        nav, header, .MuiAppBar-root, .MuiToolbar-root, #navbar, .navbar,
+        .nav-wrapper, .site-header, .top-bar, .header-container, [role="navigation"],
         .navigation {
           display: none !important;
           height: 0 !important;
@@ -30,26 +22,23 @@ const DashboardScreen = () => {
           margin: 0 !important;
           overflow: hidden !important;
         }
-        
-        /* Adjust the main content to fill the space */
+
         body {
           padding-top: 0 !important;
           margin-top: 0 !important;
         }
-        
+
         #root > div {
           padding-top: 0 !important;
         }
       \`;
       document.head.appendChild(style);
-      
-      // Remove elements after they're loaded
+
       function removeNavigation() {
         const elements = document.querySelectorAll('nav, header, .MuiAppBar-root, .MuiToolbar-root');
         elements.forEach(el => el.remove());
       }
-      
-      // Run immediately and after a delay to ensure elements are removed
+
       removeNavigation();
       setTimeout(removeNavigation, 1000);
       setTimeout(removeNavigation, 2000);
@@ -57,11 +46,19 @@ const DashboardScreen = () => {
     true;
   `;
 
+  // ✅ Send language every time it changes
+  useEffect(() => {
+    const message = JSON.stringify({ type: 'SET_LANGUAGE', lang: selectedLanguage });
+    if (webViewRef.current) {
+      webViewRef.current.postMessage(message);
+    }
+  }, [selectedLanguage]);
+
   return (
     <SafeAreaView style={styles.container}>
       <Header />
       <View style={styles.webviewContainer}>
-        <WebView 
+        <WebView
           ref={webViewRef}
           source={{ uri: 'https://map-dashboard-8ztt.onrender.com/' }}
           style={styles.webview}
@@ -71,8 +68,9 @@ const DashboardScreen = () => {
           scalesPageToFit={true}
           injectedJavaScript={injectedJavaScript}
           onLoadEnd={() => {
-            // Reapply the script when the page finishes loading
             webViewRef.current.injectJavaScript(injectedJavaScript);
+            const message = JSON.stringify({ type: 'SET_LANGUAGE', lang: selectedLanguage });
+            webViewRef.current.postMessage(message); // send language on initial load
           }}
         />
       </View>
