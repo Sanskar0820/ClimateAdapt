@@ -1,7 +1,9 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { CartesianChart, Line, Area } from 'victory-native';
+import React, { useState } from 'react';
+import { View, Text, Dimensions, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 import { daysInYear } from '../helpers/functions';
+
+const screenWidth = Dimensions.get('window').width;
 
 const ClimatologyTimeSeriesChart = ({
   selectedDistrict,
@@ -10,107 +12,137 @@ const ClimatologyTimeSeriesChart = ({
   selectedTehsilID,
   selectedVariable,
 }) => {
-  console.log('Rendering ClimatologyTimeSeriesChart');
-  console.log('Props:', {
-    selectedDistrict,
-    selectedTehsil,
-    selectedMapData,
-    selectedTehsilID,
-    selectedVariable,
-  });
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  if (!selectedMapData || !selectedMapData.Data) {
-    return <Text>No data available.</Text>;
-  }
+  if (!selectedMapData || !selectedMapData.Data) return <Text>No data available.</Text>;
 
-  const filteredData = selectedMapData.Data.find(
-    (item) => item.ID === selectedTehsilID
-  );
-
+  const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
   if (!filteredData || !filteredData[selectedVariable.value]) {
     return <Text>No valid data for the selected variable.</Text>;
   }
 
-  const chartData = daysInYear.map((day, index) => ({
-    day,
-    value: filteredData[selectedVariable.value][index] || 0,
-    sd: filteredData[`${selectedVariable.value}_SD`]?.[index] || 0,
-    current: filteredData[`daily_${selectedVariable.value}_2024`]?.[index] || 0,
-  }));
+  const climatology = daysInYear.map((_, i) => filteredData[selectedVariable.value][i] || 0);
+  const standardDeviation = daysInYear.map((_, i) => {
+    const base = filteredData[selectedVariable.value][i] || 0;
+    const sd = filteredData[`${selectedVariable.value}_SD`]?.[i] || 0;
+    return base + sd;
+  });
+  const currentYear = daysInYear.map((_, i) => filteredData[`daily_${selectedVariable.value}_2024`]?.[i] || 0);
+
+  const maxLabels = 10;
+  const interval = Math.ceil(daysInYear.length / (maxLabels - 1));
+  const spacedLabels = daysInYear.map((day, index) =>
+    index % interval === 0 || index === daysInYear.length - 1 ? String(day) : ''
+  );
+
+  const handleDataPointClick = ({ index }) => {
+    setSelectedIndex(index);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        {selectedDistrict} - {selectedTehsil}
-      </Text>
-      <Text style={styles.subtitle}>
-        {`${selectedVariable.name} (${selectedVariable.unit})`}
-      </Text>
+    <ScrollView horizontal>
+      <View style={styles.container}>
+        <Text style={styles.title}>{selectedDistrict} - {selectedTehsil}</Text>
+        <Text style={styles.subtitle}>{`${selectedVariable.name} (${selectedVariable.unit})`}</Text>
 
-      <CartesianChart
-        data={chartData}
-        xKey="day"
-        domainPadding={{ left: 20, right: 20 }}
-        padding={{ left: 60, bottom: 50, top: 20, right: 20 }}
-        xAxis={{
-          label: 'Days',
-          labelOffset: 30,
-        }}
-      >
-        {({ points, chartBounds }) => (
-          <>
-            {/* Main Climatology Line */}
-            <Line
-              points={points.value}
-              chartBounds={chartBounds}
-              color="blue"
-              strokeWidth={2}
-            />
+        <TouchableWithoutFeedback onPressOut={() => setSelectedIndex(null)}>
+          <LineChart
+            data={{
+              labels: spacedLabels,
+              datasets: [
+                {
+                  data: climatology,
+                  color: () => 'blue',
+                  strokeWidth: 2,
+                },
+                {
+                  data: standardDeviation,
+                  color: () => 'rgba(0, 200, 0, 0.3)',
+                  strokeWidth: 1,
+                },
+                {
+                  data: currentYear,
+                  color: () => 'red',
+                  strokeWidth: 2,
+                },
+              ],
+            }}
+            width={screenWidth}
+            height={260}
+            chartConfig={{
+              backgroundColor: '#fff',
+              backgroundGradientFrom: '#fff',
+              backgroundGradientTo: '#fff',
+              decimalPlaces: 1,
+              color: () => '#333',
+              labelColor: () => '#333',
+              propsForDots: {
+                r: '0',
+                strokeWidth: '0',
+                stroke: 'transparent',
+              },
+              propsForBackgroundLines: {
+                stroke: '#e3e3e3',
+              },
+            }}
+            withShadow={false}
+            withInnerLines={false}
+            withOuterLines={false}
+            bezier
+            onDataPointClick={handleDataPointClick}
+            style={styles.chartStyle}
+          />
+        </TouchableWithoutFeedback>
 
-            {/* Standard Deviation Area */}
-            <Area
-              points={points.sd}
-              chartBounds={chartBounds}
-              color="green"
-              opacity={0.3}
-            />
-
-            {/* Current Year Data */}
-            <Line
-              points={points.current}
-              chartBounds={chartBounds}
-              color="red"
-              strokeWidth={2}
-            />
-          </>
+        {selectedIndex !== null && (
+          <View style={styles.tooltip}>
+            <Text style={styles.tooltipText}>
+              Day: {daysInYear[selectedIndex]}{'\n'}
+              {selectedVariable.name}: {climatology[selectedIndex]} {selectedVariable.unit}{'\n'}
+              Current: {currentYear[selectedIndex]}{'\n'}
+              +SD: {standardDeviation[selectedIndex]}
+            </Text>
+          </View>
         )}
-      </CartesianChart>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    margin: 10,
+    elevation: 2,
   },
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 5,
     textAlign: 'center',
+    marginBottom: 5,
   },
   subtitle: {
     fontSize: 14,
     color: '#666',
-    marginBottom: 15,
     textAlign: 'center',
+    marginBottom: 10,
+  },
+  chartStyle: {
+    borderRadius: 8,
+  },
+  tooltip: {
+    marginTop: 10,
+    backgroundColor: '#f2f2f2',
+    padding: 10,
+    borderRadius: 8,
+    alignSelf: 'center',
+  },
+  tooltipText: {
+    fontSize: 14,
+    color: '#333',
+    fontFamily: 'monospace',
   },
 });
 

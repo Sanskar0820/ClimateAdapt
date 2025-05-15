@@ -24,35 +24,36 @@ const Header = () => {
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor={"black"} barStyle={"light-content"} />
-      
-      {/* Title */}
+      {/* Title on the left */}
       <Text style={styles.title}>ClimateAdapt</Text>
 
-      {/* Language Toggle Button */}
-      <TouchableOpacity onPress={switchLanguage} style={styles.langButton}>
-        <Text style={styles.langText}>{language.toUpperCase()}</Text>
-      </TouchableOpacity>
+      {/* Right container for Menu and Language button */}
+      <View style={styles.rightContainer}>
+        <TouchableOpacity onPress={switchLanguage} style={styles.langButton}>
+          <Text style={styles.langText}>{language.toUpperCase()}</Text>
+        </TouchableOpacity>
 
-      {/* Menu Button */}
-      <TouchableOpacity onPress={handleMenuPress} style={styles.menuButton}>
-        {isMenuOpen ? (
-          <Entypo name="cross" size={30} color="black" />
-        ) : (
-          <Ionicons name="reorder-three" size={36} color="black" />
-        )}
-      </TouchableOpacity>
+        <TouchableOpacity onPress={handleMenuPress} style={styles.menuButton}>
+          {isMenuOpen ? (
+            <Entypo name="cross" size={30} color="black" />
+          ) : (
+            <Ionicons name="reorder-three" size={38} color="black" />
+          )}
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 export default Header;
 
+
 const styles = StyleSheet.create({
   container: {
     height: "8%",
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between", // Title on left, buttons on right
     alignItems: "center",
     backgroundColor: '#fff',
     elevation: 5,
@@ -63,13 +64,19 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    paddingHorizontal: 15,
   },
   title: {
-    fontSize: 25,
-    fontWeight: "bold"
+    fontSize: 29,
+    fontWeight: "bold",
+  },
+  rightContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
   },
   langButton: {
-    backgroundColor: "#007AFF",
+    backgroundColor: "#008AFF",
     paddingVertical: 5,
     paddingHorizontal: 10,
     borderRadius: 5,
@@ -80,6 +87,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   menuButton: {
-    padding: 10,
+    padding: 7,
   },
 });

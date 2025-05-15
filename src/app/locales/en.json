@@ -298,6 +298,24 @@
             "98th < Percentile ≤ 100th (Exceptional Wet)"
         ]
     },
+    "dashboard": {
+        "select_data": "Select data",
+        "select_parameter": "Select parameter",
+        "show_timeseries": "Show Timeseries",
+        "hide_timeseries": "Hide Timeseries",
+        "Annual data": "Annual data",
+        "Rainfall": "Rainfall",
+        "Max. temperature": "Max. temperature",
+        "Min. temperature": "Min. temperature",
+        "Climatology data": "Climatology data",
+        "Daily rainfall": "Daily rainfall",
+        "Daily max. temperature": "Daily max. temperature",
+        "Daily min. temperature": "Daily min. temperature",
+        "Extreme conditions": "Extreme conditions",
+        "Temperature": "Temperature",
+        "Extreme conditions_pcp":"Frequency of extreme precipitation (exceeding 95th percentile rainy days threshold)",
+        "Extreme conditions_temp":"Frequency of extreme temperature (exceeding 95th percentile threshold of temperature for March-May)"
+    },
     "AccWeather": {
         "currentWeather": "Current Weather",
         "hourlyForecast": "Hourly Forecast (12 Hours)",

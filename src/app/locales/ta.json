@@ -298,6 +298,24 @@
             "98வது < சதவீதம் ≤ 100வது (அதிக ஈரமாக)"
         ]
     },
+    "dashboard": {
+        "select_data": "தரவைத் தேர்ந்தெடுக்கவும்",
+        "select_parameter": "அளவுருவைத் தேர்ந்தெடுக்கவும்",
+        "show_timeseries": "நேர்சுழற்சி காட்டவும்",
+        "hide_timeseries": "நேர்சுழற்சி மறைக்கவும்",
+        "Annual data": "வருடாந்தர தரவு",
+        "Rainfall": "மழை",
+        "Max. temperature": "அதிகபட்ச வெப்பநிலை",
+        "Min. temperature": "குறைந்தபட்ச வெப்பநிலை",
+        "Climatology data": "வானிலை தரவு",
+        "Daily rainfall": "தினசரி மழை",
+        "Daily max. temperature": "தினசரி அதிகபட்ச வெப்பநிலை",
+        "Daily min. temperature": "தினசரி குறைந்தபட்ச வெப்பநிலை",
+        "Extreme conditions": "தீவிர நிலைமைகள்",
+        "Temperature": "வெப்பநிலை",
+        "Extreme conditions_pcp": "அதிக மழைப்பொழிவின் அதிர்வெண் (95வது சதவீத மழை நாட்களின் வரம்பை மீறுதல்)",
+        "Extreme conditions_temp": "மார்ச்-மே மாதங்களில் அதிகபட்ச வெப்பநிலையின் 95வது சதவீத வரம்பை மீறுதல் (அதிகபட்ச வெப்பநிலையின் அதிர்வெண்)"
+    },
     "AccWeather":{
         "currentWeather": "தற்போதைய வானிலை",
         "hourlyForecast": "மணிநேர கணிப்பு (12 மணி)",

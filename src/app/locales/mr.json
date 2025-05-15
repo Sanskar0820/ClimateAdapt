@@ -298,6 +298,24 @@
       "98वा < टक्का ≤ 100वा (अत्यधिक ओलसर)"
     ]
   },
+  "dashboard": {
+    "select_data": "डेटा निवडा",
+    "select_parameter": "परिमाण निवडा",
+    "show_timeseries": "टाइमसीरीस दाखवा",
+    "hide_timeseries": "टाइमसीरीस लपवा",
+    "Annual data": "वार्षिक डेटा",
+    "Rainfall": "पाऊस",
+    "Max. temperature": "कमाल तापमान",
+    "Min. temperature": "किमान तापमान",
+    "Climatology data": "हवामान डेटा",
+    "Daily rainfall": "दैनिक पाऊस",
+    "Daily max. temperature": "दैनिक कमाल तापमान",
+    "Daily min. temperature": "दैनिक किमान तापमान",
+    "Extreme conditions": "अत्यंत स्थिती",
+    "Temperature": "तापमान",
+    "Extreme conditions_pcp":"अतिवृष्टीची वारंवारता (९५ व्या शतकाच्या पावसाळी दिवसांच्या मर्यादेपेक्षा जास्त)",
+    "Extreme conditions_temp":"अति तापमानाची वारंवारता (मार्च-मे महिन्यासाठी तापमानाच्या ९५ व्या टक्केवारीच्या मर्यादेपेक्षा जास्त)"
+  },
   "AccWeather":{
     "currentWeather": "सध्याचे हवामान",
     "hourlyForecast": "तासानुसार अंदाज (12 तास)",

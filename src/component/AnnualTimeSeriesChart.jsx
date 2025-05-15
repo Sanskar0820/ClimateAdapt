@@ -1,11 +1,9 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { CartesianChart, Bar, Line } from 'victory-native';
+import React, { useState } from 'react';
+import { View, Text, Dimensions, StyleSheet, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 import { yearsArray } from '../helpers/functions';
-import { Skia } from "@shopify/react-native-skia";
 
-console.log("SKIA IS ---> ",Skia); // Check if Skia is defined
-
+const screenWidth = Dimensions.get('window').width;
 
 const AnnualTimeSeriesChart = ({
   selectedDistrict,
@@ -14,89 +12,110 @@ const AnnualTimeSeriesChart = ({
   selectedTehsilID,
   selectedVariable,
 }) => {
-  if (!selectedMapData || !selectedMapData.Data) {
-    return <Text>No data available.</Text>;
-  }
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const filteredData = selectedMapData.Data.find(
-    (item) => item.ID === selectedTehsilID
+  if (!selectedMapData || !selectedMapData.Data) return null;
+
+  const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
+  if (!filteredData || !filteredData[selectedVariable.value]) return null;
+
+  const values = yearsArray.map((_, i) => filteredData[selectedVariable.value][i] || 0);
+  const trendline = yearsArray.map((_, i) => filteredData[`${selectedVariable.value}_trendline`]?.[i] || 0);
+
+  const maxLabels = 6;
+  const totalYears = yearsArray.length;
+  const interval = Math.ceil(totalYears / (maxLabels - 1));
+  const change = filteredData[`${selectedVariable.value}_change`] || 0;
+  const h = filteredData[`${selectedVariable.value}_h`] || 0;
+  const spacedLabels = yearsArray.map((year, index) =>
+    index % interval === 0 || index === totalYears - 1 ? String(year) : ''
   );
 
-  if (!filteredData || !filteredData[selectedVariable.value]) {
-    return <Text>No valid data available for the selected variable.</Text>;
-  }
-
-  const chartData = yearsArray.map((year, index) => ({
-    year,
-    value: filteredData[selectedVariable.value][index] || 0,
-    trendline: filteredData[`${selectedVariable.value}_trendline`]?.[index] || 0,
-  }));
+  const handleDataPointClick = ({ index }) => {
+    setSelectedIndex(index);
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        {selectedDistrict} - {selectedTehsil}
-      </Text>
-      <Text style={styles.subtitle}>
-        {`${selectedVariable.name} (${selectedVariable.unit})`}
-        {`\nChange: ${filteredData[`${selectedVariable.value}_change`] || 0}%, h: ${
-          filteredData[`${selectedVariable.value}_h`] || 0
-        }`}
-      </Text>
-
-      <CartesianChart
-        data={chartData}
-        xKey="year"
-        yKeys={['value', 'trendline']}
-        domainPadding={{ left: 20, right: 20 }}
-        padding={{ left: 60, bottom: 50, top: 20, right: 20 }}
-        xAxis={[
-          {
-            label: 'Years',
-            labelOffset: 30,
-          },
-        ]}
-        yAxis={[
-          {
-            label: `${selectedVariable.name} (${selectedVariable.unit})`,
-            labelOffset: 40,
-          },
-        ]}
-      >
-        {({ points, chartBounds }) => (
-          <>
-            <Bar
-              points={points.value}
-              chartBounds={chartBounds}
-              color="#4299E1"
-            />
-            <Line
-              points={points.trendline}
-              chartBounds={chartBounds}
-              color="red"
-            />
-          </>
+    <ScrollView horizontal style={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Text style={styles.title}>{selectedDistrict} - {selectedTehsil}</Text>
+        <Text style={styles.subtitle}>
+          {`${selectedVariable.name} (${selectedVariable.unit})\nChange: ${change}%, h: ${h}`}
+        </Text>
+        <TouchableWithoutFeedback onPressOut={() => setSelectedIndex(null)}>
+          <LineChart
+            data={{
+              labels: spacedLabels,
+              datasets: [
+                {
+                  data: values,
+                  color: () => '#4287f5',
+                  strokeWidth: 0,
+                  withDots: false
+                },
+                {
+                  data: trendline,
+                  color: () => 'red',
+                  strokeWidth: 2
+                }
+              ],
+            }}
+            width={screenWidth}
+            height={260}
+            chartConfig={{
+              backgroundColor: '#fff',
+              backgroundGradientFrom: '#fff',
+              backgroundGradientTo: '#fff',
+              decimalPlaces: 1,
+              color: () => '#333',
+              labelColor: () => '#333',
+              propsForDots: {
+                r: '0',
+                strokeWidth: '0',
+                stroke: 'transparent'
+              },
+              propsForBackgroundLines: {
+                stroke: 'transparent'
+              },
+            }}
+            withShadow={false}
+            withInnerLines={false}
+            withOuterLines={false}
+            bezier
+            onDataPointClick={handleDataPointClick}
+            style={styles.chartStyle}
+          />
+        </TouchableWithoutFeedback>
+            
+        {selectedIndex !== null && (
+          <View style={styles.tooltip}>
+            <Text style={styles.tooltipText}>
+              Year: {yearsArray[selectedIndex]}{'\n'}
+              {selectedVariable.name}: {values[selectedIndex]} {selectedVariable.unit}{'\n'}
+              Trendline: {trendline[selectedIndex]}
+            </Text>
+          </View>
         )}
-      </CartesianChart>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    margin: 10,
+    elevation: 2,
+  },
+  scrollContainer: {
+    flexDirection: 'row',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 10,
     textAlign: 'center',
   },
   subtitle: {
@@ -104,6 +123,21 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 15,
     textAlign: 'center',
+  },
+  chartStyle: {
+    borderRadius: 8,
+  },
+  tooltip: {
+    marginTop: 10,
+    backgroundColor: '#f2f2f2',
+    padding: 10,
+    borderRadius: 8,
+    alignSelf: 'center',
+  },
+  tooltipText: {
+    fontSize: 14,
+    color: '#333',
+    fontFamily: 'monospace',
   },
 });
 

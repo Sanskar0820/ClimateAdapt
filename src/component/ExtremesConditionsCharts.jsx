@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { CartesianChart, Bars } from 'victory-native';
+import { View, Text, Dimensions, StyleSheet, ScrollView } from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 import { yearsArray } from '../helpers/functions';
+
+const screenWidth = Dimensions.get('window').width;
 
 const ExtremesConditionsCharts = ({
   selectedDistrict,
@@ -10,83 +12,102 @@ const ExtremesConditionsCharts = ({
   selectedTehsilID,
   selectedVariable,
 }) => {
-  if (!selectedMapData || !selectedMapData.Data) {
-    return <Text>No data available.</Text>;
-  }
+  if (!selectedMapData || !selectedMapData.Data) return null;
 
-  const filteredData = selectedMapData.Data.find(
-    (item) => item.ID === selectedTehsilID
+  const filteredData = selectedMapData.Data.find(item => item.ID === selectedTehsilID);
+  if (!filteredData || !filteredData[selectedVariable.value]) return null;
+
+  const frequencyData = yearsArray.map((_, i) => filteredData[selectedVariable.value][i] || 0);
+
+  const maxLabels = 6;
+  const totalYears = yearsArray.length;
+  const interval = Math.ceil(totalYears / (maxLabels - 1));
+  const spacedLabels = yearsArray.map((year, index) =>
+    index % interval === 0 || index === totalYears - 1 ? String(year) : ''
   );
-
-  if (!filteredData || !filteredData[selectedVariable.value]) {
-    return <Text>No valid data for the selected variable.</Text>;
-  }
-
-  const chartData = yearsArray.map((year, index) => ({
-    year,
-    frequency: filteredData[selectedVariable.value]?.[index] || 0, // Ensure no undefined values
-  }));
 
   const getTitle = () => {
     if (selectedVariable.value === 'pcp') {
-      return 'Frequency of extreme precipitation (exceeding 95th percentile rainy days threshold)';
+      return 'Frequency of extreme precipitation (95th percentile rainy days)';
     } else if (selectedVariable.value === 'temp') {
-      return 'Frequency of extreme temperature (exceeding 95th percentile threshold of temperature for March-May)';
+      return 'Frequency of extreme temperature (March-May > 95th percentile)';
     }
     return 'Extreme Conditions Frequency';
   };
 
+  const getLegend = () => {
+    if (selectedVariable.value === 'pcp') {
+      return '95th percentile rainy days';
+    } else if (selectedVariable.value === 'temp') {
+      return 'March-May > 95th percentile temperature';
+    }
+    return 'Extreme frequency';
+  };
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        {selectedDistrict} - {selectedTehsil}
-      </Text>
-      <Text style={styles.subtitle}>{getTitle()}</Text>
+    <ScrollView horizontal style={styles.scrollContainer}>
+      <View style={styles.container}>
+        <Text style={styles.title}>{selectedDistrict} - {selectedTehsil}</Text>
+        <Text style={styles.subtitle}>{getTitle()}</Text>
 
-      <CartesianChart
-        data={chartData}
-        xKey="year"
-        domainPadding={{ left: 20, right: 20 }}
-        padding={{ left: 60, bottom: 50, top: 20, right: 20 }}
-        xAxis={{
-          label: 'Years',
-          labelOffset: 30,
-        }}
-      >
-        {({ points, chartBounds }) => {
-          if (!points || !points.frequency) {
-            return <Text>No chart data available.</Text>; // Prevent undefined errors
-          }
-
-          return (
-            <Bars
-              points={points.frequency} // Corrected points reference
-              chartBounds={chartBounds}
-              color="#4299E1"
-              barWidth={8}
-            />
-          );
-        }}
-      </CartesianChart>
-    </View>
+        <LineChart
+          data={{
+            labels: spacedLabels,
+            datasets: [
+              {
+                data: frequencyData,
+                strokeWidth: 2,
+                color: () => '#4287f5',
+              },
+            ],
+            legend: [getLegend()],
+          }}
+          width={screenWidth * 1.2}
+          height={260}
+          yAxisLabel=""
+          chartConfig={{
+            backgroundColor: '#fff',
+            backgroundGradientFrom: '#fff',
+            backgroundGradientTo: '#fff',
+            decimalPlaces: 0,
+            color: () => '#4287f5',
+            labelColor: () => '#333',
+            propsForDots: {
+              r: '0', // Hide dots
+              strokeWidth: '0',
+              stroke: '#4287f5',
+            },
+            propsForBackgroundLines: {
+              stroke: '#fff',
+            },
+          }}
+          bezier
+          fromZero
+          withDots={false}
+          withInnerLines={true}
+          withHorizontalLabels={true}
+          style={styles.chartStyle}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
-    elevation: 3,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    margin: 10,
+    elevation: 2,
+  },
+  scrollContainer: {
+    flexDirection: 'row',
   },
   title: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 10,
     textAlign: 'center',
   },
   subtitle: {
@@ -94,6 +115,9 @@ const styles = StyleSheet.create({
     color: '#666',
     marginBottom: 15,
     textAlign: 'center',
+  },
+  chartStyle: {
+    borderRadius: 8,
   },
 });
 

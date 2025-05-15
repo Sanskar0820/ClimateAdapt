@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ClimateAdapt",
+    "name": "Climate Adapt",
     "slug": "ClimateAdapt",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -13,10 +13,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive_icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.anonymous.ClimateAdapt"
+      "package": "com.anonymous.ClimateAdapt",
+      "versionCode":1
     },
     "web": {
       "bundler": "metro",

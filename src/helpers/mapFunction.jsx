@@ -59,6 +59,6 @@ export const mapStyles = [
 
 export const initialRegion = {
   ...mapCenter,
-  latitudeDelta: 20,
-  longitudeDelta: 20,
+  latitudeDelta: 16,
+  longitudeDelta: 27,
 }; 

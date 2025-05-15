@@ -298,6 +298,24 @@
             "98वां < प्रतिशत ≤ 100वां (अत्यंत नम)"
         ]
     },
+    "dashboard": {
+        "select_data": "डेटा चुनें",
+        "select_parameter": "पैरामीटर चुनें",
+        "show_timeseries": "समय श्रृंखला दिखाएं",
+        "hide_timeseries": "समय श्रृंखला छुपाएं",
+        "Annual data": "वार्षिक डेटा",
+        "Rainfall": "वर्षा",
+        "Max. temperature": "अधिकतम तापमान",
+        "Min. temperature": "न्यूनतम तापमान",
+        "Climatology data": "जलवायु डेटा",
+        "Daily rainfall": "दैनिक वर्षा",
+        "Daily max. temperature": "दैनिक अधिकतम तापमान",
+        "Daily min. temperature": "दैनिक न्यूनतम तापमान",
+        "Extreme conditions": "अत्यधिक स्थितियाँ",
+        "Temperature": "तापमान",
+        "Extreme conditions_pcp":"अत्यधिक वर्षा की आवृत्ति (95 प्रतिशत वर्षा दिवस सीमा से अधिक)",
+        "Extreme conditions_temp":"चरम तापमान की आवृत्ति (मार्च-मई के लिए तापमान की 95वीं प्रतिशत सीमा से अधिक)"
+    },
     "AccWeather":{
         "currentWeather": "वर्तमान मौसम",
         "hourlyForecast": "प्रति घंटा पूर्वानुमान (12 घंटे)",
